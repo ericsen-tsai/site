@@ -15,28 +15,30 @@ const HeroSection = () => {
         height={200}
         className="mb-8"
         id="hero-logo"
+        priority
       />
       <h1 className="text-3xl font-bold mb-5">I&apos;m Ericsen,</h1>
       <h2 className="text-2xl font-semibold">
         a Frontend Developer who makes web apps <br />
         <span className={textColor}>
           <TypeAnimation
+            speed={20}
             sequence={[
               () => setTextColor("text-blue-500"),
               "fascinating.",
-              2000,
+              4000,
               "",
-              200,
+              300,
               () => setTextColor("text-pink-500"),
               "stunning.",
-              2000,
+              4000,
               "",
-              200,
+              300,
               () => setTextColor("text-teal-500"),
               "engaging.",
-              2000,
+              4000,
               "",
-              200,
+              300,
             ]}
             wrapper="span"
             cursor={true}
