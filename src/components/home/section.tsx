@@ -2,12 +2,16 @@
 import { useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import Image from "next/image";
+import { NAV_ITEMS } from "@/constants/link";
 
 const HeroSection = () => {
   const [textColor, setTextColor] = useState("text-blue-500");
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen text-center p-20">
+    <div
+      className="flex h-screen flex-col items-center justify-center p-20 text-center"
+      id={NAV_ITEMS.HOME}
+    >
       <Image
         src={"/hero/ericsen.png"}
         alt="Hero Logo"
@@ -17,7 +21,7 @@ const HeroSection = () => {
         id="hero-logo"
         priority
       />
-      <h1 className="text-3xl font-bold mb-5">I&apos;m Ericsen,</h1>
+      <h1 className="mb-5 text-3xl font-bold">I&apos;m Ericsen,</h1>
       <h2 className="text-2xl font-semibold">
         a Frontend Developer who makes web apps <br />
         <span className={textColor}>

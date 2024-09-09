@@ -129,7 +129,7 @@ function ParticleBackground() {
     <Particles
       id="particles"
       options={particleOptions}
-      className="absolute top-0 left-0 z-0"
+      className="absolute left-0 top-0 z-0"
     />
   ) : null;
 }
