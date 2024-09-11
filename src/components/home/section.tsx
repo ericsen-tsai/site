@@ -8,7 +8,7 @@ const HeroSection = () => {
   const [textColor, setTextColor] = useState("text-blue-500");
 
   return (
-    <div
+    <section
       className="flex h-screen flex-col items-center justify-center p-20 text-center"
       id={NAV_ITEMS.HOME}
     >
@@ -51,7 +51,7 @@ const HeroSection = () => {
           />
         </span>
       </h2>
-    </div>
+    </section>
   );
 };
 
