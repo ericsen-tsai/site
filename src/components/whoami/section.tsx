@@ -1,11 +1,17 @@
+"use client";
+
 import { NAV_ITEMS } from "@/constants/link";
+import { useScrollContext } from "@/contexts/useSectionRefsContext";
 import Link from "next/link";
 
 function WhoAmISection() {
+  const { sectionRefs } = useScrollContext();
+
   return (
     <section
       id={NAV_ITEMS.WHOAMI}
       className="m-auto flex min-h-screen max-w-4xl items-center px-8"
+      ref={sectionRefs?.[NAV_ITEMS.WHOAMI]}
     >
       <div>
         <h2 className="mb-8 text-center text-3xl font-bold text-primary">

@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ParticleBackground from "@/components/layout/particle-background";
 import Header from "@/components/layout/header";
+import { SectionRefsProvider } from "@/contexts/useSectionRefsContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -58,9 +59,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} relative antialiased`}
       >
-        <Header />
-        <ParticleBackground />
-        <div className="relative z-10">{children}</div>
+        <SectionRefsProvider>
+          <Header />
+          <ParticleBackground />
+          <div className="relative z-10">{children}</div>
+        </SectionRefsProvider>
       </body>
     </html>
   );

@@ -4,9 +4,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { NAV_ITEMS } from "@/constants/link";
 import Image from "next/image";
+import { useScrollContext } from "@/contexts/useSectionRefsContext";
+import { cn } from "@/lib/utils";
 
 export default function Header() {
   const [scrollY, setScrollY] = useState(0);
+  const { scrollToSection, sectionInView } = useScrollContext();
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -33,45 +36,75 @@ export default function Header() {
         </Link>
         <nav>
           <ul className="flex items-center justify-center space-x-6">
-            <li>
-              <Link
-                href={`#${NAV_ITEMS.HOME}`}
-                className="opacity-50 transition-opacity hover:opacity-100"
+            <li className="text-center">
+              <a
+                className={cn(
+                  "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
+                  {
+                    "font-bold text-primary underline":
+                      sectionInView === NAV_ITEMS.HOME,
+                  }
+                )}
+                onClick={() => scrollToSection(NAV_ITEMS.HOME)}
               >
                 Home
-              </Link>
+              </a>
             </li>
-            <li>
-              <Link
-                href={`#${NAV_ITEMS.WHOAMI}`}
-                className="opacity-50 transition-opacity hover:opacity-100"
+            <li className="text-center">
+              <a
+                className={cn(
+                  "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
+                  {
+                    "font-bold text-primary underline":
+                      sectionInView === NAV_ITEMS.WHOAMI,
+                  }
+                )}
+                onClick={() => scrollToSection(NAV_ITEMS.WHOAMI)}
               >
                 Who Am I
-              </Link>
+              </a>
             </li>
-            <li>
-              <Link
-                href={`#${NAV_ITEMS.ABOUTME}`}
-                className="opacity-50 transition-opacity hover:opacity-100"
+            <li className="text-center">
+              <a
+                className={cn(
+                  "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
+                  {
+                    "font-bold text-primary underline":
+                      sectionInView === NAV_ITEMS.ABOUTME,
+                  }
+                )}
+                onClick={() => scrollToSection(NAV_ITEMS.ABOUTME)}
               >
                 About Me
-              </Link>
+              </a>
             </li>
-            <li>
-              <Link
-                href={`#${NAV_ITEMS.SOCIAL}`}
-                className="opacity-50 transition-opacity hover:opacity-100"
+            <li className="text-center">
+              <a
+                className={cn(
+                  "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
+                  {
+                    "font-bold text-primary underline":
+                      sectionInView === NAV_ITEMS.SOCIAL,
+                  }
+                )}
+                onClick={() => scrollToSection(NAV_ITEMS.SOCIAL)}
               >
                 Social & Habits
-              </Link>
+              </a>
             </li>
-            <li>
-              <Link
-                href={`#${NAV_ITEMS.GUESTBOOK}`}
-                className="opacity-50 transition-opacity hover:opacity-100"
+            <li className="text-center">
+              <a
+                className={cn(
+                  "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
+                  {
+                    "font-bold text-primary underline":
+                      sectionInView === NAV_ITEMS.GUESTBOOK,
+                  }
+                )}
+                onClick={() => scrollToSection(NAV_ITEMS.GUESTBOOK)}
               >
                 Guest Book
-              </Link>
+              </a>
             </li>
           </ul>
         </nav>

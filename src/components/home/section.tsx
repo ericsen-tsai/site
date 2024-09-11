@@ -1,25 +1,30 @@
 "use client";
+
 import { useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import Image from "next/image";
 import { NAV_ITEMS } from "@/constants/link";
+import { useScrollContext } from "@/contexts/useSectionRefsContext";
 
 const HeroSection = () => {
   const [textColor, setTextColor] = useState("text-blue-500");
+  const { sectionRefs } = useScrollContext();
 
   return (
     <section
       className="flex h-screen flex-col items-center justify-center p-20 text-center"
       id={NAV_ITEMS.HOME}
+      ref={sectionRefs?.[NAV_ITEMS.HOME]}
     >
       <Image
         src={"/hero/ericsen.png"}
         alt="Hero Logo"
-        width={200}
-        height={200}
-        className="mb-8"
+        width={0}
+        height={0}
+        className="mb-8 h-auto w-[12.5rem]"
         id="hero-logo"
         priority
+        sizes="100vw"
       />
       <h1 className="mb-5 text-3xl font-bold">I&apos;m Ericsen,</h1>
       <h2 className="text-2xl font-semibold">
