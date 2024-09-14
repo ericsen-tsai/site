@@ -83,20 +83,6 @@ export default function Header() {
                   "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
                   {
                     "text-primary underline":
-                      sectionInView === NAV_ITEMS.SOCIAL,
-                  }
-                )}
-                onClick={() => scrollToSection(NAV_ITEMS.SOCIAL)}
-              >
-                Social & Habits
-              </a>
-            </li>
-            <li className="text-center">
-              <a
-                className={cn(
-                  "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
-                  {
-                    "text-primary underline":
                       sectionInView === NAV_ITEMS.GUESTBOOK,
                   }
                 )}
