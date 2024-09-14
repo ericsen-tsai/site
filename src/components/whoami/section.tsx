@@ -14,9 +14,7 @@ function WhoAmISection() {
       ref={sectionRefs?.[NAV_ITEMS.WHOAMI]}
     >
       <div>
-        <h2 className="mb-8 text-center text-3xl font-bold text-primary">
-          Who Am I?
-        </h2>
+        <h2 className="mb-8 text-center text-3xl font-bold">Who Am I?</h2>
         <div className="space-y-6 text-foreground">
           <p className="leading-relaxed">
             I&apos;m a Frontend Developer with a master&apos;s in biomedical

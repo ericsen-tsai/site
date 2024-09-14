@@ -59,8 +59,17 @@ const config: Config = {
       animationDuration: {
         3000: "3s",
       },
+      textShadow: {
+        sm: "0 1px 2px var(--tw-shadow-color)",
+        DEFAULT: "0 2px 4px var(--tw-shadow-color)",
+        lg: "0 8px 16px var(--tw-shadow-color)",
+        xl: "0 16px 32px var(--tw-shadow-color)",
+        outline:
+          "2px 2px 0px var(--tw-shadow-color), 1px 1px 0px var(--tw-shadow-color), 2px 2px 0px var(--tw-shadow-color), 2px 3px 0px var(--tw-shadow-color)",
+        glow: "0 0 5px #f6f6f6, 0 0 10px #f6f6f6, 0 0 15px #ec4899",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("tailwindcss-textshadow")],
 };
 export default config;
