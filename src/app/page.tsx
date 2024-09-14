@@ -12,7 +12,7 @@ export default async function Home() {
   ]);
 
   return (
-    <div className="min-h-screen font-[family-name:var(--font-geist-mono)]">
+    <div className="min-h-screen font-[family-name:var(--font-montserrat)]">
       <HeroSection />
       <WhoAmISection />
       <AboutMeSection

@@ -96,7 +96,8 @@ function SingleLogoElement({ imgSrc, name, notInvert }: Item) {
 function LogoMarquee() {
   return (
     <Marquee
-      gradient={false}
+      gradient
+      gradientColor={"black"}
       className="h-full overflow-hidden"
       speed={40}
       pauseOnHover

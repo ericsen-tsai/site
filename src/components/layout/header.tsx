@@ -21,7 +21,7 @@ export default function Header() {
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-50 font-[family-name:var(--font-geist-mono)] text-sm tracking-tighter"
+      className="fixed inset-x-0 top-0 z-50 text-sm tracking-tighter"
       style={{ backgroundColor: `rgba(0, 0, 0, ${headerOpacity})` }}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between space-x-8 p-4">
@@ -41,8 +41,7 @@ export default function Header() {
                 className={cn(
                   "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
                   {
-                    "font-bold text-primary underline":
-                      sectionInView === NAV_ITEMS.HOME,
+                    "text-primary underline": sectionInView === NAV_ITEMS.HOME,
                   }
                 )}
                 onClick={() => scrollToSection(NAV_ITEMS.HOME)}
@@ -55,7 +54,7 @@ export default function Header() {
                 className={cn(
                   "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
                   {
-                    "font-bold text-primary underline":
+                    "text-primary underline":
                       sectionInView === NAV_ITEMS.WHOAMI,
                   }
                 )}
@@ -69,7 +68,7 @@ export default function Header() {
                 className={cn(
                   "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
                   {
-                    "font-bold text-primary underline":
+                    "text-primary underline":
                       sectionInView === NAV_ITEMS.ABOUTME,
                   }
                 )}
@@ -83,7 +82,7 @@ export default function Header() {
                 className={cn(
                   "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
                   {
-                    "font-bold text-primary underline":
+                    "text-primary underline":
                       sectionInView === NAV_ITEMS.SOCIAL,
                   }
                 )}
@@ -97,7 +96,7 @@ export default function Header() {
                 className={cn(
                   "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
                   {
-                    "font-bold text-primary underline":
+                    "text-primary underline":
                       sectionInView === NAV_ITEMS.GUESTBOOK,
                   }
                 )}
