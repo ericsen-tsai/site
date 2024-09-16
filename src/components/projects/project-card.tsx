@@ -24,6 +24,7 @@ function ProjectCard({ title, description, link, techStacks }: Props) {
           src={`/projects/${title.toLowerCase()}/cover.png`}
           alt={title}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-opacity duration-300 hover:opacity-5"
         />
         <CardHeader className="flex flex-row items-center gap-2 p-4 text-3xl text-primary/80">

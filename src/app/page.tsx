@@ -4,6 +4,8 @@ import HeroSection from "@/components/home/section";
 import WhoAmISection from "@/components/whoami/section";
 import AboutMeSection from "@/components/aboutme/section";
 import ProjectSection from "@/components/projects/section";
+import PhotoGallery from "@/components/photo-gallery";
+import Container from "@/components/container";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
@@ -22,6 +24,9 @@ export default async function Home() {
         editor={editor.name}
       />
       <ProjectSection />
+      <Container>
+        <PhotoGallery />
+      </Container>
     </div>
   );
 }
