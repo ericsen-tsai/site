@@ -83,12 +83,12 @@ export default function Header() {
                   "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
                   {
                     "text-primary underline":
-                      sectionInView === NAV_ITEMS.GUESTBOOK,
+                      sectionInView === NAV_ITEMS.PROJECTS,
                   }
                 )}
-                onClick={() => scrollToSection(NAV_ITEMS.GUESTBOOK)}
+                onClick={() => scrollToSection(NAV_ITEMS.PROJECTS)}
               >
-                Guest Book
+                Projects
               </a>
             </li>
           </ul>

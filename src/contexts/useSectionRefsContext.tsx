@@ -39,7 +39,7 @@ export const SectionRefsProvider = ({
       [NAV_ITEMS.HOME]: homeRef,
       [NAV_ITEMS.WHOAMI]: whoamiRef,
       [NAV_ITEMS.ABOUTME]: aboutmeRef,
-      [NAV_ITEMS.GUESTBOOK]: guestbookRef,
+      [NAV_ITEMS.PROJECTS]: guestbookRef,
     }),
     []
   );
