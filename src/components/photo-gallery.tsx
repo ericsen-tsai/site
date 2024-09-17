@@ -36,7 +36,7 @@ const PHOTOS = [
     alt: "Freediving",
     spanRow: 2,
     spanCol: 2,
-    description: "Freediving at Plane Wreck, Bohol with Justina",
+    description: "Freediving with Justina at Plane Wreck, Bohol",
   },
   {
     src: "/photo-gallery/guinea_pigs.png",
@@ -50,13 +50,13 @@ const PHOTOS = [
 
 function PhotoGallery() {
   return (
-    <div className="grid auto-rows-[100px] grid-cols-3 gap-4">
+    <div className="grid auto-rows-[100px] grid-cols-3 gap-4 [&:has(div:hover)>div:not(:hover)]:scale-[99%]">
       {PHOTOS.map((photo, index) => (
         <TooltipProvider key={index} delayDuration={200}>
           <Tooltip>
             <TooltipTrigger asChild>
               <div
-                className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-105"
+                className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-[102%]"
                 style={{
                   gridRow: `span ${photo.spanRow}`,
                   gridColumn: `span ${photo.spanCol}`,
