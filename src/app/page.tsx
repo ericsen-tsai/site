@@ -6,6 +6,7 @@ import AboutMeSection from "@/components/aboutme/section";
 import ProjectSection from "@/components/projects/section";
 import PhotoGallery from "@/components/photo-gallery";
 import Container from "@/components/container";
+import Guestbook from "@/components/guestbook";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
@@ -26,6 +27,7 @@ export default async function Home() {
       <ProjectSection />
       <Container>
         <PhotoGallery />
+        <Guestbook />
       </Container>
     </div>
   );
