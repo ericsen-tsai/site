@@ -5,6 +5,7 @@ import "./globals.css";
 import ParticleBackground from "@/components/layout/particle-background";
 import Header from "@/components/layout/header";
 import { SectionRefsProvider } from "@/contexts/useSectionRefsContext";
+import Footer from "@/components/footer";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -57,6 +58,7 @@ export default function RootLayout({
           <ParticleBackground />
           <div className="relative z-10">{children}</div>
         </SectionRefsProvider>
+        <Footer />
       </body>
     </html>
   );

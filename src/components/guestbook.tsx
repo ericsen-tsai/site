@@ -67,7 +67,7 @@ function Guestbook() {
   };
 
   return (
-    <div className="my-96 grid max-h-screen grid-cols-1 gap-12 md:h-96 md:max-h-none md:grid-cols-2">
+    <div className="mb-48 mt-96 grid max-h-screen grid-cols-1 gap-12 md:h-96 md:max-h-none md:grid-cols-2">
       <div className="flex flex-col">
         <div className="mb-8">
           <h3 className="text-xl font-bold">Guestbook</h3>
@@ -111,7 +111,7 @@ function Guestbook() {
         )}
       </div>
 
-      <div className="space-y-4 overflow-y-auto pr-4">
+      <div className="space-y-4 overflow-y-auto md:pr-4">
         {guestBookEntries.map((entry) => (
           <Card
             key={entry.id}
@@ -132,8 +132,8 @@ function Guestbook() {
                 <div className="text-xs opacity-50">{entry.date}</div>
               </div>
             </CardTitle>
-            <CardDescription>
-              <p className="text-sm text-card-foreground">{entry.message}</p>
+            <CardDescription className="text-sm text-card-foreground">
+              {entry.message}
             </CardDescription>
           </Card>
         ))}

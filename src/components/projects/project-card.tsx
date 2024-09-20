@@ -18,7 +18,7 @@ type Props = {
 
 function ProjectCard({ title, description, link, techStacks }: Props) {
   return (
-    <Link href={link}>
+    <Link href={link} target="_blank">
       <Card className="relative mx-auto flex h-60 w-full flex-col overflow-hidden border-[0.01rem] border-card-foreground/50 text-card-foreground">
         <Image
           src={`/projects/${title.toLowerCase()}/cover.png`}

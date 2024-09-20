@@ -71,8 +71,8 @@ function PhotoGallery() {
                 />
               </div>
             </TooltipTrigger>
-            <TooltipContent asChild className="bg-secondary">
-              <p className="max-w-xs text-sm">{photo.description}</p>
+            <TooltipContent asChild className="max-w-xs bg-secondary text-sm">
+              <span className="inline-block">{photo.description}</span>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

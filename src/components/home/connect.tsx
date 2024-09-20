@@ -1,34 +1,6 @@
-import {
-  SiFacebook,
-  SiGithub,
-  SiInstagram,
-  SiThreads,
-  SiLinkedin,
-} from "@icons-pack/react-simple-icons";
-import Link from "next/link";
+import { SOCIAL_LINKS } from "@/constants/link";
 
-const SOCIAL_LINKS = [
-  {
-    href: "https://github.com/ericsen-tsai",
-    icon: SiGithub,
-  },
-  {
-    href: "https://www.facebook.com/cookiestrangetsai/",
-    icon: SiFacebook,
-  },
-  {
-    href: "https://www.instagram.com/cookiestrange_tsai/",
-    icon: SiInstagram,
-  },
-  {
-    href: "https://www.threads.net/@cookiestrange_tsai",
-    icon: SiThreads,
-  },
-  {
-    href: "https://www.linkedin.com/in/ericsen-tsai-a00948236/",
-    icon: SiLinkedin,
-  },
-];
+import Link from "next/link";
 
 function Connect() {
   return (
@@ -41,6 +13,7 @@ function Connect() {
             key={href}
             href={href}
             className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-foreground"
+            target="_blank"
           >
             <Icon className="size-[18px]" />
           </Link>
