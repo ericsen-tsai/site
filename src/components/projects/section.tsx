@@ -23,7 +23,12 @@ const ProjectSection = () => {
       className="mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-8"
       ref={sectionRefs?.[NAV_ITEMS.PROJECTS]}
     >
-      <h2 className="mb-8 text-center text-3xl font-bold">Projects</h2>
+      <h2 className="mb-8 text-center text-3xl font-bold">
+        Projects
+        <p className="text-sm font-normal text-card-foreground/50">
+          Life cannot be cheated; everything that has happened becomes evidence.
+        </p>
+      </h2>
       <div
         className={cn(
           "grid w-full max-w-xs grid-cols-1 justify-items-stretch gap-y-4 md:max-w-none md:gap-x-4 md:grid-cols-3",

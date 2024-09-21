@@ -43,7 +43,12 @@ export default function AboutMe({ totalHoursText, language, editor }: Props) {
       className="mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-8"
       ref={sectionRefs?.[NAV_ITEMS.ABOUTME]}
     >
-      <h2 className="mb-8 text-center text-3xl font-bold">About Me</h2>
+      <h2 className="mb-8 text-center text-3xl font-bold">
+        About Me
+        <p className="text-sm font-normal text-card-foreground/50">
+          He was a tool of the boss, without brains or backbone.
+        </p>
+      </h2>
       <div className="grid w-full max-w-xs grid-cols-1 justify-items-stretch gap-y-4 md:max-w-none md:grid-cols-3 md:gap-x-4">
         {dashboardCards.map((card, index) => (
           <DashboardCard key={index} {...card} />

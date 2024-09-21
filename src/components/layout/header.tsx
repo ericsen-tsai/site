@@ -21,7 +21,7 @@ export default function Header() {
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-50 text-sm tracking-tighter"
+      className="fixed inset-x-0 top-0 z-50 text-sm tracking-tighter backdrop-blur-sm"
       style={{ backgroundColor: `rgba(0, 0, 0, ${headerOpacity})` }}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between space-x-8 p-4">

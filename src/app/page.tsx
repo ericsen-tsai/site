@@ -4,7 +4,6 @@ import HeroSection from "@/components/home/section";
 import WhoAmISection from "@/components/whoami/section";
 import AboutMeSection from "@/components/aboutme/section";
 import ProjectSection from "@/components/projects/section";
-import PhotoGallery from "@/components/photo-gallery";
 import Container from "@/components/container";
 import Guestbook from "@/components/guestbook";
 export const dynamic = "force-dynamic";
@@ -16,7 +15,7 @@ export default async function Home() {
   ]);
 
   return (
-    <div className="min-h-screen font-[family-name:var(--font-montserrat)]">
+    <div className="min-h-screen scroll-smooth font-[family-name:var(--font-montserrat)]">
       <HeroSection />
       <WhoAmISection />
       <AboutMeSection
@@ -26,7 +25,7 @@ export default async function Home() {
       />
       <ProjectSection />
       <Container>
-        <PhotoGallery />
+        {/* <PhotoGallery /> */}
         <Guestbook />
       </Container>
     </div>

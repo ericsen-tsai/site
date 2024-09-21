@@ -40,6 +40,38 @@ function Guestbook() {
       date: "2023-06-03",
       color: "#2C2C2C",
     },
+    {
+      id: 5,
+      name: "Charlie",
+      message:
+        "Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!",
+      date: "2023-06-03",
+      color: "#2C2C2C",
+    },
+    {
+      id: 6,
+      name: "Charlie",
+      message:
+        "Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!",
+      date: "2023-06-03",
+      color: "#2C2C2C",
+    },
+    {
+      id: 7,
+      name: "Charlie",
+      message:
+        "Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!",
+      date: "2023-06-03",
+      color: "#2C2C2C",
+    },
+    {
+      id: 8,
+      name: "Charlie",
+      message:
+        "Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!",
+      date: "2023-06-03",
+      color: "#2C2C2C",
+    },
   ]);
 
   const [newEntry, setNewEntry] = useState({
@@ -67,12 +99,13 @@ function Guestbook() {
   };
 
   return (
-    <div className="mb-48 mt-96 grid max-h-screen grid-cols-1 gap-12 md:h-96 md:max-h-none md:grid-cols-2">
+    <div className="mb-48 grid grid-cols-1 gap-12">
       <div className="flex flex-col">
         <div className="mb-8">
           <h3 className="text-xl font-bold">Guestbook</h3>
           <p className="text-sm text-card-foreground/50">
-            Ideas spread like wildfire, like particles, like seeds.
+            I have hated the words and I have loved them, and I hope I have made
+            them right.
           </p>
         </div>
         {signIn ? (
@@ -111,7 +144,7 @@ function Guestbook() {
         )}
       </div>
 
-      <div className="space-y-4 overflow-y-auto md:pr-4">
+      <div className="max-h-96 space-y-4 overflow-y-auto pr-4">
         {guestBookEntries.map((entry) => (
           <Card
             key={entry.id}
