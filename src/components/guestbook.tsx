@@ -5,9 +5,17 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Card, CardTitle, CardDescription } from "./ui/card";
+import { Session } from "next-auth";
+import { signIn, signOut } from "next-auth/react";
+import { NAV_ITEMS } from "@/constants/link";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
 
-function Guestbook() {
-  const [signIn, setSignIn] = useState(true);
+type Props = {
+  session: Session | null;
+};
+
+function Guestbook({ session }: Props) {
   const [guestBookEntries, setGuestBookEntries] = useState([
     {
       id: 1,
@@ -99,7 +107,10 @@ function Guestbook() {
   };
 
   return (
-    <div className="mb-48 grid grid-cols-1 gap-12">
+    <div
+      className="mb-48 mt-24 grid grid-cols-1 gap-12"
+      id={NAV_ITEMS.GUESTBOOK}
+    >
       <div className="flex flex-col">
         <div className="mb-8">
           <h3 className="text-xl font-bold">Guestbook</h3>
@@ -108,15 +119,14 @@ function Guestbook() {
             them right.
           </p>
         </div>
-        {signIn ? (
+        {session?.user ? (
           <form onSubmit={handleSubmit} className="flex grow flex-col gap-8">
             <div className="flex grow items-start space-x-4">
               <Avatar>
-                <AvatarImage
-                  src="/placeholder.svg?height=40&width=40"
-                  alt="User"
-                />
-                <AvatarFallback className="bg-gray-700">U</AvatarFallback>
+                <AvatarImage src={session.user.image ?? ""} alt="User" />
+                <AvatarFallback className="bg-gray-700">
+                  {session.user.name?.at(0)}
+                </AvatarFallback>
               </Avatar>
               <div className="h-full grow">
                 <Textarea
@@ -129,17 +139,52 @@ function Guestbook() {
               <Button
                 variant="outline"
                 className="hover:bg-gray-700 hover:text-white"
+                onClick={() =>
+                  signOut({ redirectTo: `/#${NAV_ITEMS.GUESTBOOK}` })
+                }
               >
-                Logout
+                Sign Out
               </Button>
               <Button variant="secondary">Submit</Button>
             </div>
           </form>
         ) : (
-          <div className="flex grow items-center justify-center">
-            <Button variant="secondary" onClick={() => setSignIn(true)}>
-              Sign In
-            </Button>
+          <div className="flex h-[8.875rem] grow flex-col items-center justify-center">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="secondary">Sign In</Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-fit border-none bg-secondary/30 p-2 shadow-none backdrop-blur-sm">
+                <div className="flex flex-col gap-2 font-[family-name:var(--font-montserrat)]">
+                  <Button
+                    variant="secondary"
+                    onClick={() =>
+                      signIn("google", {
+                        redirectTo: `/#${NAV_ITEMS.GUESTBOOK}`,
+                      })
+                    }
+                  >
+                    <SiGoogle className="mr-2 size-[18px]" />
+                    Google
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    onClick={() =>
+                      signIn("github", {
+                        redirectTo: `/#${NAV_ITEMS.GUESTBOOK}`,
+                      })
+                    }
+                  >
+                    <SiGithub className="mr-2 size-[18px]" />
+                    GitHub
+                  </Button>
+                </div>
+              </PopoverContent>
+            </Popover>
+
+            <p className="mt-3 text-sm text-card-foreground/50">
+              to leave your idea
+            </p>
           </div>
         )}
       </div>

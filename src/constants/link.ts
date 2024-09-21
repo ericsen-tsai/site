@@ -11,6 +11,7 @@ export enum NAV_ITEMS {
   WHOAMI = "whoami",
   ABOUTME = "aboutme",
   PROJECTS = "projects",
+  GUESTBOOK = "guestbook",
 }
 
 export const SOCIAL_LINKS = [

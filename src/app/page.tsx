@@ -6,6 +6,7 @@ import AboutMeSection from "@/components/aboutme/section";
 import ProjectSection from "@/components/projects/section";
 import Container from "@/components/container";
 import Guestbook from "@/components/guestbook";
+import { auth } from "@/lib/auth";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
@@ -13,7 +14,7 @@ export default async function Home() {
     getAllTimeSinceToday(),
     getMostUsedLanguageDuringSevenDays(),
   ]);
-
+  const session = await auth();
   return (
     <div className="min-h-screen scroll-smooth font-[family-name:var(--font-montserrat)]">
       <HeroSection />
@@ -26,7 +27,7 @@ export default async function Home() {
       <ProjectSection />
       <Container>
         {/* <PhotoGallery /> */}
-        <Guestbook />
+        <Guestbook session={session} />
       </Container>
     </div>
   );
