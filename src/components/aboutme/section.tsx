@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Clock, Code, Edit3 } from "lucide-react";
 import LogoMarquee from "./tech-stack-marquee";
 import { useScrollContext } from "@/contexts/useSectionRefsContext";
@@ -38,10 +39,14 @@ export default function AboutMe({ totalHoursText, language, editor }: Props) {
   );
 
   return (
-    <section
+    <motion.section
       id={NAV_ITEMS.ABOUTME}
       className="mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-8"
       ref={sectionRefs?.[NAV_ITEMS.ABOUTME]}
+      initial={{ y: 200, opacity: 0 }}
+      transition={{ duration: 0.8 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
     >
       <h2 className="mb-8 text-center text-3xl font-bold">
         About Me
@@ -55,6 +60,6 @@ export default function AboutMe({ totalHoursText, language, editor }: Props) {
         ))}
       </div>
       <LogoMarquee />
-    </section>
+    </motion.section>
   );
 }

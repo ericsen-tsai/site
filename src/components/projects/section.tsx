@@ -4,6 +4,7 @@ import { NAV_ITEMS } from "@/constants/link";
 import { useScrollContext } from "@/contexts/useSectionRefsContext";
 import ProjectCard from "./project-card";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 const PROJECTS = [
   {
@@ -19,10 +20,14 @@ const ProjectSection = () => {
   const { sectionRefs } = useScrollContext();
 
   return (
-    <section
+    <motion.section
       id={NAV_ITEMS.PROJECTS}
       className="mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-8"
       ref={sectionRefs?.[NAV_ITEMS.PROJECTS]}
+      initial={{ y: 200, opacity: 0 }}
+      transition={{ duration: 0.8 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
     >
       <h2 className="mb-8 text-center text-3xl font-bold">
         Projects
@@ -40,7 +45,7 @@ const ProjectSection = () => {
           <ProjectCard key={project.title} {...project} />
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 };
 
