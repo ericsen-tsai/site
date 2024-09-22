@@ -7,11 +7,11 @@ import {
 } from "@icons-pack/react-simple-icons";
 
 export enum NAV_ITEMS {
-  HOME = "home",
-  WHOAMI = "whoami",
-  ABOUTME = "aboutme",
-  PROJECTS = "projects",
-  GUESTBOOK = "guestbook",
+  HOME = "Home",
+  WHOAMI = "Who am I",
+  ABOUTME = "About Me",
+  PROJECTS = "Projects",
+  GUESTBOOK = "Guestbook",
 }
 
 export const SOCIAL_LINKS = [

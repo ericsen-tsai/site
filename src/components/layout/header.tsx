@@ -21,7 +21,7 @@ export default function Header() {
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-50 text-sm tracking-tighter backdrop-blur-sm"
+      className="fixed inset-x-0 top-0 z-50 font-[family-name:var(--font-montserrat)] text-sm tracking-tighter backdrop-blur-sm"
       style={{ backgroundColor: `rgba(0, 0, 0, ${headerOpacity})` }}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between space-x-8 p-4">
@@ -36,61 +36,23 @@ export default function Header() {
         </Link>
         <nav>
           <ul className="flex items-center justify-center space-x-6">
-            <li className="text-center">
-              <a
-                className={cn(
-                  "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
-                  {
-                    "text-primary underline": sectionInView === NAV_ITEMS.HOME,
-                  }
-                )}
-                onClick={() => scrollToSection(NAV_ITEMS.HOME)}
-              >
-                Home
-              </a>
-            </li>
-            <li className="text-center">
-              <a
-                className={cn(
-                  "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
-                  {
-                    "text-primary underline":
-                      sectionInView === NAV_ITEMS.WHOAMI,
-                  }
-                )}
-                onClick={() => scrollToSection(NAV_ITEMS.WHOAMI)}
-              >
-                Who Am I
-              </a>
-            </li>
-            <li className="text-center">
-              <a
-                className={cn(
-                  "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
-                  {
-                    "text-primary underline":
-                      sectionInView === NAV_ITEMS.ABOUTME,
-                  }
-                )}
-                onClick={() => scrollToSection(NAV_ITEMS.ABOUTME)}
-              >
-                About Me
-              </a>
-            </li>
-            <li className="text-center">
-              <a
-                className={cn(
-                  "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
-                  {
-                    "text-primary underline":
-                      sectionInView === NAV_ITEMS.PROJECTS,
-                  }
-                )}
-                onClick={() => scrollToSection(NAV_ITEMS.PROJECTS)}
-              >
-                Projects
-              </a>
-            </li>
+            {Object.entries(NAV_ITEMS)
+              .filter(([, value]) => value !== NAV_ITEMS.GUESTBOOK)
+              .map(([key, value]) => (
+                <li key={key} className="text-center">
+                  <a
+                    className={cn(
+                      "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
+                      {
+                        "text-primary underline": sectionInView === value,
+                      }
+                    )}
+                    onClick={() => scrollToSection(value)}
+                  >
+                    {value}
+                  </a>
+                </li>
+              ))}
           </ul>
         </nav>
       </div>
