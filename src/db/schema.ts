@@ -5,6 +5,7 @@ import {
   text,
   primaryKey,
   integer,
+  serial,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
@@ -88,3 +89,14 @@ export const authenticators = pgTable(
     }),
   })
 );
+
+export const guestbookComments = pgTable("guestbook_comments", {
+  id: serial("id").primaryKey(),
+  message: text("message").notNull(),
+  createdAt: timestamp("createdAt", { mode: "date" })
+    .notNull()
+    .$default(() => new Date()),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+});

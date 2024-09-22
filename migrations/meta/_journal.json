@@ -15,6 +15,13 @@
       "when": 1726986174465,
       "tag": "0001_nifty_fixer",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1726987081107,
+      "tag": "0002_quiet_squadron_sinister",
+      "breakpoints": true
     }
   ]
 }

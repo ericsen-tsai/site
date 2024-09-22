@@ -106,6 +106,8 @@ function Guestbook({ session }: Props) {
     }
   };
 
+  console.log({ session });
+
   return (
     <div
       className="mb-48 mt-24 grid grid-cols-1 gap-12"
