@@ -32,6 +32,7 @@ export const SectionRefsProvider = ({
   const homeRef = useRef<HTMLDivElement>(null);
   const whoamiRef = useRef<HTMLDivElement>(null);
   const aboutmeRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
   const guestbookRef = useRef<HTMLDivElement>(null);
 
   const sectionRefs: SectionRefsContext["sectionRefs"] = useMemo(
@@ -39,7 +40,8 @@ export const SectionRefsProvider = ({
       [NAV_ITEMS.HOME]: homeRef,
       [NAV_ITEMS.WHOAMI]: whoamiRef,
       [NAV_ITEMS.ABOUTME]: aboutmeRef,
-      [NAV_ITEMS.PROJECTS]: guestbookRef,
+      [NAV_ITEMS.PROJECTS]: projectsRef,
+      [NAV_ITEMS.GUESTBOOK]: guestbookRef,
     }),
     []
   );
