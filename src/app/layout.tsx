@@ -6,6 +6,7 @@ import ParticleBackground from "@/components/layout/particle-background";
 import Header from "@/components/layout/header";
 import { SectionRefsProvider } from "@/contexts/useSectionRefsContext";
 import Footer from "@/components/footer";
+import { TRPCReactProvider } from "@/trpc/react";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -53,12 +54,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.variable} relative antialiased`}>
-        <SectionRefsProvider>
-          <Header />
-          <ParticleBackground />
-          <div className="relative z-10">{children}</div>
-        </SectionRefsProvider>
-        <Footer />
+        <TRPCReactProvider>
+          <SectionRefsProvider>
+            <Header />
+            <ParticleBackground />
+            <div className="relative z-10">{children}</div>
+          </SectionRefsProvider>
+          <Footer />
+        </TRPCReactProvider>
       </body>
     </html>
   );

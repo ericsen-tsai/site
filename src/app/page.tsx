@@ -7,13 +7,16 @@ import ProjectSection from "@/components/projects/section";
 import Container from "@/components/container";
 import Guestbook from "@/components/guestbook";
 import { auth } from "@/lib/auth";
+import { getGuestbookCommentsWithUserImages } from "@/lib/db-access/guestbook-comments";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [{ totalHoursText }, { language, editor }] = await Promise.all([
-    getAllTimeSinceToday(),
-    getMostUsedLanguageDuringSevenDays(),
-  ]);
+  const [{ totalHoursText }, { language, editor }, comments] =
+    await Promise.all([
+      getAllTimeSinceToday(),
+      getMostUsedLanguageDuringSevenDays(),
+      getGuestbookCommentsWithUserImages(),
+    ]);
   const session = await auth();
   return (
     <div className="min-h-screen scroll-smooth font-[family-name:var(--font-montserrat)]">
@@ -27,7 +30,7 @@ export default async function Home() {
       <ProjectSection />
       <Container>
         {/* <PhotoGallery /> */}
-        <Guestbook session={session} />
+        <Guestbook user={session?.user} comments={comments} />
       </Container>
     </div>
   );

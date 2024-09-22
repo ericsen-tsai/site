@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -10,103 +9,49 @@ import { signIn, signOut } from "next-auth/react";
 import { NAV_ITEMS } from "@/constants/link";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
+import deleteAllComments from "@/actions/deleteAllComments";
+
+import { api } from "@/trpc/react";
+import { useRouter } from "next/navigation";
 
 type Props = {
-  session: Session | null;
+  user: Session["user"];
+  comments: {
+    userImage: string | null | undefined;
+    userName: string | null | undefined;
+    userRole: "user" | "admin" | undefined;
+    id: number;
+    message: string;
+    createdAt: Date;
+    userId: string;
+  }[];
 };
 
-function Guestbook({ session }: Props) {
-  const [guestBookEntries, setGuestBookEntries] = useState([
-    {
-      id: 1,
-      name: "Alice",
-      message: "Great portfolio!",
-      avatar: "/placeholder.svg?height=40&width=40",
-      date: "2023-06-01",
-      color: "#E5E5E5",
-    },
-    {
-      id: 2,
-      name: "Bob",
-      message: "Impressive work!",
-      date: "2023-06-02",
-      color: "#4A4A4A",
-    },
-    {
-      id: 3,
-      name: "Charlie",
-      message:
-        "Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!",
-      date: "2023-06-03",
-      color: "#2C2C2C",
-    },
-    {
-      id: 4,
-      name: "Charlie",
-      message:
-        "Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!",
-      date: "2023-06-03",
-      color: "#2C2C2C",
-    },
-    {
-      id: 5,
-      name: "Charlie",
-      message:
-        "Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!",
-      date: "2023-06-03",
-      color: "#2C2C2C",
-    },
-    {
-      id: 6,
-      name: "Charlie",
-      message:
-        "Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!",
-      date: "2023-06-03",
-      color: "#2C2C2C",
-    },
-    {
-      id: 7,
-      name: "Charlie",
-      message:
-        "Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!",
-      date: "2023-06-03",
-      color: "#2C2C2C",
-    },
-    {
-      id: 8,
-      name: "Charlie",
-      message:
-        "Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!Love the design!",
-      date: "2023-06-03",
-      color: "#2C2C2C",
-    },
-  ]);
+function Guestbook({ user, comments: initialComments }: Props) {
+  const router = useRouter();
 
-  const [newEntry, setNewEntry] = useState({
-    name: "",
-    message: "",
-    color: "#E5E5E5",
+  const { data: comments } = api.guestbookComments.get.useQuery(undefined, {
+    initialData: initialComments,
   });
+
+  const utils = api.useUtils();
+
+  const { mutate, isPending } = api.guestbookComments.create.useMutation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (newEntry.name && newEntry.message) {
-      setGuestBookEntries([
-        ...guestBookEntries,
-        {
-          id: Date.now(),
-          name: newEntry.name,
-          message: newEntry.message,
-          date: new Date().toISOString().split("T")[0],
-          color: newEntry.color,
-          avatar: "/placeholder.svg?height=40&width=40",
-        },
-      ]);
-      setNewEntry({ name: "", message: "", color: "#E5E5E5" });
-    }
+    const formData = new FormData(e.target as HTMLFormElement);
+    const message = formData.get("message") as string;
+    mutate(message, {
+      onSuccess: () => {
+        (e.target as HTMLFormElement).reset();
+        utils.guestbookComments.get.invalidate();
+      },
+      onError: (error) => {
+        console.error(error);
+      },
+    });
   };
-
-  console.log({ session });
 
   return (
     <div
@@ -121,33 +66,47 @@ function Guestbook({ session }: Props) {
             them right.
           </p>
         </div>
-        {session?.user ? (
+        {user ? (
           <form onSubmit={handleSubmit} className="flex grow flex-col gap-8">
             <div className="flex grow items-start space-x-4">
-              <Avatar>
-                <AvatarImage src={session.user.image ?? ""} alt="User" />
-                <AvatarFallback className="bg-gray-700">
-                  {session.user.name?.at(0)}
-                </AvatarFallback>
-              </Avatar>
-              <div className="h-full grow">
+              <Popover>
+                <PopoverTrigger>
+                  <Avatar>
+                    <AvatarImage src={user.image ?? ""} alt="User" />
+                    <AvatarFallback className="bg-gray-700">
+                      {user.name?.at(0)}
+                    </AvatarFallback>
+                  </Avatar>
+                </PopoverTrigger>
+                <PopoverContent className="w-fit border-none bg-secondary/30 p-2 shadow-none backdrop-blur-sm">
+                  <div className="flex flex-col gap-2 font-[family-name:var(--font-montserrat)]">
+                    <Button
+                      variant="destructive"
+                      onClick={() =>
+                        signOut({ redirectTo: `/#${NAV_ITEMS.GUESTBOOK}` })
+                      }
+                    >
+                      Sign Out
+                    </Button>
+                  </div>
+                </PopoverContent>
+              </Popover>
+              <div className="relative w-full">
                 <Textarea
                   placeholder="Leave a message"
-                  className="size-full rounded-lg border-[0.01rem] border-card-foreground/50 p-4 text-card-foreground"
+                  className="scrollbar-hide size-full rounded-lg border-[0.01rem] border-card-foreground/50 p-4 pr-24 text-card-foreground"
+                  name="message"
+                  disabled={isPending}
                 />
+                <Button
+                  variant="secondary"
+                  type="submit"
+                  className="absolute bottom-2 right-2"
+                  disabled={isPending}
+                >
+                  Submit
+                </Button>
               </div>
-            </div>
-            <div className="mt-auto flex justify-end space-x-2">
-              <Button
-                variant="outline"
-                className="hover:bg-gray-700 hover:text-white"
-                onClick={() =>
-                  signOut({ redirectTo: `/#${NAV_ITEMS.GUESTBOOK}` })
-                }
-              >
-                Sign Out
-              </Button>
-              <Button variant="secondary">Submit</Button>
             </div>
           </form>
         ) : (
@@ -183,7 +142,6 @@ function Guestbook({ session }: Props) {
                 </div>
               </PopoverContent>
             </Popover>
-
             <p className="mt-3 text-sm text-card-foreground/50">
               to leave your idea
             </p>
@@ -192,32 +150,56 @@ function Guestbook({ session }: Props) {
       </div>
 
       <div className="max-h-96 space-y-4 overflow-y-auto pr-4">
-        {guestBookEntries.map((entry) => (
+        {comments.map((comment) => (
           <Card
-            key={entry.id}
+            key={comment.id}
             className="rounded-lg border-[0.01rem] border-card-foreground/50 bg-transparent p-4 text-card-foreground"
           >
             <CardTitle className="mb-2 flex items-center space-x-3">
               <Avatar>
-                {entry.avatar ? (
-                  <AvatarImage src={entry.avatar} alt={entry.name} />
+                {comment.userImage ? (
+                  <AvatarImage
+                    src={comment.userImage}
+                    alt={comment.userName ?? ""}
+                  />
                 ) : (
                   <AvatarFallback className="bg-gray-700">
-                    {entry.name[0]}
+                    {comment.userName?.[0] ?? "?"}
                   </AvatarFallback>
                 )}
               </Avatar>
               <div className="text-sm">
-                <div className="font-semibold">{entry.name}</div>
-                <div className="text-xs opacity-50">{entry.date}</div>
+                <div className="font-semibold">
+                  {comment.userName}
+                  {comment.userRole === "admin" ? " (admin)" : ""}
+                </div>
+                <div className="text-xs opacity-50">
+                  {comment.createdAt.toLocaleString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                    hour: "numeric",
+                    minute: "numeric",
+                  })}
+                </div>
               </div>
             </CardTitle>
             <CardDescription className="text-sm text-card-foreground">
-              {entry.message}
+              {comment.message}
             </CardDescription>
           </Card>
         ))}
       </div>
+      {process.env.NODE_ENV === "development" && (
+        <Button
+          onClick={async () => {
+            await deleteAllComments();
+            router.refresh();
+          }}
+        >
+          Delete All
+        </Button>
+      )}
     </div>
   );
 }
