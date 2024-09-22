@@ -110,7 +110,7 @@ function Guestbook({ user, comments: initialComments }: Props) {
             </div>
           </form>
         ) : (
-          <div className="flex h-[8.875rem] grow flex-col items-center justify-center">
+          <div className="flex h-[4.625rem] grow flex-col items-center justify-center">
             <Popover>
               <PopoverTrigger asChild>
                 <Button variant="secondary">Sign In</Button>
