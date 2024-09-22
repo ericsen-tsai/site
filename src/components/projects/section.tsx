@@ -11,6 +11,7 @@ const PROJECTS = [
     description: "Ericsen's Portfolio Site",
     link: ".",
     techStacks: ["React", "Next.js", "Tailwind CSS", "Shadcn"],
+    githubLink: "https://github.com/ericsen-tsai/site",
   },
 ];
 

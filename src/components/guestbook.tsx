@@ -196,6 +196,8 @@ function Guestbook({ user, comments: initialComments }: Props) {
             await deleteAllComments();
             router.refresh();
           }}
+          variant="destructive"
+          disabled
         >
           Delete All
         </Button>
