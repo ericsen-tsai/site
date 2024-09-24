@@ -1,19 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import Image from "next/image";
 import { NAV_ITEMS } from "@/constants/link";
 import { useScrollContext } from "@/contexts/useSectionRefsContext";
 import Connect from "./connect";
+import { MotionValue, useScroll, useTransform } from "framer-motion";
+import BlobMorphing from "../blob-morphing";
+
+function useParallax(value: MotionValue<number>, distance: number) {
+  return useTransform(value, [0, 1], [-distance, distance]);
+}
 
 const HeroSection = () => {
   const [textColor, setTextColor] = useState("text-blue-500");
   const { sectionRefs } = useScrollContext();
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+  const y = useParallax(scrollYProgress, 300);
 
   return (
     <section
-      className="flex h-screen flex-col items-center justify-center p-20 text-center"
+      className="relative flex h-screen flex-col items-center justify-center p-20 text-center"
       id={NAV_ITEMS.HOME}
       ref={sectionRefs?.[NAV_ITEMS.HOME]}
     >
@@ -41,7 +53,7 @@ const HeroSection = () => {
         </div>
       </div>
       <h1 className="mb-3 text-3xl font-bold">I&apos;m Ericsen,</h1>
-      <h2 className="mb-16 text-2xl font-semibold">
+      <h2 className="mb-16 text-2xl font-semibold" ref={ref}>
         a Frontend Developer who makes web apps <br />
         <span className={textColor}>
           <TypeAnimation
@@ -70,6 +82,7 @@ const HeroSection = () => {
           />
         </span>
       </h2>
+      <BlobMorphing style={{ y }} />
       <Connect />
     </section>
   );
