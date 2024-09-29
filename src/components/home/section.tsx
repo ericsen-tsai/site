@@ -7,7 +7,7 @@ import { NAV_ITEMS } from "@/constants/link";
 import { useScrollContext } from "@/contexts/useSectionRefsContext";
 import Connect from "./connect";
 import { MotionValue, useScroll, useTransform } from "framer-motion";
-import BlobMorphing from "../blob-morphing";
+import BlobMorphing from "./blob-morphing";
 
 function useParallax(value: MotionValue<number>, distance: number) {
   return useTransform(value, [0, 1], [-distance, distance]);

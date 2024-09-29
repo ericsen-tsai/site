@@ -1,12 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 const PHOTOS = [
   {
@@ -52,30 +47,28 @@ function PhotoGallery() {
   return (
     <div className="grid auto-rows-[100px] grid-cols-3 gap-4 [&:has(div:hover)>div:not(:hover)]:scale-[99%]">
       {PHOTOS.map((photo, index) => (
-        <TooltipProvider key={index} delayDuration={200}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div
-                className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-[102%]"
-                style={{
-                  gridRow: `span ${photo.spanRow}`,
-                  gridColumn: `span ${photo.spanCol}`,
-                }}
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-opacity duration-300 ease-in-out hover:opacity-80"
-                />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent asChild className="max-w-xs bg-secondary text-sm">
-              <span className="inline-block">{photo.description}</span>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Tooltip key={index}>
+          <TooltipTrigger asChild>
+            <div
+              className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-[102%]"
+              style={{
+                gridRow: `span ${photo.spanRow}`,
+                gridColumn: `span ${photo.spanCol}`,
+              }}
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover transition-opacity duration-300 ease-in-out hover:opacity-80"
+              />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent asChild className="max-w-xs bg-secondary text-sm">
+            <span className="inline-block">{photo.description}</span>
+          </TooltipContent>
+        </Tooltip>
       ))}
     </div>
   );

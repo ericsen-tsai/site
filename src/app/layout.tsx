@@ -7,6 +7,7 @@ import Header from "@/components/layout/header";
 import { SectionRefsProvider } from "@/contexts/useSectionRefsContext";
 import Footer from "@/components/footer";
 import { TRPCReactProvider } from "@/trpc/react";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -55,12 +56,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${montserrat.variable} relative antialiased`}>
         <TRPCReactProvider>
-          <SectionRefsProvider>
-            <Header />
-            <ParticleBackground />
-            <div className="relative z-10">{children}</div>
-          </SectionRefsProvider>
-          <Footer />
+          <TooltipProvider delayDuration={200}>
+            <SectionRefsProvider>
+              <Header />
+              <ParticleBackground />
+              <div className="relative z-10">{children}</div>
+            </SectionRefsProvider>
+            <Footer />
+          </TooltipProvider>
         </TRPCReactProvider>
       </body>
     </html>
