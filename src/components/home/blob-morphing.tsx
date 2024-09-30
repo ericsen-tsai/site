@@ -17,13 +17,22 @@ const BlobMorphing = ({ style }: Props) => {
   const controls = useAnimation();
 
   useEffect(() => {
+    let isMounted = true;
+
     const sequence = async () => {
       for (const path of paths) {
+        if (!isMounted) break;
         await controls.start({ d: path, transition: { duration: 8 } });
       }
-      sequence();
+      if (isMounted) sequence();
     };
+
     sequence();
+
+    return () => {
+      isMounted = false;
+      controls.stop();
+    };
   }, [controls]);
 
   return (
