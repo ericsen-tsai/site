@@ -7,6 +7,7 @@ import { useScrollContext } from "@/contexts/useSectionRefsContext";
 import { NAV_ITEMS } from "@/constants/link";
 import { useMemo } from "react";
 import DashboardCard from "./dashboard-card";
+import { ANIMATION_DURATION, ANIMATION_Y_OFFSET } from "@/constants/animation";
 
 type Props = {
   totalHoursText: string;
@@ -15,7 +16,8 @@ type Props = {
 };
 
 export default function AboutMe({ totalHoursText, language, editor }: Props) {
-  const { sectionRefs } = useScrollContext();
+  const { sectionRefs, onAnimationComplete, animationCompleted } =
+    useScrollContext();
 
   const dashboardCards = useMemo(
     () => [
@@ -43,10 +45,16 @@ export default function AboutMe({ totalHoursText, language, editor }: Props) {
       id={NAV_ITEMS.ABOUTME}
       className="mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-8"
       ref={sectionRefs?.[NAV_ITEMS.ABOUTME]}
-      initial={{ y: 200, opacity: 0 }}
-      transition={{ duration: 0.8 }}
+      initial={{
+        y: animationCompleted?.[NAV_ITEMS.ABOUTME] ? 0 : ANIMATION_Y_OFFSET,
+        opacity: 0,
+      }}
+      transition={{ duration: ANIMATION_DURATION }}
       whileInView={{ y: 0, opacity: 1 }}
       viewport={{ once: true }}
+      onAnimationComplete={() => {
+        onAnimationComplete?.(NAV_ITEMS.ABOUTME);
+      }}
     >
       <h2 className="mb-8 text-center text-3xl font-bold">
         About Me

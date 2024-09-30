@@ -1,5 +1,6 @@
 "use client";
 
+import { ANIMATION_Y_OFFSET } from "@/constants/animation";
 import { NAV_ITEMS } from "@/constants/link";
 import {
   createContext,
@@ -14,6 +15,8 @@ import {
 type SectionRefsContext = {
   scrollToSection: (section: NAV_ITEMS) => void;
   sectionRefs?: Record<NAV_ITEMS, React.RefObject<HTMLDivElement>>;
+  animationCompleted?: Record<NAV_ITEMS, boolean>;
+  onAnimationComplete?: (section: NAV_ITEMS) => void;
   sectionInView: NAV_ITEMS;
 };
 
@@ -46,14 +49,40 @@ export const SectionRefsProvider = ({
     []
   );
 
+  const [animationCompleted, setAnimationCompleted] = useState<
+    Record<NAV_ITEMS, boolean>
+  >({
+    [NAV_ITEMS.HOME]: false,
+    [NAV_ITEMS.WHOAMI]: false,
+    [NAV_ITEMS.ABOUTME]: false,
+    [NAV_ITEMS.PROJECTS]: false,
+    [NAV_ITEMS.GUESTBOOK]: false,
+  });
+
+  const handleAnimationComplete = useCallback((section: NAV_ITEMS) => {
+    setAnimationCompleted((prev) => ({
+      ...prev,
+      [section]: true,
+    }));
+  }, []);
+
   const scrollToSection = useCallback(
     (section: NAV_ITEMS) => {
-      sectionRefs[section]?.current?.scrollIntoView({
+      const element = sectionRefs[section]?.current;
+      if (!element) {
+        return;
+      }
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition +
+        window.scrollY -
+        (animationCompleted[section] ? 0 : ANIMATION_Y_OFFSET);
+      window.scrollTo({
+        top: offsetPosition,
         behavior: "smooth",
-        block: "center",
       });
     },
-    [sectionRefs]
+    [sectionRefs, animationCompleted]
   );
 
   const [sectionInView, setSectionInView] = useState<NAV_ITEMS>(NAV_ITEMS.HOME);
@@ -79,7 +108,13 @@ export const SectionRefsProvider = ({
 
   return (
     <SectionRefsContext.Provider
-      value={{ sectionRefs, scrollToSection, sectionInView }}
+      value={{
+        sectionRefs,
+        scrollToSection,
+        sectionInView,
+        onAnimationComplete: handleAnimationComplete,
+        animationCompleted,
+      }}
     >
       {children}
     </SectionRefsContext.Provider>

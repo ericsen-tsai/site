@@ -1,15 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { NAV_ITEMS } from "@/constants/link";
 import Image from "next/image";
 import { useScrollContext } from "@/contexts/useSectionRefsContext";
 import { cn } from "@/lib/utils";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Header() {
   const [scrollY, setScrollY] = useState(0);
   const { scrollToSection, sectionInView } = useScrollContext();
+  const router = useRouter();
+  const inHomePage = usePathname() === "/";
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -18,6 +21,17 @@ export default function Header() {
   }, []);
 
   const headerOpacity = scrollY > 0 ? 0.5 : 0;
+
+  const handleItemClick = useCallback(
+    (item: NAV_ITEMS) => {
+      if (inHomePage) {
+        scrollToSection(item);
+        return;
+      }
+      router.push(`/#${item}`);
+    },
+    [inHomePage, scrollToSection, router]
+  );
 
   return (
     <header
@@ -44,10 +58,11 @@ export default function Header() {
                     className={cn(
                       "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
                       {
-                        "text-primary underline": sectionInView === value,
+                        "text-primary underline":
+                          inHomePage && sectionInView === value,
                       }
                     )}
-                    onClick={() => scrollToSection(value)}
+                    onClick={() => handleItemClick(value)}
                   >
                     {value}
                   </a>
