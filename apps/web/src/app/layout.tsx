@@ -45,6 +45,7 @@ export const metadata: Metadata = {
       },
     ],
   },
+  metadataBase: new URL("https://site.erichandsen.dev"),
   openGraph: {
     url: "https://site.erichandsen.dev",
     type: "website",
