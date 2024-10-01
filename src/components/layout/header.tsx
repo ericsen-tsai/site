@@ -49,7 +49,7 @@ export default function Header() {
           />
         </Link>
         <nav>
-          <ul className="flex items-center justify-center space-x-6">
+          <ul className="flex items-center justify-center space-x-1 sm:space-x-6">
             {Object.entries(NAV_ITEMS)
               .filter(([, value]) => value !== NAV_ITEMS.GUESTBOOK)
               .map(([key, value]) => (

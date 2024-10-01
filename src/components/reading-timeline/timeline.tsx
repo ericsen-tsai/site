@@ -171,8 +171,8 @@ function Timeline() {
                   className={cn(
                     "relative w-full flex",
                     index % 2 === 0
-                      ? "justify-end text-right pr-36"
-                      : "justify-start text-left pl-36"
+                      ? "justify-end text-right pr-28 sm:pr-36"
+                      : "justify-start text-left pl-28 sm:pl-36"
                   )}
                 >
                   <Tooltip>
@@ -180,7 +180,7 @@ function Timeline() {
                       <Link href={book.link ?? ""} target="_blank">
                         <h3
                           className={
-                            "max-w-56 font-medium text-primary/80 hover:underline"
+                            "max-w-56 font-semibold text-primary/80 backdrop-blur-sm hover:underline"
                           }
                         >
                           {book.title}
@@ -201,8 +201,11 @@ function Timeline() {
                     )}
                   </Tooltip>
                 </div>
-                <div className="absolute -bottom-12 right-0 flex flex-col items-end text-sm text-gray-500">
-                  <p>by {book.author}</p>
+                <div className="absolute -bottom-16 right-0 flex flex-col items-end text-sm font-semibold text-gray-500">
+                  <div className="flex flex-col items-end sm:flex-row">
+                    <p>by</p>
+                    <p className="backdrop-blur-sm">&nbsp;{book.author}</p>
+                  </div>
                   <p className="flex items-center">
                     <Calendar className="mr-1 size-4" />
                     {book.date}
