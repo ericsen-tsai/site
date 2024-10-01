@@ -4,7 +4,7 @@
   "globalEnv": [
     "NODE_ENV",
     "CI",
-    "WAKATIME_API_KEY",
+    "WAKA_TIME_API_KEY",
     "AUTH_SECRET",
     "AUTH_GOOGLE_ID",
     "AUTH_GOOGLE_SECRET",
