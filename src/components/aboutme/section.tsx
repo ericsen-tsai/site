@@ -58,7 +58,7 @@ export default function AboutMe({ totalHoursText, language, editor }: Props) {
     >
       <h2 className="mb-8 text-center text-3xl font-bold">
         About Me
-        <p className="text-sm font-normal text-card-foreground/50">
+        <p className="text-sm font-medium text-card-foreground/50">
           He was a tool of the boss, without brains or backbone.
         </p>
       </h2>

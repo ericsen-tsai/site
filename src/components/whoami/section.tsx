@@ -28,7 +28,7 @@ function WhoAmISection() {
       <div>
         <h2 className="mb-8 text-center text-3xl font-bold">
           Who Am I?
-          <p className="text-sm font-normal text-card-foreground/50">
+          <p className="text-sm font-medium text-card-foreground/50">
             A person doesn’t belong to a place until there is someone dead under
             the ground.
           </p>

@@ -39,7 +39,7 @@ const ProjectSection = () => {
     >
       <h2 className="mb-8 text-center text-3xl font-bold">
         Projects
-        <p className="text-sm font-normal text-card-foreground/50">
+        <p className="text-sm font-medium text-card-foreground/50">
           Life cannot be cheated; everything that has happened becomes evidence.
         </p>
       </h2>

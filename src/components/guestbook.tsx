@@ -60,8 +60,8 @@ function Guestbook({ user, comments: initialComments }: Props) {
     >
       <div className="flex flex-col">
         <div className="mb-8">
-          <h3 className="text-xl font-bold">Guestbook</h3>
-          <p className="text-sm text-card-foreground/50">
+          <h3 className="text-xl font-medium">Guestbook</h3>
+          <p className="text-sm font-medium text-card-foreground/50">
             I have hated the words and I have loved them, and I hope I have made
             them right.
           </p>

@@ -38,8 +38,8 @@ export default function Header() {
       className="fixed inset-x-0 top-0 z-50 font-[family-name:var(--font-montserrat)] text-sm tracking-tighter backdrop-blur-sm"
       style={{ backgroundColor: `rgba(0, 0, 0, ${headerOpacity})` }}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between space-x-8 p-4">
-        <Link href="/" className="flex items-center">
+      <div className="mx-auto flex max-w-6xl items-center justify-center p-4 sm:justify-between sm:space-x-8">
+        <Link href="/" className="hidden items-center sm:flex">
           <Image
             src="/favicon/favicon-32x32.png"
             alt="Logo"
@@ -49,14 +49,14 @@ export default function Header() {
           />
         </Link>
         <nav>
-          <ul className="flex items-center justify-center space-x-1 sm:space-x-6">
+          <ul className="flex items-center justify-center space-x-1 font-semibold sm:space-x-6">
             {Object.entries(NAV_ITEMS)
               .filter(([, value]) => value !== NAV_ITEMS.GUESTBOOK)
               .map(([key, value]) => (
                 <li key={key} className="text-center">
                   <a
                     className={cn(
-                      "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.2rem] inline-block",
+                      "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.5rem] inline-block",
                       {
                         "text-primary underline":
                           inHomePage && sectionInView === value,

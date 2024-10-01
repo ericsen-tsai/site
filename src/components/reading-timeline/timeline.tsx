@@ -171,8 +171,8 @@ function Timeline() {
                   className={cn(
                     "relative w-full flex",
                     index % 2 === 0
-                      ? "justify-end text-right pr-28 sm:pr-36"
-                      : "justify-start text-left pl-28 sm:pl-36"
+                      ? "justify-end text-right pr-28 sm:pr-32"
+                      : "justify-start text-left pl-28 sm:pl-32"
                   )}
                 >
                   <Tooltip>
@@ -180,11 +180,10 @@ function Timeline() {
                       <Link href={book.link ?? ""} target="_blank">
                         <h3
                           className={
-                            "max-w-56 font-semibold text-primary/80 backdrop-blur-sm hover:underline"
+                            "w-fit font-semibold text-primary/80 backdrop-blur-sm hover:underline"
                           }
                         >
-                          {book.title}
-                          {book.ongoing && " (Ongoing)"}
+                          {book.title} {book.ongoing && "(Ongoing)"}
                         </h3>
                       </Link>
                     </TooltipTrigger>
