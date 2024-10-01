@@ -45,6 +45,23 @@ export const metadata: Metadata = {
       },
     ],
   },
+  openGraph: {
+    url: "https://site.erichandsen.dev",
+    type: "website",
+    title: "Ericsen - A Frontend Developer",
+    siteName: "Ericsen - A Frontend Developer",
+    description: "Ericsen • Frontend Developer • Gardener • Freediver",
+    locale: "en-US",
+    images: [
+      {
+        url: "/images/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Ericsen • Frontend Developer • Gardener • Freediver",
+        type: "image/png",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
