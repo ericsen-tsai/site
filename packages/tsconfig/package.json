@@ -1,0 +1,29 @@
+{
+  "name": "@erichandsen/tsconfig",
+  "version": "0.0.1",
+  "description": "The typescript config for ericsen's projects",
+  "author": "Ericsen Tsai <bommer95175@gmail.com> (https://github.com/ericsen-tsai)",
+  "homepage": "https://github.com/ericsen-tsai/site#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericsen-tsai/site.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ericsen-tsai/site/issues"
+  },
+  "type": "module",
+  "files": [
+    "base.json",
+    "nextjs.json",
+    "react-library.json"
+  ],
+  "peerDependencies": {
+    "typescript": "5.x"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
+}

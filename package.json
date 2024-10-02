@@ -4,12 +4,35 @@
   "type": "module",
   "scripts": {
     "build": "turbo run build",
+    "build:apps": "turbo build --filter=./apps/*",
+    "build:packages": "turbo build --filter=./packages/*",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "clean": "turbo run clean && rm -rf .turbo"
+    "clean": "turbo run clean && rm -rf .turbo",
+    "prepare": "husky && pnpm build:packages",
+    "commit": "cz"
   },
   "devDependencies": {
-    "turbo": "latest"
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@erichandsen/tsconfig": "workspace:*",
+    "commitizen": "^4.3.0",
+    "cz-git": "^1.9.4",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "tsx": "^4.19.1",
+    "turbo": "latest",
+    "typescript": "5.5.1-rc"
   },
-  "packageManager": "pnpm@9.9.0"
+  "packageManager": "pnpm@9.9.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
+  }
 }
