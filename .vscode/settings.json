@@ -1,0 +1,54 @@
+{
+  "[css]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "editor.codeActionsOnSave": {
+    "source.addMissingImports": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+
+  "eslint.runtime": "node",
+  "eslint.useFlatConfig": true,
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+
+  "files.associations": {
+    "*.css": "tailwindcss",
+    ".env*": "properties"
+  },
+
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "'([^']*)'"],
+    ["cn\\(([^)]*)\\)", "'([^']*)'"],
+    "className\\: '([^']*)'",
+    ["classNames\\: {([^}]*)", "'([^']*)'"]
+  ],
+
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

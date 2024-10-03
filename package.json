@@ -9,6 +9,8 @@
     "clean": "turbo run clean && rm -rf .turbo",
     "commit": "cz",
     "dev": "turbo run dev",
+    "dev:packages": "turbo dev --filter=./packages/*",
+    "dev:web": "turbo dev --filter=site",
     "lint": "turbo run lint",
     "prepare": "husky && pnpm build:packages"
   },
@@ -40,6 +42,14 @@
     "tsx": "^4.19.1",
     "turbo": "latest",
     "typescript": "5.5.1-rc"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{json,md,yml}": [
+      "prettier --write"
+    ]
   },
   "packageManager": "pnpm@9.9.0"
 }
