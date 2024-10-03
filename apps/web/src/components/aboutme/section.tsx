@@ -64,8 +64,8 @@ export default function AboutMe({ totalHoursText, language, editor }: Props) {
         </p>
       </h2>
       <div className="grid w-full max-w-xs grid-cols-1 justify-items-stretch gap-y-4 md:max-w-none md:grid-cols-3 md:gap-x-4">
-        {dashboardCards.map((card, index) => (
-          <DashboardCard key={index} {...card} />
+        {dashboardCards.map((card) => (
+          <DashboardCard key={card.title} {...card} />
         ))}
       </div>
       <LogoMarquee />

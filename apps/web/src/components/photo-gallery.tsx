@@ -47,8 +47,8 @@ const PHOTOS = [
 function PhotoGallery() {
   return (
     <div className="grid auto-rows-[100px] grid-cols-3 gap-4 [&:has(div:hover)>div:not(:hover)]:scale-[99%]">
-      {PHOTOS.map((photo, index) => (
-        <Tooltip key={index}>
+      {PHOTOS.map((photo) => (
+        <Tooltip key={photo.src}>
           <TooltipTrigger asChild>
             <div
               className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-[102%]"

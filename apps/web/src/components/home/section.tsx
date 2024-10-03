@@ -84,7 +84,7 @@ const HeroSection = () => {
               300
             ]}
             wrapper="span"
-            cursor={true}
+            cursor
             repeat={Infinity}
             className="inline-block"
           />

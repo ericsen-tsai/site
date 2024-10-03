@@ -70,6 +70,9 @@ export const react = (options?: Options): Linter.Config[] => {
             Link: "a"
           }
         },
+        react: {
+          version: "detect"
+        },
         ...reactPluginAll.settings
       }
     }

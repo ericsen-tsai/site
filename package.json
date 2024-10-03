@@ -6,12 +6,21 @@
     "build": "turbo run build",
     "build:apps": "turbo build --filter=./apps/*",
     "build:packages": "turbo build --filter=./packages/*",
+    "clean": "turbo run clean && rm -rf .turbo",
+    "commit": "cz",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "clean": "turbo run clean && rm -rf .turbo",
-    "prepare": "husky && pnpm build:packages",
-    "commit": "cz"
+    "prepare": "husky && pnpm build:packages"
   },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
@@ -32,14 +41,5 @@
     "turbo": "latest",
     "typescript": "5.5.1-rc"
   },
-  "packageManager": "pnpm@9.9.0",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-git"
-    }
-  }
+  "packageManager": "pnpm@9.9.0"
 }

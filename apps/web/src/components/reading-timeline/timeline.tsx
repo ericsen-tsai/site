@@ -163,7 +163,7 @@ function Timeline() {
           <div className="bg-card-foreground/30 absolute left-1/2 h-full w-0.5 -translate-x-1/2" />
           <ul className="space-y-24">
             {books.map((book, index) => (
-              <li key={index} className="relative">
+              <li key={book.title} className="relative">
                 <div
                   className={cn(
                     "relative flex w-full",
