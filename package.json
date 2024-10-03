@@ -20,6 +20,7 @@
     "@erichandsen/tsconfig": "workspace:*",
     "@types/node": "^20",
     "commitizen": "^4.3.0",
+    "concurrently": "^9.0.1",
     "cz-git": "^1.9.4",
     "dotenv-cli": "^7.4.2",
     "eslint": "^8.57.0",
