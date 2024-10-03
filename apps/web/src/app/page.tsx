@@ -24,8 +24,8 @@ export default async function Home() {
       <WhoAmISection />
       <AboutMeSection
         totalHoursText={totalHoursText}
-        language={language.name}
-        editor={editor.name}
+        language={language.name ?? ""}
+        editor={editor.name ?? ""}
       />
       <ProjectSection />
       <Container>
