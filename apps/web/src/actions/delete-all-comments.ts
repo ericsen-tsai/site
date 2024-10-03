@@ -2,6 +2,8 @@
 
 import { deleteAllGuestbookComments } from "@/lib/db-access/guestbook-comments";
 
-export const deleteAllComments = async () => {
+const deleteAllComments = async () => {
   await deleteAllGuestbookComments();
 };
+
+export default deleteAllComments;
