@@ -2,7 +2,7 @@ import { env } from "@/env";
 
 type LastSevenDaysMostUsedLanguageResponse = {
   data: {
-    languages: {
+    languages: Array<{
       name: string;
       total_seconds: number;
       percent: number;
@@ -11,8 +11,8 @@ type LastSevenDaysMostUsedLanguageResponse = {
       text: string;
       hours: number;
       minutes: number;
-    }[];
-    editors: {
+    }>;
+    editors: Array<{
       name: string;
       total_seconds: number;
       percent: number;
@@ -21,34 +21,31 @@ type LastSevenDaysMostUsedLanguageResponse = {
       text: string;
       hours: number;
       minutes: number;
-    }[];
+    }>;
   };
 };
 
 const getMostUsedLanguageDuringSevenDays = async () => {
-  const response = await fetch(
-    "https://wakatime.com/api/v1/users/current/stats/last_7_days",
-    {
-      headers: {
-        Authorization: `Basic ${env.WAKA_TIME_API_KEY}`,
-      },
+  const response = await fetch("https://wakatime.com/api/v1/users/current/stats/last_7_days", {
+    headers: {
+      Authorization: `Basic ${env.WAKA_TIME_API_KEY}`
     }
-  );
+  });
   const data = (await response.json()) as LastSevenDaysMostUsedLanguageResponse;
   const mostUsedLanguage = data.data.languages[0];
   const mostUsedEditor = data.data.editors[0];
-  
+
   return {
     language: {
-      name: mostUsedLanguage.name,
-      percent: mostUsedLanguage.percent,
-      hours: mostUsedLanguage.hours,
+      name: mostUsedLanguage?.name,
+      percent: mostUsedLanguage?.percent,
+      hours: mostUsedLanguage?.hours
     },
     editor: {
-      name: mostUsedEditor.name,
-      percent: mostUsedEditor.percent,
-      hours: mostUsedEditor.hours,
-    },
+      name: mostUsedEditor?.name,
+      percent: mostUsedEditor?.percent,
+      hours: mostUsedEditor?.hours
+    }
   };
 };
 

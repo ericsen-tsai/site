@@ -1,13 +1,13 @@
 "use client";
 import { motion } from "framer-motion";
-import { NAV_ITEMS } from "@/constants/link";
-import { useScrollContext } from "@/contexts/useSectionRefsContext";
 import Link from "next/link";
+
 import { ANIMATION_DURATION, ANIMATION_Y_OFFSET } from "@/constants/animation";
+import { NAV_ITEMS } from "@/constants/link";
+import { useScrollContext } from "@/contexts/use-section-refs-context";
 
 function WhoAmISection() {
-  const { sectionRefs, onAnimationComplete, animationCompleted } =
-    useScrollContext();
+  const { sectionRefs, onAnimationComplete, animationCompleted } = useScrollContext();
 
   return (
     <motion.section
@@ -16,7 +16,7 @@ function WhoAmISection() {
       ref={sectionRefs?.[NAV_ITEMS.WHOAMI]}
       initial={{
         y: animationCompleted?.[NAV_ITEMS.WHOAMI] ? 0 : ANIMATION_Y_OFFSET,
-        opacity: 0,
+        opacity: 0
       }}
       transition={{ duration: ANIMATION_DURATION }}
       whileInView={{ y: 0, opacity: 1 }}
@@ -28,16 +28,15 @@ function WhoAmISection() {
       <div>
         <h2 className="mb-8 text-center text-3xl font-bold">
           Who Am I?
-          <p className="text-sm font-medium text-card-foreground/50">
-            A person doesn’t belong to a place until there is someone dead under
-            the ground.
+          <p className="text-card-foreground/50 text-sm font-medium">
+            A person doesn’t belong to a place until there is someone dead under the ground.
           </p>
         </h2>
 
-        <div className="space-y-6 text-foreground">
+        <div className="text-foreground space-y-6">
           <p className="leading-relaxed">
-            I&apos;m a Frontend Developer with a master&apos;s in biomedical
-            engineering, experienced in building user-friendly interfaces for{" "}
+            I&apos;m a Frontend Developer with a master&apos;s in biomedical engineering,
+            experienced in building user-friendly interfaces for{" "}
             <Link
               href="https://theixt.com/launch-pad/"
               target="_blank"
@@ -76,12 +75,11 @@ function WhoAmISection() {
             >
               Next.js
             </Link>
-            , with a solid background in software development, UX and
-            biomedical.
+            , with a solid background in software development, UX and biomedical.
           </p>
           <p className="leading-relaxed">
-            I learn fast, work well in teams, and love creating clean,
-            functional designs that enhance user experiences.
+            I learn fast, work well in teams, and love creating clean, functional designs that
+            enhance user experiences.
           </p>
         </div>
       </div>

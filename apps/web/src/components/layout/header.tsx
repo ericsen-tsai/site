@@ -1,12 +1,19 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair -- no-static-element-interactions
+/* eslint-disable jsx-a11y/no-static-element-interactions -- Allowing static element interactions for specific use case */
+// eslint-disable-next-line eslint-comments/disable-enable-pair -- click-events-have-key-events
+/* eslint-disable jsx-a11y/click-events-have-key-events -- Disabling key events requirement for click handlers */
+// eslint-disable-next-line eslint-comments/disable-enable-pair -- anchor-is-valid
+/* eslint-disable jsx-a11y/anchor-is-valid -- Using anchors without href for custom behavior */
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
-import { NAV_ITEMS } from "@/constants/link";
 import Image from "next/image";
-import { useScrollContext } from "@/contexts/useSectionRefsContext";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+
+import { NAV_ITEMS } from "@/constants/link";
+import { useScrollContext } from "@/contexts/use-section-refs-context";
+import { cn } from "@/lib/utils";
 
 export default function Header() {
   const [scrollY, setScrollY] = useState(0);
@@ -15,9 +22,13 @@ export default function Header() {
   const inHomePage = usePathname() === "/";
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const headerOpacity = scrollY > 0 ? 0.5 : 0;
@@ -56,13 +67,14 @@ export default function Header() {
                 <li key={key} className="text-center">
                   <a
                     className={cn(
-                      "cursor-pointer opacity-50 transition-all hover:opacity-100 hover:tracking-tight w-[4.5rem] inline-block",
+                      "inline-block w-[4.5rem] cursor-pointer opacity-50 transition-all hover:tracking-tight hover:opacity-100",
                       {
-                        "text-primary underline":
-                          inHomePage && sectionInView === value,
+                        "text-primary underline": inHomePage && sectionInView === value
                       }
                     )}
-                    onClick={() => handleItemClick(value)}
+                    onClick={() => {
+                      handleItemClick(value);
+                    }}
                   >
                     {value}
                   </a>

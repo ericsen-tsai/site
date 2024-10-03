@@ -10,7 +10,7 @@ type Props = {
 
 function DashboardCard({ title, icon, content }: Props) {
   return (
-    <Card className="mx-auto w-full border-[0.01rem] border-card-foreground/50 text-card-foreground">
+    <Card className="border-card-foreground/50 text-card-foreground mx-auto w-full border-[0.01rem]">
       <CardHeader className="flex flex-row items-center gap-2 p-4 text-sm">
         {icon}
         {title}

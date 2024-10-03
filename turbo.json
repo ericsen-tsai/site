@@ -4,6 +4,8 @@
   "globalEnv": [
     "NODE_ENV",
     "CI",
+    "VERCEL_URL",
+    "PORT",
     "WAKA_TIME_API_KEY",
     "AUTH_SECRET",
     "AUTH_GOOGLE_ID",

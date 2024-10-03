@@ -15,12 +15,18 @@
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
+    "@erichandsen/eslint-config": "workspace:*",
+    "@erichandsen/prettier-config": "workspace:*",
     "@erichandsen/tsconfig": "workspace:*",
+    "@types/node": "^20",
     "commitizen": "^4.3.0",
     "cz-git": "^1.9.4",
+    "dotenv-cli": "^7.4.2",
+    "eslint": "^8.57.0",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
+    "tsup": "^8.1.0",
     "tsx": "^4.19.1",
     "turbo": "latest",
     "typescript": "5.5.1-rc"

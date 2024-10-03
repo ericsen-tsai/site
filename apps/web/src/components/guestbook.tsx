@@ -1,22 +1,23 @@
 "use client";
 
+import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
+import { useRouter } from "next/navigation";
+import { type Session } from "next-auth";
+import { signIn, signOut } from "next-auth/react";
+
+import deleteAllComments from "@/actions/delete-all-comments";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Card, CardTitle, CardDescription } from "./ui/card";
-import { Session } from "next-auth";
-import { signIn, signOut } from "next-auth/react";
 import { NAV_ITEMS } from "@/constants/link";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
-import deleteAllComments from "@/actions/deleteAllComments";
-
 import { api } from "@/trpc/react";
-import { useRouter } from "next/navigation";
+
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Card, CardDescription, CardTitle } from "./ui/card";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 type Props = {
   user: Session["user"];
-  comments: {
+  comments: Array<{
     userImage: string | null | undefined;
     userName: string | null | undefined;
     userRole: "user" | "admin" | undefined;
@@ -24,14 +25,14 @@ type Props = {
     message: string;
     createdAt: Date;
     userId: string;
-  }[];
+  }>;
 };
 
 function Guestbook({ user, comments: initialComments }: Props) {
   const router = useRouter();
 
   const { data: comments } = api.guestbookComments.get.useQuery(undefined, {
-    initialData: initialComments,
+    initialData: initialComments
   });
 
   const utils = api.useUtils();
@@ -49,21 +50,17 @@ function Guestbook({ user, comments: initialComments }: Props) {
       },
       onError: (error) => {
         console.error(error);
-      },
+      }
     });
   };
 
   return (
-    <div
-      className="mb-48 mt-24 grid grid-cols-1 gap-12"
-      id={NAV_ITEMS.GUESTBOOK}
-    >
+    <div className="mb-48 mt-24 grid grid-cols-1 gap-12" id={NAV_ITEMS.GUESTBOOK}>
       <div className="flex flex-col">
         <div className="mb-8">
           <h3 className="text-xl font-medium">Guestbook</h3>
-          <p className="text-sm font-medium text-card-foreground/50">
-            I have hated the words and I have loved them, and I hope I have made
-            them right.
+          <p className="text-card-foreground/50 text-sm font-medium">
+            I have hated the words and I have loved them, and I hope I have made them right.
           </p>
         </div>
         {user ? (
@@ -73,18 +70,14 @@ function Guestbook({ user, comments: initialComments }: Props) {
                 <PopoverTrigger>
                   <Avatar>
                     <AvatarImage src={user.image ?? ""} alt="User" />
-                    <AvatarFallback className="bg-gray-700">
-                      {user.name?.at(0)}
-                    </AvatarFallback>
+                    <AvatarFallback className="bg-gray-700">{user.name?.at(0)}</AvatarFallback>
                   </Avatar>
                 </PopoverTrigger>
-                <PopoverContent className="w-fit border-none bg-secondary/30 p-2 shadow-none backdrop-blur-sm">
+                <PopoverContent className="bg-secondary/30 w-fit border-none p-2 shadow-none backdrop-blur-sm">
                   <div className="flex flex-col gap-2 font-[family-name:var(--font-montserrat)]">
                     <Button
                       variant="destructive"
-                      onClick={() =>
-                        signOut({ redirectTo: `/#${NAV_ITEMS.GUESTBOOK}` })
-                      }
+                      onClick={() => signOut({ redirectTo: `/#${NAV_ITEMS.GUESTBOOK}` })}
                     >
                       Sign Out
                     </Button>
@@ -94,7 +87,7 @@ function Guestbook({ user, comments: initialComments }: Props) {
               <div className="relative w-full">
                 <Textarea
                   placeholder="Leave a message"
-                  className="scrollbar-hide size-full rounded-lg border-[0.01rem] border-card-foreground/50 p-4 pr-24 text-card-foreground"
+                  className="scrollbar-hide border-card-foreground/50 text-card-foreground size-full rounded-lg border-[0.01rem] p-4 pr-24"
                   name="message"
                   disabled={isPending}
                 />
@@ -115,13 +108,13 @@ function Guestbook({ user, comments: initialComments }: Props) {
               <PopoverTrigger asChild>
                 <Button variant="secondary">Sign In</Button>
               </PopoverTrigger>
-              <PopoverContent className="w-fit border-none bg-secondary/30 p-2 shadow-none backdrop-blur-sm">
+              <PopoverContent className="bg-secondary/30 w-fit border-none p-2 shadow-none backdrop-blur-sm">
                 <div className="flex flex-col gap-2 font-[family-name:var(--font-montserrat)]">
                   <Button
                     variant="secondary"
                     onClick={() =>
                       signIn("google", {
-                        redirectTo: `/#${NAV_ITEMS.GUESTBOOK}`,
+                        redirectTo: `/#${NAV_ITEMS.GUESTBOOK}`
                       })
                     }
                   >
@@ -132,7 +125,7 @@ function Guestbook({ user, comments: initialComments }: Props) {
                     variant="secondary"
                     onClick={() =>
                       signIn("github", {
-                        redirectTo: `/#${NAV_ITEMS.GUESTBOOK}`,
+                        redirectTo: `/#${NAV_ITEMS.GUESTBOOK}`
                       })
                     }
                   >
@@ -142,9 +135,7 @@ function Guestbook({ user, comments: initialComments }: Props) {
                 </div>
               </PopoverContent>
             </Popover>
-            <p className="mt-3 text-sm text-card-foreground/50">
-              to leave your idea
-            </p>
+            <p className="text-card-foreground/50 mt-3 text-sm">to leave your idea</p>
           </div>
         )}
       </div>
@@ -153,15 +144,12 @@ function Guestbook({ user, comments: initialComments }: Props) {
         {comments.map((comment) => (
           <Card
             key={comment.id}
-            className="rounded-lg border-[0.01rem] border-card-foreground/50 bg-transparent p-4 text-card-foreground"
+            className="border-card-foreground/50 text-card-foreground rounded-lg border-[0.01rem] bg-transparent p-4"
           >
             <CardTitle className="mb-2 flex items-center space-x-3">
               <Avatar>
                 {comment.userImage ? (
-                  <AvatarImage
-                    src={comment.userImage}
-                    alt={comment.userName ?? ""}
-                  />
+                  <AvatarImage src={comment.userImage} alt={comment.userName ?? ""} />
                 ) : (
                   <AvatarFallback className="bg-gray-700">
                     {comment.userName?.[0] ?? "?"}
@@ -179,12 +167,12 @@ function Guestbook({ user, comments: initialComments }: Props) {
                     day: "numeric",
                     year: "numeric",
                     hour: "numeric",
-                    minute: "numeric",
+                    minute: "numeric"
                   })}
                 </div>
               </div>
             </CardTitle>
-            <CardDescription className="text-sm text-card-foreground">
+            <CardDescription className="text-card-foreground text-sm">
               {comment.message}
             </CardDescription>
           </Card>

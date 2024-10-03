@@ -1,6 +1,6 @@
 "use client";
 
-import { IOptions, RecursivePartial } from "@tsparticles/engine";
+import { type IOptions, type RecursivePartial } from "@tsparticles/engine";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import { useEffect, useMemo, useState } from "react";
@@ -13,7 +13,7 @@ function ParticleBackground() {
       autoPlay: true,
       fullScreen: {
         enable: true,
-        zIndex: 0,
+        zIndex: 0
       },
       detectRetina: true,
       fpsLimit: 120,
@@ -21,88 +21,88 @@ function ParticleBackground() {
         detectsOn: "window",
         events: {
           resize: {
-            enable: false,
-          },
+            enable: false
+          }
         },
         modes: {
           trail: {
             delay: 1,
-            quantity: 1,
+            quantity: 1
           },
           attract: {
             distance: 200,
             duration: 0.4,
             factor: 1,
-            speed: 1,
+            speed: 1
           },
           bubble: {
             distance: 400,
             duration: 2,
             opacity: 0.8,
-            size: 40,
+            size: 40
           },
           repulse: {
             distance: 200,
             duration: 0.4,
             factor: 100,
-            speed: 1,
-          },
-        },
+            speed: 1
+          }
+        }
       },
       particles: {
         bounce: {
           horizontal: {
-            value: 1,
+            value: 1
           },
           vertical: {
-            value: 1,
-          },
+            value: 1
+          }
         },
         collisions: {
-          enable: false,
+          enable: false
         },
         color: {
-          value: "#ffffff",
+          value: "#ffffff"
         },
         move: {
           enable: true,
           speed: 0.5,
           outModes: {
-            default: "out",
-          },
+            default: "out"
+          }
         },
         number: {
           density: {
             enable: true,
             width: 1920,
-            height: 1080,
+            height: 1080
           },
-          value: 50,
+          value: 50
         },
         opacity: {
           value: {
             min: 0.1,
-            max: 0.5,
-          },
+            max: 0.5
+          }
         },
         shape: {
-          type: "circle",
+          type: "circle"
         },
         size: {
           value: {
             min: 1,
-            max: 4,
-          },
+            max: 4
+          }
         },
         links: {
           color: {
-            value: "#ffffff",
+            value: "#ffffff"
           },
           distance: 150,
           enable: true,
           opacity: 0.4,
-          width: 1,
-        },
+          width: 1
+        }
       },
       pauseOnBlur: true,
       pauseOnOutsideViewport: true,
@@ -110,9 +110,9 @@ function ParticleBackground() {
       motion: {
         reduce: {
           factor: 4,
-          value: true,
-        },
-      },
+          value: true
+        }
+      }
     }),
     []
   );
@@ -126,11 +126,7 @@ function ParticleBackground() {
   }, []);
 
   return init ? (
-    <Particles
-      id="particles"
-      options={particleOptions}
-      className="absolute left-0 top-0 z-0"
-    />
+    <Particles id="particles" options={particleOptions} className="absolute left-0 top-0 z-0" />
   ) : null;
 }
 

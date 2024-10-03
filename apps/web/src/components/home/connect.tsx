@@ -1,6 +1,6 @@
-import { SOCIAL_LINKS } from "@/constants/link";
-
 import Link from "next/link";
+
+import { SOCIAL_LINKS } from "@/constants/link";
 
 function Connect() {
   return (
@@ -12,7 +12,7 @@ function Connect() {
           <Link
             key={href}
             href={href}
-            className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground flex items-center gap-3 transition-colors"
             target="_blank"
           >
             <Icon className="size-[18px]" />

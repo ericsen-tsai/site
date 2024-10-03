@@ -1,11 +1,11 @@
 import {
   boolean,
-  timestamp,
-  pgTable,
-  text,
-  primaryKey,
   integer,
+  pgTable,
+  primaryKey,
   serial,
+  text,
+  timestamp
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
@@ -20,7 +20,7 @@ export const users = pgTable("user", {
   role: text("role")
     .$type<"admin" | "user">()
     .notNull()
-    .$default(() => "user"),
+    .$default(() => "user")
 });
 
 export const accounts = pgTable(
@@ -38,12 +38,12 @@ export const accounts = pgTable(
     token_type: text("token_type"),
     scope: text("scope"),
     id_token: text("id_token"),
-    session_state: text("session_state"),
+    session_state: text("session_state")
   },
   (account) => ({
     compoundKey: primaryKey({
-      columns: [account.provider, account.providerAccountId],
-    }),
+      columns: [account.provider, account.providerAccountId]
+    })
   })
 );
 
@@ -52,7 +52,7 @@ export const sessions = pgTable("session", {
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  expires: timestamp("expires", { mode: "date" }).notNull(),
+  expires: timestamp("expires", { mode: "date" }).notNull()
 });
 
 export const verificationTokens = pgTable(
@@ -60,12 +60,12 @@ export const verificationTokens = pgTable(
   {
     identifier: text("identifier").notNull(),
     token: text("token").notNull(),
-    expires: timestamp("expires", { mode: "date" }).notNull(),
+    expires: timestamp("expires", { mode: "date" }).notNull()
   },
   (verificationToken) => ({
     compositePk: primaryKey({
-      columns: [verificationToken.identifier, verificationToken.token],
-    }),
+      columns: [verificationToken.identifier, verificationToken.token]
+    })
   })
 );
 
@@ -81,12 +81,12 @@ export const authenticators = pgTable(
     counter: integer("counter").notNull(),
     credentialDeviceType: text("credentialDeviceType").notNull(),
     credentialBackedUp: boolean("credentialBackedUp").notNull(),
-    transports: text("transports"),
+    transports: text("transports")
   },
   (authenticator) => ({
     compositePK: primaryKey({
-      columns: [authenticator.userId, authenticator.credentialID],
-    }),
+      columns: [authenticator.userId, authenticator.credentialID]
+    })
   })
 );
 
@@ -98,5 +98,5 @@ export const guestbookComments = pgTable("guestbook_comments", {
     .$default(() => new Date()),
   userId: text("userId")
     .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
+    .references(() => users.id, { onDelete: "cascade" })
 });

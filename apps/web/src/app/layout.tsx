@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
-import "./globals.css";
 
-import ParticleBackground from "@/components/layout/particle-background";
-import Header from "@/components/layout/header";
-import { SectionRefsProvider } from "@/contexts/useSectionRefsContext";
+import "./globals.css";
 import Footer from "@/components/footer";
-import { TRPCReactProvider } from "@/trpc/react";
+import Header from "@/components/layout/header";
+import ParticleBackground from "@/components/layout/particle-background";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { SectionRefsProvider } from "@/contexts/use-section-refs-context";
+import { TRPCReactProvider } from "@/trpc/react";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  variable: "--font-montserrat"
 });
 
 export const metadata: Metadata = {
@@ -27,23 +27,23 @@ export const metadata: Metadata = {
       {
         url: "/favicon/apple-touch-icon.png",
         sizes: "180x180",
-        type: "image/png",
-      },
+        type: "image/png"
+      }
     ],
     other: [
       {
         rel: "icon",
         type: "image/png",
         sizes: "16x16",
-        url: "/favicon/favicon-16x16.png",
+        url: "/favicon/favicon-16x16.png"
       },
       {
         rel: "icon",
         type: "image/png",
         sizes: "32x32",
-        url: "/favicon/favicon-32x32.png",
-      },
-    ],
+        url: "/favicon/favicon-32x32.png"
+      }
+    ]
   },
   metadataBase: new URL("https://site.erichandsen.dev"),
   openGraph: {
@@ -59,14 +59,14 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: "Ericsen • Frontend Developer • Gardener • Freediver",
-        type: "image/png",
-      },
-    ],
-  },
+        type: "image/png"
+      }
+    ]
+  }
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {

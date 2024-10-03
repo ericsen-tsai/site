@@ -1,5 +1,5 @@
 {
   "exclude": ["apps/**", "packages/**"],
   "extends": "@erichandsen/tsconfig/base.json",
-  "include": ["**/*.ts", "./commitlint.config.js"]
+  "include": ["**/*.ts"]
 }

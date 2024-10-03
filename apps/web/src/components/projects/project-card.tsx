@@ -1,15 +1,11 @@
-import * as React from "react";
-
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { SiGithub } from "@icons-pack/react-simple-icons";
 import Image from "next/image";
 import Link from "next/link";
+import * as React from "react";
+
+import { Card, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
+
 import { Button } from "../ui/button";
-import { SiGithub } from "@icons-pack/react-simple-icons";
 
 type Props = {
   title: string;
@@ -19,17 +15,11 @@ type Props = {
   githubLink: string;
 };
 
-function ProjectCard({
-  title,
-  description,
-  link,
-  techStacks,
-  githubLink,
-}: Props) {
+function ProjectCard({ title, description, link, techStacks, githubLink }: Props) {
   return (
     <div className="relative">
       <Link href={link} target="_blank">
-        <Card className="relative mx-auto flex h-60 w-full flex-col overflow-hidden border-[0.01rem] border-card-foreground/50 text-card-foreground">
+        <Card className="border-card-foreground/50 text-card-foreground relative mx-auto flex h-60 w-full flex-col overflow-hidden border-[0.01rem]">
           <Image
             src={`/projects/${title.toLowerCase()}/cover.png`}
             alt={title}
@@ -37,10 +27,10 @@ function ProjectCard({
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-opacity duration-300 hover:opacity-5"
           />
-          <CardHeader className="flex flex-row items-center gap-2 p-4 text-3xl text-primary/80">
+          <CardHeader className="text-primary/80 flex flex-row items-center gap-2 p-4 text-3xl">
             {title}
           </CardHeader>
-          <CardDescription className="p-4 pt-0 text-right text-sm text-secondary">
+          <CardDescription className="text-secondary p-4 pt-0 text-right text-sm">
             {description}
           </CardDescription>
           <CardFooter className="mt-auto">

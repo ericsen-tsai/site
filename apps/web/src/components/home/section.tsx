@@ -1,13 +1,15 @@
 "use client";
 
+import { type MotionValue, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
-import Image from "next/image";
+
 import { NAV_ITEMS } from "@/constants/link";
-import { useScrollContext } from "@/contexts/useSectionRefsContext";
-import Connect from "./connect";
-import { MotionValue, useScroll, useTransform } from "framer-motion";
+import { useScrollContext } from "@/contexts/use-section-refs-context";
+
 import BlobMorphing from "./blob-morphing";
+import Connect from "./connect";
 
 function useParallax(value: MotionValue<number>, distance: number) {
   return useTransform(value, [0, 1], [-distance, distance]);
@@ -19,7 +21,7 @@ const HeroSection = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end end"],
+    offset: ["start start", "end end"]
   });
   const y = useParallax(scrollYProgress, 300);
 
@@ -59,21 +61,27 @@ const HeroSection = () => {
           <TypeAnimation
             speed={20}
             sequence={[
-              () => setTextColor("text-blue-500"),
+              () => {
+                setTextColor("text-blue-500");
+              },
               "fascinating.",
               4000,
               "",
               300,
-              () => setTextColor("text-pink-500"),
+              () => {
+                setTextColor("text-pink-500");
+              },
               "stunning.",
               4000,
               "",
               300,
-              () => setTextColor("text-teal-500"),
+              () => {
+                setTextColor("text-teal-500");
+              },
               "engaging.",
               4000,
               "",
-              300,
+              300
             ]}
             wrapper="span"
             cursor={true}

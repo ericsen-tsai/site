@@ -2,12 +2,14 @@
 
 import { motion } from "framer-motion";
 import { Clock, Code, Edit3 } from "lucide-react";
-import LogoMarquee from "./tech-stack-marquee";
-import { useScrollContext } from "@/contexts/useSectionRefsContext";
-import { NAV_ITEMS } from "@/constants/link";
 import { useMemo } from "react";
-import DashboardCard from "./dashboard-card";
+
 import { ANIMATION_DURATION, ANIMATION_Y_OFFSET } from "@/constants/animation";
+import { NAV_ITEMS } from "@/constants/link";
+import { useScrollContext } from "@/contexts/use-section-refs-context";
+
+import DashboardCard from "./dashboard-card";
+import LogoMarquee from "./tech-stack-marquee";
 
 type Props = {
   totalHoursText: string;
@@ -16,26 +18,25 @@ type Props = {
 };
 
 export default function AboutMe({ totalHoursText, language, editor }: Props) {
-  const { sectionRefs, onAnimationComplete, animationCompleted } =
-    useScrollContext();
+  const { sectionRefs, onAnimationComplete, animationCompleted } = useScrollContext();
 
   const dashboardCards = useMemo(
     () => [
       {
         title: "Coding Hours",
         icon: <Clock className="size-4" />,
-        content: <p className="text-lg tracking-tighter">{totalHoursText}</p>,
+        content: <p className="text-lg tracking-tighter">{totalHoursText}</p>
       },
       {
         title: "Most Used Language",
         icon: <Code className="size-4" />,
-        content: <p className="text-lg tracking-tighter">{language}</p>,
+        content: <p className="text-lg tracking-tighter">{language}</p>
       },
       {
         title: "Most Used Editor",
         icon: <Edit3 className="size-4" />,
-        content: <p className="text-lg tracking-tighter">{editor}</p>,
-      },
+        content: <p className="text-lg tracking-tighter">{editor}</p>
+      }
     ],
     [totalHoursText, language, editor]
   );
@@ -47,7 +48,7 @@ export default function AboutMe({ totalHoursText, language, editor }: Props) {
       ref={sectionRefs?.[NAV_ITEMS.ABOUTME]}
       initial={{
         y: animationCompleted?.[NAV_ITEMS.ABOUTME] ? 0 : ANIMATION_Y_OFFSET,
-        opacity: 0,
+        opacity: 0
       }}
       transition={{ duration: ANIMATION_DURATION }}
       whileInView={{ y: 0, opacity: 1 }}
@@ -58,7 +59,7 @@ export default function AboutMe({ totalHoursText, language, editor }: Props) {
     >
       <h2 className="mb-8 text-center text-3xl font-bold">
         About Me
-        <p className="text-sm font-medium text-card-foreground/50">
+        <p className="text-card-foreground/50 text-sm font-medium">
           He was a tool of the boss, without brains or backbone.
         </p>
       </h2>

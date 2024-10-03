@@ -1,7 +1,5 @@
 "use client";
 
-import { ANIMATION_Y_OFFSET } from "@/constants/animation";
-import { NAV_ITEMS } from "@/constants/link";
 import {
   createContext,
   useCallback,
@@ -9,8 +7,11 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
+
+import { ANIMATION_Y_OFFSET } from "@/constants/animation";
+import { NAV_ITEMS } from "@/constants/link";
 
 type SectionRefsContext = {
   scrollToSection: (section: NAV_ITEMS) => void;
@@ -21,17 +22,15 @@ type SectionRefsContext = {
 };
 
 const SectionRefsContext = createContext<SectionRefsContext>({
-  scrollToSection: () => {},
-  sectionInView: NAV_ITEMS.HOME,
+  scrollToSection: () => {
+    console.log("EMPTY");
+  },
+  sectionInView: NAV_ITEMS.HOME
 });
 
 export const useScrollContext = () => useContext(SectionRefsContext);
 
-export const SectionRefsProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const SectionRefsProvider = ({ children }: { children: React.ReactNode }) => {
   const homeRef = useRef<HTMLDivElement>(null);
   const whoamiRef = useRef<HTMLDivElement>(null);
   const aboutmeRef = useRef<HTMLDivElement>(null);
@@ -44,42 +43,38 @@ export const SectionRefsProvider = ({
       [NAV_ITEMS.WHOAMI]: whoamiRef,
       [NAV_ITEMS.ABOUTME]: aboutmeRef,
       [NAV_ITEMS.PROJECTS]: projectsRef,
-      [NAV_ITEMS.GUESTBOOK]: guestbookRef,
+      [NAV_ITEMS.GUESTBOOK]: guestbookRef
     }),
     []
   );
 
-  const [animationCompleted, setAnimationCompleted] = useState<
-    Record<NAV_ITEMS, boolean>
-  >({
+  const [animationCompleted, setAnimationCompleted] = useState<Record<NAV_ITEMS, boolean>>({
     [NAV_ITEMS.HOME]: false,
     [NAV_ITEMS.WHOAMI]: false,
     [NAV_ITEMS.ABOUTME]: false,
     [NAV_ITEMS.PROJECTS]: false,
-    [NAV_ITEMS.GUESTBOOK]: false,
+    [NAV_ITEMS.GUESTBOOK]: false
   });
 
   const handleAnimationComplete = useCallback((section: NAV_ITEMS) => {
     setAnimationCompleted((prev) => ({
       ...prev,
-      [section]: true,
+      [section]: true
     }));
   }, []);
 
   const scrollToSection = useCallback(
     (section: NAV_ITEMS) => {
-      const element = sectionRefs[section]?.current;
+      const element = sectionRefs[section].current;
       if (!element) {
         return;
       }
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition =
-        elementPosition +
-        window.scrollY -
-        (animationCompleted[section] ? 0 : ANIMATION_Y_OFFSET);
+        elementPosition + window.scrollY - (animationCompleted[section] ? 0 : ANIMATION_Y_OFFSET);
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     },
     [sectionRefs, animationCompleted]
@@ -91,10 +86,9 @@ export const SectionRefsProvider = ({
     const checkSectionInView = () => {
       const scrollPosition = window.scrollY;
       const section = Object.entries(sectionRefs).findLast(
-        ([, ref]) =>
-          ref.current && ref.current.offsetTop - 100 <= scrollPosition
+        ([, ref]) => ref.current && ref.current.offsetTop - 100 <= scrollPosition
       );
-      if (section && section[0] !== sectionInView) {
+      if (section && (section[0] as NAV_ITEMS) !== sectionInView) {
         setSectionInView(section[0] as NAV_ITEMS);
       }
     };
@@ -106,17 +100,16 @@ export const SectionRefsProvider = ({
     };
   }, [sectionRefs, sectionInView]);
 
-  return (
-    <SectionRefsContext.Provider
-      value={{
-        sectionRefs,
-        scrollToSection,
-        sectionInView,
-        onAnimationComplete: handleAnimationComplete,
-        animationCompleted,
-      }}
-    >
-      {children}
-    </SectionRefsContext.Provider>
+  const value = useMemo(
+    () => ({
+      sectionRefs,
+      scrollToSection,
+      sectionInView,
+      onAnimationComplete: handleAnimationComplete,
+      animationCompleted
+    }),
+    [sectionRefs, scrollToSection, sectionInView, handleAnimationComplete, animationCompleted]
   );
+
+  return <SectionRefsContext.Provider value={value}>{children}</SectionRefsContext.Provider>;
 };

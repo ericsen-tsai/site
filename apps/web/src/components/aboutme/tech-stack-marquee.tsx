@@ -1,18 +1,19 @@
 "use client";
 
+import Image, { type StaticImageData } from "next/image";
 import Marquee from "react-fast-marquee";
-import ReactIcon from "@/assets/react-icon.png";
-import NextIcon from "@/assets/next-icon.png";
-import MuiIcon from "@/assets/mui-icon.png";
-import ReactQueryIcon from "@/assets/react-query-icon.png";
-import ReduxIcon from "@/assets/redux-icon.png";
-import TailwindCssIcon from "@/assets/tailwind-css-icon.png";
+
 import AstroIcon from "@/assets/astro-icon.png";
 import DockerIcon from "@/assets/docker-icon.png";
+import MuiIcon from "@/assets/mui-icon.png";
+import NextIcon from "@/assets/next-icon.png";
+import ReactIcon from "@/assets/react-icon.png";
+import ReactQueryIcon from "@/assets/react-query-icon.png";
+import ReduxIcon from "@/assets/redux-icon.png";
 import SassIcon from "@/assets/sass-icon.png";
 import SupabaseIcon from "@/assets/supabase-icon.png";
+import TailwindCssIcon from "@/assets/tailwind-css-icon.png";
 import TrpcIcon from "@/assets/trpc-icon.png";
-import Image, { StaticImageData } from "next/image";
 import { cn } from "@/lib/utils";
 
 type Item = {
@@ -25,49 +26,49 @@ type Item = {
 const MARQUEE_ITEMS: Item[] = [
   {
     imgSrc: ReactIcon,
-    name: "React.js",
+    name: "React.js"
   },
   {
     imgSrc: NextIcon,
-    name: "Next.js",
+    name: "Next.js"
   },
   {
     imgSrc: MuiIcon,
-    name: "Material UI",
+    name: "Material UI"
   },
   {
     imgSrc: ReactQueryIcon,
-    name: "React Query",
+    name: "React Query"
   },
   {
     imgSrc: ReduxIcon,
-    name: "Redux Toolkit",
+    name: "Redux Toolkit"
   },
   {
     imgSrc: TailwindCssIcon,
-    name: "TailwindCSS",
+    name: "TailwindCSS"
   },
   {
     imgSrc: AstroIcon,
-    name: "Astro.js",
+    name: "Astro.js"
   },
   {
     imgSrc: DockerIcon,
-    name: "docker",
+    name: "docker"
   },
   {
     imgSrc: TrpcIcon,
     name: "tRPC",
-    notInvert: true,
+    notInvert: true
   },
   {
     imgSrc: SassIcon,
-    name: "Sass",
+    name: "Sass"
   },
   {
     imgSrc: SupabaseIcon,
-    name: "Supabase",
-  },
+    name: "Supabase"
+  }
 ];
 
 function SingleLogoElement({ imgSrc, name, notInvert }: Item) {
@@ -76,17 +77,14 @@ function SingleLogoElement({ imgSrc, name, notInvert }: Item) {
       <Image
         src={imgSrc}
         alt={name}
-        className={cn(
-          "h-[72%] w-auto grayscale transition-all group-hover:blur-sm",
-          {
-            invert: !notInvert,
-          }
-        )}
+        className={cn("h-[72%] w-auto grayscale transition-all group-hover:blur-sm", {
+          invert: !notInvert
+        })}
         sizes="100vw"
         width={200}
         height={100}
       />
-      <p className="invisible absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-sm text-white shadow-black text-shadow-outline group-hover:visible">
+      <p className="text-shadow-outline invisible absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-sm text-white shadow-black group-hover:visible">
         {name}
       </p>
     </div>

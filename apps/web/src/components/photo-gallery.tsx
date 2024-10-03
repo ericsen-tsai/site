@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 const PHOTOS = [
@@ -9,14 +10,14 @@ const PHOTOS = [
     alt: "Fire Stick",
     spanRow: 2,
     spanCol: 1,
-    description: "Fire stick practice during college",
+    description: "Fire stick practice during college"
   },
   {
     src: "/photo-gallery/camping.png",
     alt: "Camping",
     spanRow: 3,
     spanCol: 2,
-    description: "Camping with Dollars and Sense",
+    description: "Camping with Dollars and Sense"
   },
   {
     src: "/photo-gallery/guinea_pigs.png",
@@ -24,14 +25,14 @@ const PHOTOS = [
     spanRow: 1,
     spanCol: 1,
     description:
-      "My guinea pigs, Fengui and Mixiang (which means rice cake and puffed rice respectively in Chinese)",
+      "My guinea pigs, Fengui and Mixiang (which means rice cake and puffed rice respectively in Chinese)"
   },
   {
     src: "/photo-gallery/freediving.png",
     alt: "Freediving",
     spanRow: 2,
     spanCol: 2,
-    description: "Freediving with Justina at Plane Wreck, Bohol",
+    description: "Freediving with Justina at Plane Wreck, Bohol"
   },
   {
     src: "/photo-gallery/guinea_pigs.png",
@@ -39,8 +40,8 @@ const PHOTOS = [
     spanRow: 2,
     spanCol: 1,
     description:
-      "My guinea pigs, Fengui and Mixiang (which means rice cake and puffed rice respectively in Chinese)",
-  },
+      "My guinea pigs, Fengui and Mixiang (which means rice cake and puffed rice respectively in Chinese)"
+  }
 ];
 
 function PhotoGallery() {
@@ -53,7 +54,7 @@ function PhotoGallery() {
               className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-[102%]"
               style={{
                 gridRow: `span ${photo.spanRow}`,
-                gridColumn: `span ${photo.spanCol}`,
+                gridColumn: `span ${photo.spanCol}`
               }}
             >
               <Image
@@ -65,7 +66,7 @@ function PhotoGallery() {
               />
             </div>
           </TooltipTrigger>
-          <TooltipContent asChild className="max-w-xs bg-secondary text-sm">
+          <TooltipContent asChild className="bg-secondary max-w-xs text-sm">
             <span className="inline-block">{photo.description}</span>
           </TooltipContent>
         </Tooltip>

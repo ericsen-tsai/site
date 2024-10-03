@@ -1,11 +1,13 @@
 "use client";
 
-import { NAV_ITEMS } from "@/constants/link";
-import { useScrollContext } from "@/contexts/useSectionRefsContext";
-import ProjectCard from "./project-card";
-import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+
 import { ANIMATION_DURATION, ANIMATION_Y_OFFSET } from "@/constants/animation";
+import { NAV_ITEMS } from "@/constants/link";
+import { useScrollContext } from "@/contexts/use-section-refs-context";
+import { cn } from "@/lib/utils";
+
+import ProjectCard from "./project-card";
 
 const PROJECTS = [
   {
@@ -13,13 +15,12 @@ const PROJECTS = [
     description: "Ericsen's Portfolio Site",
     link: ".",
     techStacks: ["React", "Next.js", "Tailwind CSS", "Shadcn"],
-    githubLink: "https://github.com/ericsen-tsai/site",
-  },
+    githubLink: "https://github.com/ericsen-tsai/site"
+  }
 ];
 
 const ProjectSection = () => {
-  const { sectionRefs, onAnimationComplete, animationCompleted } =
-    useScrollContext();
+  const { sectionRefs, onAnimationComplete, animationCompleted } = useScrollContext();
 
   return (
     <motion.section
@@ -28,7 +29,7 @@ const ProjectSection = () => {
       ref={sectionRefs?.[NAV_ITEMS.PROJECTS]}
       initial={{
         y: animationCompleted?.[NAV_ITEMS.PROJECTS] ? 0 : ANIMATION_Y_OFFSET,
-        opacity: 0,
+        opacity: 0
       }}
       transition={{ duration: ANIMATION_DURATION }}
       whileInView={{ y: 0, opacity: 1 }}
@@ -39,13 +40,13 @@ const ProjectSection = () => {
     >
       <h2 className="mb-8 text-center text-3xl font-bold">
         Projects
-        <p className="text-sm font-medium text-card-foreground/50">
+        <p className="text-card-foreground/50 text-sm font-medium">
           Life cannot be cheated; everything that has happened becomes evidence.
         </p>
       </h2>
       <div
         className={cn(
-          "grid w-full max-w-xs grid-cols-1 justify-items-stretch gap-y-4 md:max-w-none md:gap-x-4 md:grid-cols-3",
+          "grid w-full max-w-xs grid-cols-1 justify-items-stretch gap-y-4 md:max-w-none md:grid-cols-3 md:gap-x-4",
           { "[&>*]:col-start-2 [&>*]:col-end-2": PROJECTS.length === 1 }
         )}
       >
