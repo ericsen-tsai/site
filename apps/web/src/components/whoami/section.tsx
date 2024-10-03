@@ -33,7 +33,7 @@ function WhoAmISection() {
           </p>
         </h2>
 
-        <div className="text-foreground space-y-6">
+        <div className="text-background space-y-6">
           <p className="leading-relaxed">
             I&apos;m a Frontend Developer with a master&apos;s in biomedical engineering,
             experienced in building user-friendly interfaces for{" "}

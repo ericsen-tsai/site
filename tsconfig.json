@@ -1,5 +1,5 @@
 {
   "exclude": ["apps/**", "packages/**"],
   "extends": "@erichandsen/tsconfig/base.json",
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "prettier.config.js", "eslint.config.mjs"]
 }
