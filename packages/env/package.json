@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "name": "@erichandsen/env",
+  "version": "0.0.0",
+  "description": "The validated environment variables for Ericsen's projects",
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "clean": "rm -rf .turbo",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint --fix .",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@t3-oss/env-nextjs": "^0.11.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@erichandsen/eslint-config": "workspace:*",
+    "@erichandsen/tsconfig": "workspace:*"
+  },
+  "lint-staged": {
+    "*.{cjs,mjs,js,jsx,cts,mts,ts,tsx,json}": "eslint --fix",
+    "**/*": "prettier --write --ignore-unknown"
+  }
+}

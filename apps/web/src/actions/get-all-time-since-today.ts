@@ -1,6 +1,6 @@
 "use server";
 
-import { env } from "@/env";
+import { env } from "@erichandsen/env";
 
 type AllTimeSinceTodayResponse = {
   data: {
@@ -16,7 +16,7 @@ type AllTimeSinceTodayResponse = {
 const getAllTimeSinceToday = async () => {
   const response = await fetch("https://wakatime.com/api/v1/users/current/all_time_since_today", {
     headers: {
-      Authorization: `Basic ${env.WAKA_TIME_API_KEY}`
+      Authorization: `Basic ${env.WAKATIME_API_KEY}`
     }
   });
 

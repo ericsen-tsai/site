@@ -6,7 +6,7 @@
     "CI",
     "VERCEL_URL",
     "PORT",
-    "WAKA_TIME_API_KEY",
+    "WAKATIME_API_KEY",
     "AUTH_SECRET",
     "AUTH_GOOGLE_ID",
     "AUTH_GOOGLE_SECRET",

@@ -1,4 +1,4 @@
-import { env } from "@/env";
+import { env } from "@erichandsen/env";
 
 type LastSevenDaysMostUsedLanguageResponse = {
   data: {
@@ -28,7 +28,7 @@ type LastSevenDaysMostUsedLanguageResponse = {
 const getMostUsedLanguageDuringSevenDays = async () => {
   const response = await fetch("https://wakatime.com/api/v1/users/current/stats/last_7_days", {
     headers: {
-      Authorization: `Basic ${env.WAKA_TIME_API_KEY}`
+      Authorization: `Basic ${env.WAKATIME_API_KEY}`
     }
   });
   const data = (await response.json()) as LastSevenDaysMostUsedLanguageResponse;

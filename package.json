@@ -10,7 +10,7 @@
     "commit": "cz",
     "dev": "turbo run dev",
     "dev:packages": "turbo dev --filter=./packages/*",
-    "dev:web": "turbo dev --filter=site",
+    "dev:web": "turbo dev --filter=@erichandsen/web",
     "lint": "turbo run lint",
     "prepare": "husky && pnpm build:packages"
   },

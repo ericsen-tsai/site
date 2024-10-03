@@ -1,6 +1,6 @@
 {
   "name": "@erichandsen/eslint-config",
-  "version": "0.1.11",
+  "version": "0.0.1",
   "description": "The eslint config for erichandsen's projects",
   "author": "Ericsen Tsai <bommer95175@gmail.com> (https://github.com/ericsen-tsai)",
   "homepage": "https://github.com/ericsen-tsai/site#readme",
