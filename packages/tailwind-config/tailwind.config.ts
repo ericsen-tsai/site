@@ -1,7 +1,6 @@
 import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
-import textShadow from "tailwindcss-textshadow";
 
 import { ui } from "./src/plugin";
 
@@ -70,6 +69,6 @@ const config: Partial<Config> = {
       }
     }
   },
-  plugins: [animate, textShadow, typography, ui]
+  plugins: [animate, typography, ui]
 };
 export default config;
