@@ -1,9 +1,8 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { accounts, db, sessions, users, verificationTokens } from "@erichandsen/db";
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
-
-import { accounts, db, sessions, users, verificationTokens } from "@/db";
 
 declare module "next-auth" {
   interface User {

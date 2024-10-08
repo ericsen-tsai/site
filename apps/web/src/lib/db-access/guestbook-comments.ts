@@ -1,8 +1,7 @@
 "use server";
 
+import { db, guestbookComments, users } from "@erichandsen/db";
 import { desc, eq, inArray } from "drizzle-orm";
-
-import { db, guestbookComments, users } from "@/db";
 
 export const getGuestbookCommentsWithUserImages = async () => {
   const [comments, guestbookUsers] = await Promise.all([

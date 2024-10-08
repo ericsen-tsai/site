@@ -35,6 +35,9 @@ importers:
       cz-git:
         specifier: ^1.9.4
         version: 1.10.0
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       dotenv-cli:
         specifier: ^7.4.2
         version: 7.4.2
@@ -68,15 +71,15 @@ importers:
       '@auth/drizzle-adapter':
         specifier: ^1.5.0
         version: 1.5.3
+      '@erichandsen/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@erichandsen/env':
         specifier: workspace:*
         version: link:../../packages/env
       '@icons-pack/react-simple-icons':
         specifier: ^10.0.0
         version: 10.0.0(react@18.3.1)
-      '@next/env':
-        specifier: ^14.2.13
-        version: 14.2.14
       '@radix-ui/react-avatar':
         specifier: ^1.1.0
         version: 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -122,9 +125,6 @@ importers:
       '@tsparticles/slim':
         specifier: ^3.5.0
         version: 3.5.0
-      '@vercel/postgres':
-        specifier: ^0.10.0
-        version: 0.10.0
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -134,9 +134,6 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
-      drizzle-orm:
-        specifier: ^0.33.0
-        version: 0.33.0(@neondatabase/serverless@0.9.5)(@types/pg@8.11.6)(@types/react@18.3.11)(@vercel/postgres@0.10.0)(react@18.3.1)
       framer-motion:
         specifier: ^11.5.6
         version: 11.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -198,9 +195,6 @@ importers:
       '@types/react-dom':
         specifier: ^18
         version: 18.3.0
-      drizzle-kit:
-        specifier: ^0.24.2
-        version: 0.24.2
       postcss:
         specifier: ^8
         version: 8.4.47
@@ -210,6 +204,28 @@ importers:
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.13
+
+  packages/db:
+    dependencies:
+      '@erichandsen/env':
+        specifier: workspace:*
+        version: link:../env
+      '@vercel/postgres':
+        specifier: ^0.10.0
+        version: 0.10.0
+      drizzle-orm:
+        specifier: ^0.33.0
+        version: 0.33.0(@neondatabase/serverless@0.9.5)(@types/pg@8.11.6)(@types/react@18.3.11)(@vercel/postgres@0.10.0)(react@18.3.1)
+    devDependencies:
+      '@erichandsen/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@erichandsen/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      drizzle-kit:
+        specifier: ^0.24.2
+        version: 0.24.2
 
   packages/env:
     dependencies:
@@ -1243,9 +1259,6 @@ packages:
 
   '@neondatabase/serverless@0.9.5':
     resolution: {integrity: sha512-siFas6gItqv6wD/pZnvdu34wEqgG3nSE6zWZdq5j2DEsa+VvX8i/5HXJOo06qrw5axPXn+lGCxeR+NLaSPIXug==}
-
-  '@next/env@14.2.14':
-    resolution: {integrity: sha512-/0hWQfiaD5//LvGNgc8PjvyqV50vGK0cADYzaoOOGN8fxzBn3iAiaq3S0tCRnFBldq0LVveLcxCTi41ZoYgAgg==}
 
   '@next/env@14.2.8':
     resolution: {integrity: sha512-L44a+ynqkolyNBnYfF8VoCiSrjSZWgEHYKkKLGcs/a80qh7AkfVUD/MduVPgdsWZ31tgROR+yJRA0PZjSVBXWQ==}
@@ -5707,8 +5720,6 @@ snapshots:
   '@neondatabase/serverless@0.9.5':
     dependencies:
       '@types/pg': 8.11.6
-
-  '@next/env@14.2.14': {}
 
   '@next/env@14.2.8': {}
 
