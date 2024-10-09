@@ -2,7 +2,7 @@
   "private": true,
   "name": "@erichandsen/db",
   "version": "0.0.0",
-  "description": "The validated environment variables for Ericsen's projects",
+  "description": "The ORM for Ericsen's projects",
   "type": "module",
   "main": "./src/index.ts",
   "scripts": {
