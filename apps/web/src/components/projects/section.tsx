@@ -1,11 +1,11 @@
 "use client";
 
+import { cn } from "@erichandsen/utils";
 import { motion } from "framer-motion";
 
 import { ANIMATION_DURATION, ANIMATION_Y_OFFSET } from "@/constants/animation";
 import { NAV_ITEMS } from "@/constants/link";
 import { useScrollContext } from "@/contexts/use-section-refs-context";
-import { cn } from "@/lib/utils";
 
 import ProjectCard from "./project-card";
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@erichandsen/utils";
 import Image, { type StaticImageData } from "next/image";
 import Marquee from "react-fast-marquee";
 
@@ -14,7 +15,6 @@ import SassIcon from "@/assets/sass-icon.png";
 import SupabaseIcon from "@/assets/supabase-icon.png";
 import TailwindCssIcon from "@/assets/tailwind-css-icon.png";
 import TrpcIcon from "@/assets/trpc-icon.png";
-import { cn } from "@/lib/utils";
 
 type Item = {
   name: string;

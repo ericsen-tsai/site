@@ -1,3 +1,4 @@
+import { TooltipProvider } from "@erichandsen/ui";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
@@ -5,7 +6,6 @@ import "./globals.css";
 import Footer from "@/components/footer";
 import Header from "@/components/layout/header";
 import ParticleBackground from "@/components/layout/particle-background";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { SectionRefsProvider } from "@/contexts/use-section-refs-context";
 import { TRPCReactProvider } from "@/trpc/react";
 

@@ -57,6 +57,7 @@
       "persistent": true
     },
     "lint": {},
+    "lint:fix": {},
     "type-check": {}
   },
   "ui": "tui"

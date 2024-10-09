@@ -1,6 +1,5 @@
+import { Card, CardContent, CardHeader } from "@erichandsen/ui";
 import * as React from "react";
-
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 type Props = {
   title: string;

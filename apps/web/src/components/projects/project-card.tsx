@@ -1,11 +1,8 @@
+import { Button, Card, CardDescription, CardFooter, CardHeader } from "@erichandsen/ui";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
-
-import { Card, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
-
-import { Button } from "../ui/button";
 
 type Props = {
   title: string;

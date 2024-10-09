@@ -1,8 +1,7 @@
 "use client";
 
+import { Tooltip, TooltipContent, TooltipTrigger } from "@erichandsen/ui";
 import Image from "next/image";
-
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 const PHOTOS = [
   {

@@ -1,8 +1,7 @@
-/* eslint-disable eslint-comments/disable-enable-pair -- heading-has-content */
-/* eslint-disable jsx-a11y/heading-has-content -- heading-has-content */
-import * as React from "react";
+"use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@erichandsen/utils";
+import * as React from "react";
 
 const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (

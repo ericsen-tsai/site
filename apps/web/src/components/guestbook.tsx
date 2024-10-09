@@ -1,19 +1,26 @@
 "use client";
 
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Button,
+  Card,
+  CardDescription,
+  CardTitle,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Textarea
+} from "@erichandsen/ui";
 import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
 import { useRouter } from "next/navigation";
 import { type Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 
 import deleteAllComments from "@/actions/delete-all-comments";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { NAV_ITEMS } from "@/constants/link";
 import { api } from "@/trpc/react";
-
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Card, CardDescription, CardTitle } from "./ui/card";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 type Props = {
   user: Session["user"];

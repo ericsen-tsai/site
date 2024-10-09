@@ -6,6 +6,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid -- Using anchors without href for custom behavior */
 "use client";
 
+import { cn } from "@erichandsen/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -13,7 +14,6 @@ import { useCallback, useEffect, useState } from "react";
 
 import { NAV_ITEMS } from "@/constants/link";
 import { useScrollContext } from "@/contexts/use-section-refs-context";
-import { cn } from "@/lib/utils";
 
 export default function Header() {
   const [scrollY, setScrollY] = useState(0);

@@ -1,0 +1,5 @@
+pnpm-lock.yaml
+**/migrations/**
+
+# For CI
+.pnpm-store/

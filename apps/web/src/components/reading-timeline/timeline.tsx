@@ -1,9 +1,7 @@
+import { Tooltip, TooltipContent, TooltipTrigger } from "@erichandsen/ui";
+import { cn } from "@erichandsen/utils";
 import { Calendar } from "lucide-react";
 import Link from "next/link";
-
-import { cn } from "@/lib/utils";
-
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 interface BookEntry {
   title: string;
