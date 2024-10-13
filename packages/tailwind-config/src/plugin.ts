@@ -72,3 +72,15 @@ export const ui = plugin(({ addBase, addUtilities }) => {
     }
   });
 });
+
+// eslint-disable-next-line @typescript-eslint/unbound-method -- Tailwind plugin
+export const textShadow = plugin(({ matchUtilities, theme }) => {
+  matchUtilities(
+    {
+      "text-shadow": (value) => ({
+        textShadow: value
+      })
+    },
+    { values: theme("textShadow") }
+  );
+});

@@ -2,7 +2,7 @@ import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
 
-import { ui } from "./src/plugin";
+import { textShadow, ui } from "./src/plugin";
 
 const config: Partial<Config> = {
   darkMode: "class",
@@ -69,6 +69,6 @@ const config: Partial<Config> = {
       }
     }
   },
-  plugins: [animate, typography, ui]
+  plugins: [animate, typography, textShadow, ui]
 };
 export default config;

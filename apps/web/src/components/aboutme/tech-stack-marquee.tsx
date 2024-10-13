@@ -3,6 +3,7 @@
 import { cn } from "@erichandsen/utils";
 import Image, { type StaticImageData } from "next/image";
 import Marquee from "react-fast-marquee";
+import { useMediaQuery } from "usehooks-ts";
 
 import AstroIcon from "@/assets/astro-icon.png";
 import DockerIcon from "@/assets/docker-icon.png";
@@ -92,10 +93,13 @@ function SingleLogoElement({ imgSrc, name, notInvert }: Item) {
 }
 
 function LogoMarquee() {
+  const isMediumScreen = useMediaQuery("(min-width: 640px)");
+
   return (
     <Marquee
       gradient
-      gradientColor={"black"}
+      gradientWidth={isMediumScreen ? 200 : 50}
+      gradientColor={"hsl(var(--foreground))"}
       className="h-full overflow-hidden"
       speed={40}
       pauseOnHover

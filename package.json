@@ -34,6 +34,9 @@
     "apps/*",
     "packages/*"
   ],
+  "dependencies": {
+    "usehooks-ts": "^3.1.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
