@@ -10,7 +10,7 @@ function Articles() {
       <div className="min-h-screen px-10 py-20 md:p-20">
         <div className="mx-auto max-w-3xl">
           <h1 className="mb-4 flex items-center justify-center text-center text-3xl font-bold">
-            Articles
+            Ericsen's Blog
           </h1>
           <p className="text-card-foreground/50 mb-8 text-center text-sm font-medium">
             Fear can be expelled with knowledge.

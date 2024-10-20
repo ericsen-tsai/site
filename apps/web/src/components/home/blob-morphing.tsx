@@ -1,5 +1,5 @@
 import { motion, type MotionStyle, useAnimation } from "framer-motion";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 const paths = [
   "M476,299Q454,348,426.5,392.5Q399,437,347.5,444Q296,451,246.5,467.5Q197,484,147,463Q97,442,82.5,390Q68,338,55.5,294Q43,250,44.5,201Q46,152,85.5,122.5Q125,93,162.5,61.5Q200,30,248,39Q296,48,340.5,64.5Q385,81,423,114.5Q461,148,479.5,199Q498,250,476,299Z",
@@ -16,11 +16,11 @@ type Props = {
 const BlobMorphing = ({ style }: Props) => {
   const controls = useAnimation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let isMounted = true;
 
     const sequence = async () => {
-      for (const path of paths) {
+      for await (const path of paths) {
         if (!isMounted) break;
         await controls.start({ d: path, transition: { duration: 8 } });
       }

@@ -6,12 +6,16 @@ import {
   SiThreads
 } from "@icons-pack/react-simple-icons";
 
-export enum NAV_ITEMS {
+export enum SECTION_NAV_ITEMS {
   HOME = "Home",
   WHOAMI = "Who am I",
   ABOUTME = "About Me",
   PROJECTS = "Projects",
   GUESTBOOK = "Guestbook"
+}
+
+export enum LINK_NAV_ITEMS {
+  BLOG = "Blog"
 }
 
 export const SOCIAL_LINKS = [

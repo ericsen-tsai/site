@@ -19,7 +19,7 @@ import { type Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 
 import deleteAllComments from "@/actions/delete-all-comments";
-import { NAV_ITEMS } from "@/constants/link";
+import { SECTION_NAV_ITEMS } from "@/constants/link";
 import { api } from "@/trpc/react";
 
 type Props = {
@@ -62,7 +62,7 @@ function Guestbook({ user, comments: initialComments }: Props) {
   };
 
   return (
-    <div className="mb-48 mt-24 grid grid-cols-1 gap-12" id={NAV_ITEMS.GUESTBOOK}>
+    <div className="mb-48 mt-24 grid grid-cols-1 gap-12" id={SECTION_NAV_ITEMS.GUESTBOOK}>
       <div className="flex flex-col">
         <div className="mb-8">
           <h3 className="text-xl font-medium">Guestbook</h3>
@@ -84,7 +84,7 @@ function Guestbook({ user, comments: initialComments }: Props) {
                   <div className="flex flex-col gap-2 font-[family-name:var(--font-montserrat)]">
                     <Button
                       variant="destructive"
-                      onClick={() => signOut({ redirectTo: `/#${NAV_ITEMS.GUESTBOOK}` })}
+                      onClick={() => signOut({ redirectTo: `/#${SECTION_NAV_ITEMS.GUESTBOOK}` })}
                     >
                       Sign Out
                     </Button>
@@ -121,7 +121,7 @@ function Guestbook({ user, comments: initialComments }: Props) {
                     variant="secondary"
                     onClick={() =>
                       signIn("google", {
-                        redirectTo: `/#${NAV_ITEMS.GUESTBOOK}`
+                        redirectTo: `/#${SECTION_NAV_ITEMS.GUESTBOOK}`
                       })
                     }
                   >
@@ -132,7 +132,7 @@ function Guestbook({ user, comments: initialComments }: Props) {
                     variant="secondary"
                     onClick={() =>
                       signIn("github", {
-                        redirectTo: `/#${NAV_ITEMS.GUESTBOOK}`
+                        redirectTo: `/#${SECTION_NAV_ITEMS.GUESTBOOK}`
                       })
                     }
                   >

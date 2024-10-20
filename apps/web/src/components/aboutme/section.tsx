@@ -5,7 +5,7 @@ import { Clock, Code, Edit3 } from "lucide-react";
 import { useMemo } from "react";
 
 import { ANIMATION_DURATION, ANIMATION_Y_OFFSET } from "@/constants/animation";
-import { NAV_ITEMS } from "@/constants/link";
+import { SECTION_NAV_ITEMS } from "@/constants/link";
 import { useScrollContext } from "@/contexts/use-section-refs-context";
 
 import DashboardCard from "./dashboard-card";
@@ -43,18 +43,18 @@ export default function AboutMe({ totalHoursText, language, editor }: Props) {
 
   return (
     <motion.section
-      id={NAV_ITEMS.ABOUTME}
+      id={SECTION_NAV_ITEMS.ABOUTME}
       className="mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-8"
-      ref={sectionRefs?.[NAV_ITEMS.ABOUTME]}
+      ref={sectionRefs?.[SECTION_NAV_ITEMS.ABOUTME]}
       initial={{
-        y: animationCompleted?.[NAV_ITEMS.ABOUTME] ? 0 : ANIMATION_Y_OFFSET,
+        y: animationCompleted?.[SECTION_NAV_ITEMS.ABOUTME] ? 0 : ANIMATION_Y_OFFSET,
         opacity: 0
       }}
       transition={{ duration: ANIMATION_DURATION }}
       whileInView={{ y: 0, opacity: 1 }}
       viewport={{ once: true }}
       onAnimationComplete={() => {
-        onAnimationComplete?.(NAV_ITEMS.ABOUTME);
+        onAnimationComplete?.(SECTION_NAV_ITEMS.ABOUTME);
       }}
     >
       <h2 className="mb-8 text-center text-3xl font-bold">

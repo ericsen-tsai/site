@@ -19,7 +19,7 @@ export default async function Home() {
   ]);
   const session = await auth();
   return (
-    <div className="min-h-screen scroll-smooth font-[family-name:var(--font-montserrat)]">
+    <div className="relative min-h-screen scroll-smooth font-[family-name:var(--font-montserrat)]">
       <HeroSection />
       <WhoAmISection />
       <AboutMeSection

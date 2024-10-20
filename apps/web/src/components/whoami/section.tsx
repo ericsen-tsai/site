@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 import { ANIMATION_DURATION, ANIMATION_Y_OFFSET } from "@/constants/animation";
-import { NAV_ITEMS } from "@/constants/link";
+import { SECTION_NAV_ITEMS } from "@/constants/link";
 import { useScrollContext } from "@/contexts/use-section-refs-context";
 
 function WhoAmISection() {
@@ -11,18 +11,18 @@ function WhoAmISection() {
 
   return (
     <motion.section
-      id={NAV_ITEMS.WHOAMI}
+      id={SECTION_NAV_ITEMS.WHOAMI}
       className="m-auto flex min-h-screen max-w-4xl items-center px-8"
-      ref={sectionRefs?.[NAV_ITEMS.WHOAMI]}
+      ref={sectionRefs?.[SECTION_NAV_ITEMS.WHOAMI]}
       initial={{
-        y: animationCompleted?.[NAV_ITEMS.WHOAMI] ? 0 : ANIMATION_Y_OFFSET,
+        y: animationCompleted?.[SECTION_NAV_ITEMS.WHOAMI] ? 0 : ANIMATION_Y_OFFSET,
         opacity: 0
       }}
       transition={{ duration: ANIMATION_DURATION }}
       whileInView={{ y: 0, opacity: 1 }}
       viewport={{ once: true }}
       onAnimationComplete={() => {
-        onAnimationComplete?.(NAV_ITEMS.WHOAMI);
+        onAnimationComplete?.(SECTION_NAV_ITEMS.WHOAMI);
       }}
     >
       <div>

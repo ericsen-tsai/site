@@ -11,21 +11,21 @@ import {
 } from "react";
 
 import { ANIMATION_Y_OFFSET } from "@/constants/animation";
-import { NAV_ITEMS } from "@/constants/link";
+import { SECTION_NAV_ITEMS } from "@/constants/link";
 
 type SectionRefsContext = {
-  scrollToSection: (section: NAV_ITEMS) => void;
-  sectionRefs?: Record<NAV_ITEMS, React.RefObject<HTMLDivElement>>;
-  animationCompleted?: Record<NAV_ITEMS, boolean>;
-  onAnimationComplete?: (section: NAV_ITEMS) => void;
-  sectionInView: NAV_ITEMS;
+  scrollToSection: (section: SECTION_NAV_ITEMS) => void;
+  sectionRefs?: Record<SECTION_NAV_ITEMS, React.RefObject<HTMLDivElement>>;
+  animationCompleted?: Record<SECTION_NAV_ITEMS, boolean>;
+  onAnimationComplete?: (section: SECTION_NAV_ITEMS) => void;
+  sectionInView: SECTION_NAV_ITEMS;
 };
 
 const SectionRefsContext = createContext<SectionRefsContext>({
   scrollToSection: () => {
     console.log("EMPTY");
   },
-  sectionInView: NAV_ITEMS.HOME
+  sectionInView: SECTION_NAV_ITEMS.HOME
 });
 
 export const useScrollContext = () => useContext(SectionRefsContext);
@@ -39,24 +39,24 @@ export const SectionRefsProvider = ({ children }: { children: React.ReactNode })
 
   const sectionRefs: SectionRefsContext["sectionRefs"] = useMemo(
     () => ({
-      [NAV_ITEMS.HOME]: homeRef,
-      [NAV_ITEMS.WHOAMI]: whoamiRef,
-      [NAV_ITEMS.ABOUTME]: aboutmeRef,
-      [NAV_ITEMS.PROJECTS]: projectsRef,
-      [NAV_ITEMS.GUESTBOOK]: guestbookRef
+      [SECTION_NAV_ITEMS.HOME]: homeRef,
+      [SECTION_NAV_ITEMS.WHOAMI]: whoamiRef,
+      [SECTION_NAV_ITEMS.ABOUTME]: aboutmeRef,
+      [SECTION_NAV_ITEMS.PROJECTS]: projectsRef,
+      [SECTION_NAV_ITEMS.GUESTBOOK]: guestbookRef
     }),
     []
   );
 
-  const [animationCompleted, setAnimationCompleted] = useState<Record<NAV_ITEMS, boolean>>({
-    [NAV_ITEMS.HOME]: false,
-    [NAV_ITEMS.WHOAMI]: false,
-    [NAV_ITEMS.ABOUTME]: false,
-    [NAV_ITEMS.PROJECTS]: false,
-    [NAV_ITEMS.GUESTBOOK]: false
+  const [animationCompleted, setAnimationCompleted] = useState<Record<SECTION_NAV_ITEMS, boolean>>({
+    [SECTION_NAV_ITEMS.HOME]: false,
+    [SECTION_NAV_ITEMS.WHOAMI]: false,
+    [SECTION_NAV_ITEMS.ABOUTME]: false,
+    [SECTION_NAV_ITEMS.PROJECTS]: false,
+    [SECTION_NAV_ITEMS.GUESTBOOK]: false
   });
 
-  const handleAnimationComplete = useCallback((section: NAV_ITEMS) => {
+  const handleAnimationComplete = useCallback((section: SECTION_NAV_ITEMS) => {
     setAnimationCompleted((prev) => ({
       ...prev,
       [section]: true
@@ -64,7 +64,7 @@ export const SectionRefsProvider = ({ children }: { children: React.ReactNode })
   }, []);
 
   const scrollToSection = useCallback(
-    (section: NAV_ITEMS) => {
+    (section: SECTION_NAV_ITEMS) => {
       const element = sectionRefs[section].current;
       if (!element) {
         return;
@@ -80,7 +80,7 @@ export const SectionRefsProvider = ({ children }: { children: React.ReactNode })
     [sectionRefs, animationCompleted]
   );
 
-  const [sectionInView, setSectionInView] = useState<NAV_ITEMS>(NAV_ITEMS.HOME);
+  const [sectionInView, setSectionInView] = useState<SECTION_NAV_ITEMS>(SECTION_NAV_ITEMS.HOME);
 
   useEffect(() => {
     const checkSectionInView = () => {
@@ -88,8 +88,8 @@ export const SectionRefsProvider = ({ children }: { children: React.ReactNode })
       const section = Object.entries(sectionRefs).findLast(
         ([, ref]) => ref.current && ref.current.offsetTop - 100 <= scrollPosition
       );
-      if (section && (section[0] as NAV_ITEMS) !== sectionInView) {
-        setSectionInView(section[0] as NAV_ITEMS);
+      if (section && (section[0] as SECTION_NAV_ITEMS) !== sectionInView) {
+        setSectionInView(section[0] as SECTION_NAV_ITEMS);
       }
     };
 

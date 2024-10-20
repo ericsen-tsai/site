@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 
-import { NAV_ITEMS } from "@/constants/link";
+import { SECTION_NAV_ITEMS } from "@/constants/link";
 import { useScrollContext } from "@/contexts/use-section-refs-context";
 
 import BlobMorphing from "./blob-morphing";
@@ -28,8 +28,8 @@ const HeroSection = () => {
   return (
     <section
       className="relative flex h-screen flex-col items-center justify-center p-20 text-center"
-      id={NAV_ITEMS.HOME}
-      ref={sectionRefs?.[NAV_ITEMS.HOME]}
+      id={SECTION_NAV_ITEMS.HOME}
+      ref={sectionRefs?.[SECTION_NAV_ITEMS.HOME]}
     >
       <div className="photo-container mb-8">
         <div className="photo-flipper">

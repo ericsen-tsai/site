@@ -64,6 +64,9 @@ export const ui = plugin(({ addBase, addUtilities }) => {
       color: "theme('colors.background')",
       "-webkit-font-smoothing": "antialiased",
       "-moz-osx-font-smoothing": "grayscale"
+    },
+    html: {
+      position: "relative"
     }
   });
   addUtilities({

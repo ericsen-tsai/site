@@ -1,9 +1,3 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair -- no-static-element-interactions
-/* eslint-disable jsx-a11y/no-static-element-interactions -- Allowing static element interactions for specific use case */
-// eslint-disable-next-line eslint-comments/disable-enable-pair -- click-events-have-key-events
-/* eslint-disable jsx-a11y/click-events-have-key-events -- Disabling key events requirement for click handlers */
-// eslint-disable-next-line eslint-comments/disable-enable-pair -- anchor-is-valid
-/* eslint-disable jsx-a11y/anchor-is-valid -- Using anchors without href for custom behavior */
 "use client";
 
 import { cn } from "@erichandsen/utils";
@@ -12,15 +6,22 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
-import { NAV_ITEMS } from "@/constants/link";
+import { LINK_NAV_ITEMS, SECTION_NAV_ITEMS } from "@/constants/link";
 import { useScrollContext } from "@/contexts/use-section-refs-context";
 
-export default function Header() {
+const NAV_ITEMS = [
+  SECTION_NAV_ITEMS.HOME,
+  SECTION_NAV_ITEMS.ABOUTME,
+  SECTION_NAV_ITEMS.PROJECTS,
+  LINK_NAV_ITEMS.BLOG
+] as const;
+
+function Header() {
   const [scrollY, setScrollY] = useState(0);
-  const { scrollToSection, sectionInView } = useScrollContext();
+  const { scrollToSection, sectionInView, onAnimationComplete } = useScrollContext();
   const router = useRouter();
   const inHomePage = usePathname() === "/";
-
+  const isBlogPage = usePathname() === "/blog";
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -34,14 +35,27 @@ export default function Header() {
   const headerOpacity = scrollY > 0 ? 0.5 : 0;
 
   const handleItemClick = useCallback(
-    (item: NAV_ITEMS) => {
+    (item: (typeof NAV_ITEMS)[number]) => {
+      if (item === LINK_NAV_ITEMS.BLOG) {
+        router.push(`/blog`);
+        return;
+      }
       if (inHomePage) {
         scrollToSection(item);
         return;
       }
+      onAnimationComplete?.(item);
       router.push(`/#${item}`);
     },
-    [inHomePage, scrollToSection, router]
+    [inHomePage, onAnimationComplete, scrollToSection, router]
+  );
+
+  const shouldDisplayUnderline = useCallback(
+    (item: (typeof NAV_ITEMS)[number]) => {
+      if (isBlogPage && item === LINK_NAV_ITEMS.BLOG) return true;
+      return inHomePage && sectionInView === item;
+    },
+    [inHomePage, isBlogPage, sectionInView]
   );
 
   return (
@@ -61,28 +75,29 @@ export default function Header() {
         </Link>
         <nav>
           <ul className="flex items-center justify-center space-x-1 font-semibold sm:space-x-6">
-            {Object.entries(NAV_ITEMS)
-              .filter(([, value]) => value !== NAV_ITEMS.GUESTBOOK)
-              .map(([key, value]) => (
-                <li key={key} className="text-center">
-                  <a
-                    className={cn(
-                      "inline-block w-[4.5rem] cursor-pointer opacity-50 transition-all hover:tracking-tight hover:opacity-100",
-                      {
-                        "text-primary underline": inHomePage && sectionInView === value
-                      }
-                    )}
-                    onClick={() => {
-                      handleItemClick(value);
-                    }}
-                  >
-                    {value}
-                  </a>
-                </li>
-              ))}
+            {NAV_ITEMS.map((value) => (
+              <li key={value} className="text-center">
+                <button
+                  type="button"
+                  className={cn(
+                    "inline-block w-[4.5rem] cursor-pointer opacity-50 transition-all hover:tracking-tight hover:opacity-100",
+                    {
+                      "text-primary underline": shouldDisplayUnderline(value)
+                    }
+                  )}
+                  onClick={() => {
+                    handleItemClick(value);
+                  }}
+                >
+                  {value}
+                </button>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
     </header>
   );
 }
+
+export default Header;

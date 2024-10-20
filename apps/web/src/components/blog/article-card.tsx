@@ -16,6 +16,7 @@ function ArticleCard({ slugAsParams, title, date }: Props) {
           src={`/blog/${slugAsParams}/cover.png`}
           alt={title}
           className="rounded-xl p-2"
+          priority
         />
         <div className="flex flex-col p-2 transition-transform ease-out group-hover:translate-x-0.5">
           <p className="text-muted-foreground mt-2">

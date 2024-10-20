@@ -40,7 +40,7 @@ export async function generateMetadata(
     description: article.description,
     openGraph: {
       ...previousOpenGraph,
-      url: "/article",
+      url: "/blog",
       title: article.title,
       description: article.description
     }
