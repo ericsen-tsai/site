@@ -1,7 +1,10 @@
+import { Button } from "@erichandsen/ui";
 import { allArticles } from "contentlayer/generated";
 import { format } from "date-fns";
+import { ArrowLeft } from "lucide-react";
 import { type Metadata, type ResolvingMetadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import MarkdownRenderer from "@/components/blog/markdown-renderer";
@@ -64,6 +67,11 @@ function ArticlePage({ params }: PageProps) {
     <div className="min-h-screen scroll-smooth font-[family-name:var(--font-montserrat)]">
       <div className="min-h-screen px-10 py-20 md:p-20">
         <div className="mx-auto max-w-3xl">
+          <Link href="/blog">
+            <Button variant="ghost" size="icon">
+              <ArrowLeft className="size-4" />
+            </Button>
+          </Link>
           <article className="prose prose-invert py-6">
             <h1 className="mb-2">{article.title}</h1>
             <p className="text-sm text-slate-400">
