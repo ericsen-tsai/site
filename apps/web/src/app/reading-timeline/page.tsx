@@ -149,7 +149,7 @@ function ReadingTimeline() {
           <h1 className="mb-3 flex items-center justify-center text-center text-2xl font-bold">
             Reading Timeline
           </h1>
-          <p className="text-card-foreground/50 mb-8 text-sm font-medium">
+          <p className="text-card-foreground/50 mb-8 text-center text-sm font-medium">
             Books are not just for reading the words within; they are also tools for adjusting one's
             own feelings.
           </p>
