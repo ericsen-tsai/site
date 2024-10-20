@@ -1,0 +1,219 @@
+---
+title: Runtime Environment Variables anywhere in App Router
+description: How to securely pass runtime environment variables to the browser in a Next.js application using App Router.
+date: 2024-10-20
+---
+
+Next.js is a powerful React framework that allows for server-side rendering and static site generation. However, when it comes to handling environment variables, there's a challenge: how do we securely provide runtime environment variables to the browser? This article will walk you through a solution using a Next.js project.
+
+## The Challenge
+
+In a typical Next.js application, environment variables are handled server-side and are not accessible in the browser by default. This is a security feature to prevent sensitive information from being exposed. However, there are scenarios where you might need certain environment variables available on the client-side at runtime.
+
+## The Solution
+
+We'll implement a solution that allows us to:
+
+1. Securely pass specific environment variables to the client.
+2. Keep server-only variables private.
+3. Access these variables in both server and client components.
+
+Let's break down the implementation.
+
+## Implementation
+
+### 1. Setting up the Environment Variables
+
+First, define your environment variables in a `.env.local` file (which should be gitignored):
+
+```bash
+SERVER_SECRET_KEY=your_server_secret
+
+CLIENT_SECRET_KEY=your_client_secret
+```
+
+### 2. Creating a Constants File
+
+Create a constants file to store the ID for our runtime environment container:
+
+```typescript
+export const RUNTIME_ENVS_CONTAINER_ID = "client-runtime-envs";
+```
+
+### 3. Implementing the Environment Handler
+
+Create an `env.ts` file to handle both server and client environment variables:
+
+```typescript
+import { RUNTIME_ENVS_CONTAINER_ID } from "./constants";
+
+const isBrowser = typeof window !== "undefined";
+
+const getServerEnvs = <T extends string>(keys: T[]): Record<T, string> => {
+  return keys.reduce(
+    (acc, key) => {
+      return { ...acc, [key]: process.env[key] ?? "" };
+    },
+    {} as Record<T, string>
+  );
+};
+
+const getClientRuntimeEnvs = <T extends string>(keys: T[]): Record<T, string> => {
+  return keys.reduce(
+    (acc, key) => {
+      return {
+        ...acc,
+
+        [key]: isBrowser
+          ? JSON.parse(document.getElementById(RUNTIME_ENVS_CONTAINER_ID)?.innerText ?? "{}")[key]
+          : (process.env[key] ?? "")
+      };
+    },
+    {} as Record<T, string>
+  );
+};
+
+// extend your client runtime env keys here
+export const clientRuntimeEnvs = getClientRuntimeEnvs(["CLIENT_SECRET_KEY"]);
+
+// extend your server runtime env keys here
+const serverEnvs = getServerEnvs(["SERVER_SECRET_KEY"]);
+
+export type ClientRuntimeEnvs = typeof clientRuntimeEnvs;
+
+export type ServerEnvs = typeof serverEnvs;
+
+export const env = {
+  ...clientRuntimeEnvs,
+  ...(isBrowser ? {} : serverEnvs)
+};
+```
+
+This file does several things:
+
+- Defines functions to get server and client runtime environment variables.
+- Exports `clientRuntimeEnvs` for client-side use.
+- Creates a unified `env` object that works on both server and client.
+
+### 4. Creating a Client Runtime Environment Component
+
+Implement a component to inject client runtime variables into the DOM:
+
+```typescript
+"use client";
+
+import { RUNTIME_ENVS_CONTAINER_ID } from "@/constants";
+import { clientRuntimeEnvs } from "@/env";
+import { unstable_noStore as noStore } from "next/cache";
+
+function WithClientRuntimeEnv({ children }: { children: React.ReactNode }) {
+  noStore();
+  return (
+    <>
+      <div id={RUNTIME_ENVS_CONTAINER_ID} style={{ display: "none" }}>
+        {JSON.stringify(clientRuntimeEnvs)}
+      </div>
+      {children}
+    </>
+  );
+}
+
+export default WithClientRuntimeEnv;
+
+```
+
+This component:
+
+- Uses `"use client"` to ensure it runs on the client.
+- Injects the `clientRuntimeEnvs` into a hidden div in the DOM.
+- Uses `noStore()` to prevent caching, ensuring fresh values on each request.
+
+### 5. Integrating with the Layout
+
+Wrap your app with the `WithClientRuntimeEnv` component in your root layout:
+
+```typescript
+function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <WithClientRuntimeEnv>{children}</WithClientRuntimeEnv>
+      </body>
+    </html>
+  );
+}
+```
+
+### 6. Using Environment Variables
+
+Now you can use the `env` object in both server and client components:
+
+Server Component Example:
+
+```typescript
+import { env } from "@/env";
+
+function Home() {
+  return (
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+        <h3>Server Env: {env.SERVER_SECRET_KEY}</h3>
+        <Button />
+      </main>
+    </div>
+  );
+}
+
+export default Home
+
+```
+
+Client Component Example:
+
+```typescript
+"use client"
+
+import { env } from "@/env";
+
+import { useState } from "react";
+
+function Button() {
+  const [hidden, setHidden] = useState(true);
+
+  return (
+    <button onClick={() => setHidden((h) => !h)}>
+      {hidden ? <h3>Client Env: {env.CLIENT_SECRET_KEY}</h3> : "Hide"}
+    </button>
+  );
+}
+
+export default Button;
+```
+
+## How It Works
+
+1. The `WithClientRuntimeEnv` component injects client-safe environment variables into the DOM on initial page load.
+2. The `env.ts` file provides a unified `env` object that:
+
+- On the server, directly accesses `process.env`.
+- In the browser, retrieves values from the injected DOM element.
+
+3. This approach allows you to use the same `env` object seamlessly across your application.
+
+## Security Considerations
+
+- Only inject environment variables that are safe to expose to the client.
+- Use different variables for truly sensitive server-side information.
+- Consider encrypting client-side variables if they contain sensitive data.
+
+## Conclusion
+
+This solution provides a flexible and secure way to handle runtime environment variables in a Next.js application. It maintains the security of server-only variables while allowing necessary configuration to be available on the client-side.
+
+By following this pattern, you can easily manage and access environment variables throughout your Next.js application, both on the server and in the browser.

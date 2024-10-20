@@ -146,7 +146,7 @@ function ReadingTimeline() {
     <div className="min-h-screen scroll-smooth font-[family-name:var(--font-montserrat)]">
       <div className="min-h-screen p-20">
         <div className="mx-auto max-w-3xl">
-          <h1 className="mb-3 flex items-center justify-center text-center text-2xl font-bold">
+          <h1 className="mb-3 flex items-center justify-center text-center text-3xl font-bold">
             Reading Timeline
           </h1>
           <p className="text-card-foreground/50 mb-8 text-center text-sm font-medium">
