@@ -4,7 +4,7 @@ import { type Metadata, type ResolvingMetadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import MarkdownRenderer from "@/components/articles/markdown-renderer";
+import MarkdownRenderer from "@/components/blog/markdown-renderer";
 
 interface PageProps {
   params: {
@@ -62,7 +62,7 @@ function ArticlePage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen scroll-smooth font-[family-name:var(--font-montserrat)]">
-      <div className="min-h-screen p-20">
+      <div className="min-h-screen px-10 py-20 md:p-20">
         <div className="mx-auto max-w-3xl">
           <article className="prose prose-invert py-6">
             <h1 className="mb-2">{article.title}</h1>
@@ -73,7 +73,7 @@ function ArticlePage({ params }: PageProps) {
             <Image
               width={1200}
               height={630}
-              src={`/article/${article.slugAsParams}/cover.png`}
+              src={`/blog/${article.slugAsParams}/cover.png`}
               alt={article.title}
               className="rounded-xl p-2"
             />

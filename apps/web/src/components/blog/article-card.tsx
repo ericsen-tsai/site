@@ -8,12 +8,12 @@ type Props = Omit<Article, "slug">;
 
 function ArticleCard({ slugAsParams, title, date }: Props) {
   return (
-    <Link href={`/article/${slugAsParams}`}>
+    <Link href={`/blog/${slugAsParams}`}>
       <Card className="border-card-foreground/50 text-card-foreground group relative rounded-xl border-[0.01rem] p-2">
         <Image
           width={1200}
           height={630}
-          src={`/article/${slugAsParams}/cover.png`}
+          src={`/blog/${slugAsParams}/cover.png`}
           alt={title}
           className="rounded-xl p-2"
         />

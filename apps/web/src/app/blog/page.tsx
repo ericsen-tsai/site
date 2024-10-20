@@ -1,13 +1,13 @@
 import { allArticles } from "contentlayer/generated";
 
-import ArticleCard from "@/components/articles/article-card";
+import ArticleCard from "@/components/blog/article-card";
 
 export const dynamic = "force-dynamic";
 
 function Articles() {
   return (
     <div className="min-h-screen scroll-smooth font-[family-name:var(--font-montserrat)]">
-      <div className="min-h-screen p-20">
+      <div className="min-h-screen px-10 py-20 md:p-20">
         <div className="mx-auto max-w-3xl">
           <h1 className="mb-4 flex items-center justify-center text-center text-3xl font-bold">
             Articles
