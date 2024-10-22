@@ -118,11 +118,16 @@ This is a workaround for the fact that styled-components doesn't support nonce i
 
 ```javascript
 // override document createElement to inject nonce
-const originalCreateElement = document.createElement;
-document.createElement = function (tagName, options) {
-  const element = originalCreateElement(tagName, options);
-  // get nonce from meta tag
-  element.nonce = document.querySelector("meta[name='x-nonce']").getAttribute("content");
+var originCreateElement = document.createElement;
+document.createElement = function (tagName) {
+  var element = originCreateElement.call(document, tagName);
+  // when tagName is style, inject nonce
+  if (tagName === "style") {
+    element.setAttribute(
+      "nonce",
+      document.head.querySelector('meta[name="x-nonce"]').content
+    );
+  }
   return element;
 };
 ```
