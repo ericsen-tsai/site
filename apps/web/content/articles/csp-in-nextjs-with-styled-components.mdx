@@ -1,0 +1,177 @@
+---
+title: CSP in Nextjs with styled-components
+description: How to implement CSP in a Nextjs application with styled-components.
+date: 2024-10-22
+---
+
+A lot of projects use styled-components for CSS-in-JS styling. To enhance security and comply with Content Security Policy (CSP), I've implemented nonce generation and injection for styled-components. Here's how it works:
+
+## Server-Side Nonce Generation and Injection
+
+Create a nonce in response headers and inject the nonce into the page and styled-components' styles.
+
+- Generate a nonce for each request and set in response headers in `src/middleware.ts`.
+
+```typescript
+export function middleware() {
+  const response = NextResponse.next();
+  const nonce = Buffer.from(uuidv4()).toString("base64");
+
+  // Only apply CSP in production
+  if (process.env.NODE_ENV === "production") {
+    const cspHeader = `
+      default-src 'self';
+      script-src 'self' 'nonce-${nonce}' 'strict-dynamic';
+      style-src 'self' 'nonce-${nonce}';
+      img-src 'self' blob: data:;
+      font-src 'self';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      frame-ancestors 'none';
+      block-all-mixed-content;
+      upgrade-insecure-requests;
+    `;
+
+    response.headers.set("Content-Security-Policy", cspHeader.replace(/\s{2,}/g, " ").trim());
+  }
+
+  response.headers.set("x-nonce", nonce);
+
+  return response;
+}
+```
+
+- In `src/app/registry.tsx`, use the nonce to inject into the styles.
+
+```typescript
+function StyledComponentsRegistry({
+  children,
+  nonce,
+}: {
+  children: React.ReactNode;
+  nonce: string;
+}) {
+  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
+
+  useServerInsertedHTML(() => {
+    const styles = styledComponentsStyleSheet.getStyleElement();
+    // add nonce to the style JSX.Element
+    const styledComponentsStyleSheetWithNonce = styles.map((style) =>
+      React.cloneElement(style, {
+        nonce,
+      })
+    );
+    styledComponentsStyleSheet.instance.clearTag();
+    return <>{styledComponentsStyleSheetWithNonce}</>;
+  });
+
+  if (typeof window !== "undefined") return <>{children}</>;
+
+  return (
+    <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
+      {children}
+    </StyleSheetManager>
+  );
+}
+```
+
+- In `src/app/layout.tsx`, add nonce in metadata and inject the nonce into the page.
+
+```typescript
+
+export const generateMetadata = () => {
+  const nonce = headers().get("x-nonce");
+  return {
+    title: "My App",
+    other: {
+      "x-nonce": nonce,
+    },
+  };
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const nonce = headers().get("x-nonce");
+  return (
+    <html>
+      <head>
+      </head>
+      <body>
+        <StyledComponentsRegistry nonce={nonce}>
+          {children}
+        </StyledComponentsRegistry>
+      </body>
+    </html>
+  );
+}
+```
+
+## Client-Side Nonce Injection
+
+This is a workaround for the fact that styled-components doesn't support nonce injection out of the box. If you don't have a concern to override the `createElement`, you can use this approach.
+
+- Create `inject-nonce.js` in `public` folder and override the `createElement` to inject the nonce into the styles.
+
+```javascript
+// override document createElement to inject nonce
+const originalCreateElement = document.createElement;
+document.createElement = function (tagName, options) {
+  const element = originalCreateElement(tagName, options);
+  // get nonce from meta tag
+  element.nonce = document.querySelector("meta[name='x-nonce']").getAttribute("content");
+  return element;
+};
+```
+
+- Add `inject-nonce.js` to the page head in `src/app/layout.tsx`.
+
+```typescript
+<head>
+  <Script src="/inject-nonce.js" nonce={nonce} strategy="beforeInteractive" />
+</head>
+```
+
+This setup ensures that your styled-components styles are compliant with the Content Security Policy, enhancing the security of your application.
+
+## Final Steps
+
+```bash
+npm run build
+```
+
+```bash
+npm run start
+```
+
+And you should see the styles compliant with CSP.
+
+## Important Notes
+
+- The nonce is generated for each request, ensuring a unique value for enhanced security.
+- This setup works seamlessly with Next.js's server-side rendering and client-side hydration.
+- Make sure to keep the `StyledComponentsRegistry` component updated if you upgrade styled-components or Next.js, as the implementation might change in future versions.
+- Be cautious when overriding `document.createElement` in the client-side nonce injection approach. This global modification could potentially interfere with other libraries or scripts that rely on the standard behavior of `createElement`.
+
+By following this approach, you can use styled-components in your Next.js application while maintaining a strong Content Security Policy. However, consider the potential risks and implications of overriding core DOM methods before implementing the client-side nonce injection.
+
+## Future Nonce Support for Styled-Components
+
+I'm actively working on improving nonce support for styled-components to enhance security and Content Security Policy (CSP) compliance. A pull request has been opened to address this:
+
+- Pull Request: [Add nonce support #4356](https://github.com/styled-components/styled-components/pull/4356)
+
+If this pull request is merged, it will provide native nonce support for styled-components, potentially simplifying the current workaround described in this README. The proposed changes include:
+
+- Adding a `NONCE` constant to retrieve the nonce value from a `<meta name="sc-nonce">` tag
+- Enhancing the `ServerStyleSheet` class to accept and use a nonce
+- Improving nonce handling in various methods
+
+Once merged, this feature would allow for more straightforward nonce implementation without the need for custom createElement overrides.
+
+**Note:** As of now, this feature is not yet available in the main styled-components package. Please check the status of the pull request or the styled-components documentation for the most up-to-date information on nonce support.
+
+I'll update this README with instructions on using the native nonce support once it becomes available in a future release of styled-components.
