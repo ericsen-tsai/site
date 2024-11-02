@@ -18,7 +18,8 @@ function useParallax(value: MotionValue<number>, distance: number) {
 const HeroSection = () => {
   const [textColor, setTextColor] = useState("text-blue-500");
   const { sectionRefs } = useScrollContext();
-  const ref = useRef(null);
+  const ref = useRef<HTMLHeadingElement>(null);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"]

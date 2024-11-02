@@ -8,6 +8,7 @@ import { javascript } from "./configs/javascript";
 import { next } from "./configs/next";
 import { prettier } from "./configs/prettier";
 import { react } from "./configs/react";
+import { reactCompiler } from "./configs/react-compiler";
 import { sonarjs } from "./configs/sonarjs";
 import { tailwindcss } from "./configs/tailwindcss";
 import { turbo } from "./configs/turbo";
@@ -64,7 +65,7 @@ const erichandsen = async (
   }
 
   if (enableReact) {
-    configs.push(...react(options));
+    configs.push(...react(options), ...reactCompiler);
   }
 
   if (enableTurbo) {

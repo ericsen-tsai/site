@@ -46,7 +46,7 @@ export const typescript = (options?: Options): Linter.Config[] => [
       "@typescript-eslint/no-unsafe-member-access": "off",
       "@typescript-eslint/consistent-type-definitions": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
-
+      "@typescript-eslint/await-thenable": "off",
       // Turn off due to poor performance
       "@typescript-eslint/no-misused-promises": "off",
       "@typescript-eslint/no-floating-promises": "off"

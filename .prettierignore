@@ -3,3 +3,6 @@ pnpm-lock.yaml
 
 # For CI
 .pnpm-store/
+
+# Mdx
+*.mdx

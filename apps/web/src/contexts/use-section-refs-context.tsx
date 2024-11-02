@@ -13,15 +13,15 @@ import {
 import { ANIMATION_Y_OFFSET } from "@/constants/animation";
 import { SECTION_NAV_ITEMS } from "@/constants/link";
 
-type SectionRefsContext = {
+type TSectionRefsContext = {
   scrollToSection: (section: SECTION_NAV_ITEMS) => void;
-  sectionRefs?: Record<SECTION_NAV_ITEMS, React.RefObject<HTMLDivElement>>;
+  sectionRefs?: Record<SECTION_NAV_ITEMS, React.RefObject<HTMLDivElement | null>>;
   animationCompleted?: Record<SECTION_NAV_ITEMS, boolean>;
   onAnimationComplete?: (section: SECTION_NAV_ITEMS) => void;
   sectionInView: SECTION_NAV_ITEMS;
 };
 
-const SectionRefsContext = createContext<SectionRefsContext>({
+const SectionRefsContext = createContext<TSectionRefsContext>({
   scrollToSection: () => {
     console.log("EMPTY");
   },
@@ -37,7 +37,7 @@ export const SectionRefsProvider = ({ children }: { children: React.ReactNode })
   const projectsRef = useRef<HTMLDivElement>(null);
   const guestbookRef = useRef<HTMLDivElement>(null);
 
-  const sectionRefs: SectionRefsContext["sectionRefs"] = useMemo(
+  const sectionRefs: TSectionRefsContext["sectionRefs"] = useMemo(
     () => ({
       [SECTION_NAV_ITEMS.HOME]: homeRef,
       [SECTION_NAV_ITEMS.WHOAMI]: whoamiRef,
