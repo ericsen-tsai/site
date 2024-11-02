@@ -15,7 +15,7 @@ import { SECTION_NAV_ITEMS } from "@/constants/link";
 
 type SectionRefsContext = {
   scrollToSection: (section: SECTION_NAV_ITEMS) => void;
-  sectionRefs?: Record<SECTION_NAV_ITEMS, React.RefObject<HTMLDivElement>>;
+  sectionRefs?: Record<SECTION_NAV_ITEMS, React.RefObject<HTMLDivElement | null>>;
   animationCompleted?: Record<SECTION_NAV_ITEMS, boolean>;
   onAnimationComplete?: (section: SECTION_NAV_ITEMS) => void;
   sectionInView: SECTION_NAV_ITEMS;

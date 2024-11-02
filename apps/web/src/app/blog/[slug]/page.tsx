@@ -10,13 +10,13 @@ import { notFound } from "next/navigation";
 import MarkdownRenderer from "@/components/blog/markdown-renderer";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-function getArticleFromParams(params: PageProps["params"]) {
-  const { slug } = params;
+async function getArticleFromParams(params: PageProps["params"]) {
+  const { slug } = await params;
   const currentArticle = allArticles.find((article) => article.slugAsParams === slug);
 
   if (!currentArticle) {
@@ -30,7 +30,7 @@ export async function generateMetadata(
   { params }: PageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const article = getArticleFromParams(params);
+  const article = await getArticleFromParams(params);
 
   if (!article) {
     return {};
@@ -50,14 +50,14 @@ export async function generateMetadata(
   };
 }
 
-export function generateStaticParams(): Array<PageProps["params"]> {
+export function generateStaticParams() {
   return allArticles.map((article) => ({
     slug: article.slugAsParams
   }));
 }
 
-function ArticlePage({ params }: PageProps) {
-  const article = getArticleFromParams(params);
+async function ArticlePage({ params }: PageProps) {
+  const article = await getArticleFromParams(params);
 
   if (!article) {
     notFound();

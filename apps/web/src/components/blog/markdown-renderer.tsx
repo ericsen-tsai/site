@@ -31,7 +31,7 @@ function MarkdownRenderer({ content }: { content: string }) {
             ) : null;
           },
           code({ className, ...props }) {
-            const languages = /language-(\w+)/.exec(className ?? "");
+            const languages = /language-(\w+)/.exec(String(className ?? ""));
             const language = languages ? languages[1] : null;
 
             return language ? (
@@ -42,7 +42,7 @@ function MarkdownRenderer({ content }: { content: string }) {
                 wrapLines={false}
                 useInlineStyles
               >
-                {props.children as string}
+                {String(props.children)}
               </SyntaxHighlighter>
             ) : (
               <code
