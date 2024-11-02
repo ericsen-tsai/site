@@ -4,7 +4,7 @@ A modern, feature-rich personal website built with cutting-edge technologies.
 
 ## Tech Stack
 
-- **Frontend**: Next.js 14, React 18, TailwindCSS
+- **Frontend**: Next.js 15, React 19, TailwindCSS
 - **Backend**: tRPC, Drizzle ORM
 - **Database**: PostgreSQL (via Vercel Postgres)
 - **Authentication**: NextAuth.js
