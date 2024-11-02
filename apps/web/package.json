@@ -13,7 +13,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@auth/drizzle-adapter": "^1.5.0",
+    "@auth/drizzle-adapter": "^1.7.2",
     "@emotion/is-prop-valid": "^1.3.1",
     "@erichandsen/db": "workspace:*",
     "@erichandsen/env": "workspace:*",
