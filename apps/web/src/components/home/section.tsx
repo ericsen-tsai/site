@@ -2,7 +2,7 @@
 
 import { type MotionValue, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { type RefObject, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 
 import { SECTION_NAV_ITEMS } from "@/constants/link";
@@ -15,16 +15,13 @@ function useParallax(value: MotionValue<number>, distance: number) {
   return useTransform(value, [0, 1], [-distance, distance]);
 }
 
-function isRefObject<T>(ref: RefObject<T>): ref is RefObject<NonNullable<T>> {
-  return ref.current !== null;
-}
-
 const HeroSection = () => {
   const [textColor, setTextColor] = useState("text-blue-500");
   const { sectionRefs } = useScrollContext();
   const ref = useRef<HTMLHeadingElement>(null);
+
   const { scrollYProgress } = useScroll({
-    target: isRefObject(ref) ? ref : undefined,
+    target: ref,
     offset: ["start start", "end end"]
   });
   const y = useParallax(scrollYProgress, 300);

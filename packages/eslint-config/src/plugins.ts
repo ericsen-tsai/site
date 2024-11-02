@@ -10,6 +10,7 @@ export { default as eslintCommentsPlugin } from "eslint-plugin-eslint-comments";
 export * as importPlugin from "eslint-plugin-import";
 export { default as jsxA11yPlugin } from "eslint-plugin-jsx-a11y";
 export { default as prettierPlugin } from "eslint-plugin-prettier";
+export { default as reactCompilerPlugin } from "eslint-plugin-react-compiler";
 export { default as reactHooksPlugin } from "eslint-plugin-react-hooks";
 export { default as simpleImportSortPlugin } from "eslint-plugin-simple-import-sort";
 export * as sonarjsPlugin from "eslint-plugin-sonarjs";
