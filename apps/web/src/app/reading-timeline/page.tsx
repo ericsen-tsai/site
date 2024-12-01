@@ -5,6 +5,12 @@ export const dynamic = "force-dynamic";
 
 const books: BookEntry[] = [
   {
+    title: "Sapiens: A Brief History of Humankind",
+    author: "Yuval Noah Harari",
+    date: "Nov 2024",
+    link: "https://www.google.com/search?q=Sapiens%3A+A+Brief+History+of+Humankind+Yuval+Noah+Harari"
+  },
+  {
     title: "By the Sea",
     author: "Abdulrazak Gurnah",
     date: "Oct 2024",
