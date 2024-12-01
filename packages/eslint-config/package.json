@@ -23,7 +23,6 @@
     "dev": "concurrently \"tsup --watch\" \"eslint-config-inspector\"",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint --fix .",
-    "postpublish": "bash ./scripts/update-git-repo.sh",
     "type-check": "tsc --noEmit"
   },
   "sideEffects": false,

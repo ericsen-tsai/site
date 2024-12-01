@@ -35,6 +35,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "@changesets/cli": "^2.27.10",
     "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
