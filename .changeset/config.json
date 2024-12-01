@@ -10,13 +10,7 @@
   ],
   "commit": false,
   "fixed": [],
-  "ignore": [
-    "@erichandsen/db",
-    "@erichandsen/env",
-    "@erichandsen/ui",
-    "@erichandsen/utils",
-    "@erichandsen/web"
-  ],
+  "ignore": ["@erichandsen/db", "@erichandsen/env", "@erichandsen/web"],
   "linked": [],
   "updateInternalDependencies": "patch"
 }
