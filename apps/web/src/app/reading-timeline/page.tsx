@@ -5,6 +5,13 @@ export const dynamic = "force-dynamic";
 
 const books: BookEntry[] = [
   {
+    title: "Heart of Darkness",
+    author: "Joseph Conrad",
+    date: "Jan 2025",
+    link: "https://www.google.com/search?q=Heart+of+Darkness+Joseph+Conrad",
+    ongoing: true
+  },
+  {
     title: "Sapiens: A Brief History of Humankind",
     author: "Yuval Noah Harari",
     date: "Nov 2024",
@@ -14,7 +21,6 @@ const books: BookEntry[] = [
     title: "By the Sea",
     author: "Abdulrazak Gurnah",
     date: "Oct 2024",
-    ongoing: true,
     link: "https://www.google.com/search?q=By+the+Sea+Abdulrazak+Gurnah"
   },
   {
