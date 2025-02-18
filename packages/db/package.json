@@ -19,12 +19,12 @@
   "dependencies": {
     "@erichandsen/env": "workspace:*",
     "@vercel/postgres": "^0.10.0",
-    "drizzle-orm": "^0.33.0"
+    "drizzle-orm": "^0.38.3"
   },
   "devDependencies": {
     "@erichandsen/eslint-config": "workspace:*",
     "@erichandsen/tsconfig": "workspace:*",
-    "drizzle-kit": "^0.24.2"
+    "drizzle-kit": "^0.30.4"
   },
   "lint-staged": {
     "*.{cjs,mjs,js,jsx,cts,mts,ts,tsx,json}": "eslint --fix",

@@ -42,7 +42,9 @@ function MarkdownRenderer({ content }: { content: string }) {
                 wrapLines={false}
                 useInlineStyles
               >
-                {String(props.children)}
+                {typeof props.children === "object"
+                  ? JSON.stringify(props.children)
+                  : String(props.children)}
               </SyntaxHighlighter>
             ) : (
               <code

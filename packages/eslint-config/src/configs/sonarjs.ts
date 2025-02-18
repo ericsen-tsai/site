@@ -11,7 +11,7 @@ export const sonarjs: Linter.Config[] = [
     rules: {
       ...sonarjsPlugin.configs.recommended.rules,
       "sonarjs/no-duplicate-string": "off",
-      "sonarjs/sonar-prefer-read-only-props": "off",
+      "sonarjs/prefer-read-only-props": "off",
       "sonarjs/no-unstable-nested-components": "off",
       "sonarjs/no-misused-promises": "off",
       "sonarjs/different-types-comparison": "off",
