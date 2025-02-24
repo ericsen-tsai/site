@@ -1,11 +1,14 @@
+import { sql } from "drizzle-orm";
 import {
   boolean,
+  decimal,
   integer,
   pgTable,
   primaryKey,
   serial,
   text,
-  timestamp
+  timestamp,
+  varchar
 } from "drizzle-orm/pg-core";
 
 export const users = pgTable("user", {
@@ -104,4 +107,22 @@ export const guestbookComments = pgTable("guestbook_comments", {
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" })
+});
+
+export const diaries = pgTable("diary", {
+  id: serial("id").primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  content: text("content").notNull(),
+  // Location coordinates
+  latitude: decimal("latitude", { precision: 10, scale: 8 }).notNull(),
+  longitude: decimal("longitude", { precision: 11, scale: 8 }).notNull(),
+  // Hero image
+  heroImageUrl: varchar("hero_image_url", { length: 2048 }),
+  // Metadata
+  createdAt: timestamp("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull()
 });
