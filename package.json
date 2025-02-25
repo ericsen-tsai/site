@@ -15,6 +15,7 @@
     "db:push": "turbo db:push",
     "db:studio": "turbo db:studio",
     "dev": "turbo run dev",
+    "dev:cds": "turbo dev --filter=@erichandsen/cds-editor",
     "dev:packages": "turbo dev --filter=./packages/*",
     "dev:web": "turbo dev --filter=@erichandsen/web",
     "format:check": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
