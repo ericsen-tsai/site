@@ -49,7 +49,7 @@ interface ContactButtonsProps {
 function ContactButtons({ contact, personalWebsiteUrl }: ContactButtonsProps) {
   return (
     <div
-      className="text-foreground/80 flex gap-x-1 pt-1 font-mono text-sm print:hidden"
+      className="text-foreground/80 flex flex-wrap gap-x-1 pt-1 font-mono text-sm print:hidden"
       aria-label="Contact links"
     >
       {personalWebsiteUrl && (

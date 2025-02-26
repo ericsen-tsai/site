@@ -82,7 +82,7 @@ interface ProjectCardProps {
  */
 function ProjectCard({ title, description, tags, link }: ProjectCardProps) {
   return (
-    <Card className="flex h-full flex-col overflow-hidden border p-3">
+    <Card className="flex h-full flex-col overflow-hidden border p-0">
       <CardHeader>
         <div className="space-y-1">
           <CardTitle className="text-base">

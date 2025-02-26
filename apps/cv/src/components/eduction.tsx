@@ -31,9 +31,9 @@ function EducationItem({ education }: EducationItemProps) {
   const { school, start, end, degree } = education;
 
   return (
-    <Card>
-      <CardHeader>
-        <div className="flex items-center justify-between gap-x-2 text-base">
+    <Card className="border-none shadow-none">
+      <CardHeader className="space-y-0 p-0 py-1">
+        <div className="flex items-center justify-between text-base">
           <h3
             className="font-semibold leading-none"
             id={`education-${school.toLowerCase().replaceAll(/\s+/g, "-")}`}
@@ -44,7 +44,7 @@ function EducationItem({ education }: EducationItemProps) {
         </div>
       </CardHeader>
       <CardContent
-        className="text-foreground/80 mt-2 font-mono text-xs print:mt-1 print:text-[10px]"
+        className="text-foreground/80 p-0 font-mono text-xs print:mt-1 print:text-[10px]"
         aria-labelledby={`education-${school.toLowerCase().replaceAll(/\s+/g, "-")}`}
       >
         {degree}
