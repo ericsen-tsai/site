@@ -9,7 +9,7 @@
     "dev": "dotenv -e ../../.env.local -- next dev -p 3000",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint --fix .",
-    "start": "dotenv -e ../../.env.local -- next start -p 3002",
+    "start": "dotenv -e ../../.env.local -- next start -p 3000",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
@@ -57,7 +57,7 @@
     "@erichandsen/eslint-config": "workspace:*",
     "@erichandsen/tailwind-config": "workspace:*",
     "@erichandsen/tsconfig": "workspace:*",
-    "@types/node": "^20",
+    "@types/node": "^22.13.1",
     "@types/react": "19.0.4",
     "@types/react-dom": "19.0.4",
     "babel-plugin-react-compiler": "19.0.0-beta-21e868a-20250216",
