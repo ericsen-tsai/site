@@ -15,63 +15,66 @@ SyntaxHighlighter.registerLanguage("bash", bash);
 function MarkdownRenderer({ content }: { content: string }) {
   return (
     <article className="prose prose-invert prose-headings:font-medium max-w-none leading-normal">
-      <ReactMarkdown
-        className="mb-8"
-        components={{
-          img: ({ src, alt, ...props }) => {
-            return typeof src === "string" ? (
-              <Image
-                className="mx-auto my-4"
-                alt={alt ?? "markdown image"}
-                {...props}
-                width={920}
-                height={640}
-                src={src}
-              />
-            ) : null;
-          },
-          code({ className, ...props }) {
-            const languages = /language-(\w+)/.exec(String(className ?? ""));
-            const language = languages ? languages[1] : null;
+      <div className="mb-8">
+        <ReactMarkdown
+          components={{
+            img: ({ src, alt, ...props }) => {
+              return typeof src === "string" ? (
+                <Image
+                  className="mx-auto my-4"
+                  alt={alt ?? "markdown image"}
+                  {...props}
+                  width={920}
+                  height={640}
+                  src={src}
+                />
+              ) : null;
+            },
+            code({ className, ...props }) {
+              const languages = /language-(\w+)/.exec(String(className ?? ""));
+              const language = languages ? languages[1] : null;
 
-            return language ? (
-              <SyntaxHighlighter
-                style={oneDark}
-                language={language}
-                PreTag="div"
-                wrapLines={false}
-                useInlineStyles
-              >
-                {typeof props.children === "object"
-                  ? JSON.stringify(props.children)
-                  : String(props.children)}
-              </SyntaxHighlighter>
-            ) : (
-              <code
-                className="rounded bg-gray-800 p-1 text-white before:content-[''] after:content-none"
-                {...props}
-              />
-            );
-          },
-          p: ({ children, ...props }) => {
-            const str =
-              Array.isArray(children) && children.length > 0 ? (children[0]?.toString() ?? "") : "";
-
-            if (str.startsWith("![](")) {
-              const imageUrl = str.slice(4, -1).split(" ")[0];
-              return imageUrl ? (
-                <Image src={imageUrl} alt={""} width={920} height={640} className="mx-auto" />
+              return language ? (
+                <SyntaxHighlighter
+                  style={oneDark}
+                  language={language}
+                  PreTag="div"
+                  wrapLines={false}
+                  useInlineStyles
+                >
+                  {typeof props.children === "object"
+                    ? JSON.stringify(props.children)
+                    : String(props.children)}
+                </SyntaxHighlighter>
               ) : (
-                <div>Error showing image</div>
+                <code
+                  className="rounded bg-gray-800 p-1 text-white before:content-[''] after:content-none"
+                  {...props}
+                />
               );
-            }
+            },
+            p: ({ children, ...props }) => {
+              const str =
+                Array.isArray(children) && children.length > 0
+                  ? (children[0]?.toString() ?? "")
+                  : "";
 
-            return <p {...props}>{children}</p>;
-          }
-        }}
-      >
-        {content}
-      </ReactMarkdown>
+              if (str.startsWith("![](")) {
+                const imageUrl = str.slice(4, -1).split(" ")[0];
+                return imageUrl ? (
+                  <Image src={imageUrl} alt={""} width={920} height={640} className="mx-auto" />
+                ) : (
+                  <div>Error showing image</div>
+                );
+              }
+
+              return <p {...props}>{children}</p>;
+            }
+          }}
+        >
+          {content}
+        </ReactMarkdown>
+      </div>
     </article>
   );
 }
