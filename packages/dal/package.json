@@ -1,6 +1,7 @@
 {
+  "private": true,
   "name": "@erichandsen/dal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The data access layer for Ericsen's projects",
   "author": "Ericsen Tsai <bommer95175@gmail.com> (https://github.com/ericsen-tsai/)",
   "homepage": "https://github.com/ericsen-tsai/site#readme",
