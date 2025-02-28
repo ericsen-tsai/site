@@ -28,12 +28,12 @@ export const RESUME_DATA = {
     social: [
       {
         name: "GitHub",
-        url: "https://github.com/EricsenTsai",
+        url: "https://github.com/ericsen-tsai",
         icon: SiGithub
       },
       {
         name: "LinkedIn",
-        url: "https://www.linkedin.com/in/ericsen-tsai/",
+        url: "https://www.linkedin.com/in/ericsen-tsai-a00948236/",
         icon: SiLinkedin
       },
       {
