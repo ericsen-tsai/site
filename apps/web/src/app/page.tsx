@@ -1,3 +1,4 @@
+import { auth } from "@erichandsen/auth";
 import { getGuestbookCommentsWithUserImages } from "@erichandsen/dal";
 
 import getAllTimeSinceToday from "@/actions/get-all-time-since-today";
@@ -8,7 +9,6 @@ import Guestbook from "@/components/guestbook";
 import HeroSection from "@/components/home/section";
 import ProjectSection from "@/components/projects/section";
 import WhoAmISection from "@/components/whoami/section";
-import { auth } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
