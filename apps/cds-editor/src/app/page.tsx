@@ -1,5 +1,5 @@
 import { auth } from "@erichandsen/auth";
-import { redirect } from "next/navigation";
+import { forbidden, redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
@@ -9,7 +9,7 @@ export default async function Home() {
     redirect("/login");
   }
   if (session.user?.role !== "admin") {
-    redirect("/403");
+    forbidden();
   }
   return (
     <div className="relative min-h-screen scroll-smooth font-[family-name:var(--font-montserrat)]">

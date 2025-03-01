@@ -9,7 +9,8 @@ jiti.esmResolve("@erichandsen/env");
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
-    reactCompiler: true
+    reactCompiler: true,
+    authInterrupts: true
   }
 };
 
