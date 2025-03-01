@@ -1,6 +1,16 @@
+import { auth } from "@erichandsen/auth";
+import { redirect } from "next/navigation";
+
 export const dynamic = "force-dynamic";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+  if (!session) {
+    redirect("/login");
+  }
+  if (session.user?.role !== "admin") {
+    redirect("/403");
+  }
   return (
     <div className="relative min-h-screen scroll-smooth font-[family-name:var(--font-montserrat)]">
       Home

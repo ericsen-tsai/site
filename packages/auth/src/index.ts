@@ -25,6 +25,3 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }
   }
 });
-
-export * from "@auth/drizzle-adapter";
-export * from "next-auth";
