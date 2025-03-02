@@ -1,19 +1,10 @@
-import { auth } from "@erichandsen/auth";
-import { forbidden, redirect } from "next/navigation";
+import { DiaryForm } from "../components/cds-form";
 
-export const dynamic = "force-dynamic";
-
-export default async function Home() {
-  const session = await auth();
-  if (!session) {
-    redirect("/login");
-  }
-  if (session.user?.role !== "admin") {
-    forbidden();
-  }
+export default function CDSEditorPage() {
   return (
-    <div className="relative min-h-screen scroll-smooth font-[family-name:var(--font-montserrat)]">
-      Home
-    </div>
+    <main className="container mx-auto px-4 py-8">
+      <h1 className="mb-6 text-3xl font-bold">Create Diary Entry</h1>
+      <DiaryForm />
+    </main>
   );
 }

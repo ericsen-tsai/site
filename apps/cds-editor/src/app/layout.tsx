@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
 import "./globals.css";
+// Import uploadthing CSS
+import "@uploadthing/react/styles.css";
 import { TRPCReactProvider } from "@/trpc/react";
 
 const montserrat = Montserrat({
