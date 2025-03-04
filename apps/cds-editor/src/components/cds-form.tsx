@@ -1,9 +1,9 @@
 "use client";
 
-import { Button, Input, Textarea } from "@erichandsen/ui";
+import { Button, DatePicker, Input, Textarea } from "@erichandsen/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { UploadButton } from "./uploadthing";
@@ -16,7 +16,7 @@ const diaryFormSchema = z.object({
     longitude: z.number()
   }),
   imageUrl: z.string().optional(),
-  date: z.string().optional()
+  date: z.date()
 });
 
 type DiaryFormData = z.infer<typeof diaryFormSchema>;
@@ -31,18 +31,19 @@ export function DiaryForm() {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors, isSubmitting }
   } = useForm<DiaryFormData>({
     resolver: zodResolver(diaryFormSchema),
     defaultValues: {
-      date: new Date().toISOString().split("T")[0]
+      date: new Date()
     }
   });
 
   const onSubmit = useCallback((data: DiaryFormData) => {
     const formData = {
       ...data,
-      date: data.date ?? new Date().toISOString().split("T")[0]
+      date: data.date
     };
 
     console.log(formData);
@@ -87,7 +88,7 @@ export function DiaryForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="title" className="text-accent mb-4 block text-sm font-medium">
               Title
             </label>
             <Input type="text" id="title" {...register("title")} placeholder="My Diary Entry" />
@@ -95,15 +96,21 @@ export function DiaryForm() {
           </div>
 
           <div>
-            <label htmlFor="date" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="date" className="text-accent mb-4 block text-sm font-medium">
               Date
             </label>
-            <Input type="date" id="date" {...register("date")} />
+            <Controller
+              control={control}
+              name="date"
+              render={({ field }) => (
+                <DatePicker selected={field.value} onSelect={field.onChange} />
+              )}
+            />
           </div>
         </div>
 
         <div>
-          <label htmlFor="content" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="content" className="text-accent mb-4 block text-sm font-medium">
             Content
           </label>
           <Textarea
@@ -116,7 +123,7 @@ export function DiaryForm() {
         </div>
 
         <div>
-          <label htmlFor="image-upload" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="image-upload" className="text-accent mb-4 block text-sm font-medium">
             Image Upload
           </label>
           <div id="image-upload" className="mt-1">
@@ -137,7 +144,7 @@ export function DiaryForm() {
             />
             {imageUrl && (
               <div className="mt-4">
-                <h4 className="text-sm font-medium text-gray-700">Preview:</h4>
+                <h4 className="text-accent text-sm font-medium">Preview:</h4>
                 <div className="mt-2 overflow-hidden rounded-lg">
                   <img
                     src={imageUrl}
@@ -149,11 +156,10 @@ export function DiaryForm() {
             )}
           </div>
         </div>
-
+        <p className="text-accent mb-2 text-sm">
+          Location status: <span className="font-bold">{renderLocationStatusDescription}</span>
+        </p>
         <div className="mt-4">
-          <p className="mb-2 text-sm text-gray-600">
-            Location status: {renderLocationStatusDescription}
-          </p>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Creating entry..." : "Create Diary Entry"}
           </Button>
