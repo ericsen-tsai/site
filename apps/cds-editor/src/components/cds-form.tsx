@@ -2,9 +2,14 @@
 
 import { Button, DatePicker, Input, Textarea } from "@erichandsen/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
+
+import { api } from "@/trpc/react";
 
 import { UploadButton } from "./uploadthing";
 
@@ -26,12 +31,13 @@ type LocationStatus = "loading" | "success" | "error";
 export function DiaryForm() {
   const [imageUrl, setImageUrl] = useState<string>("");
   const [locationStatus, setLocationStatus] = useState<LocationStatus>("loading");
-
+  const { mutate: createDiaryEntry } = api.diaries.create.useMutation();
   const {
     register,
     handleSubmit,
     setValue,
     control,
+    reset,
     formState: { errors, isSubmitting }
   } = useForm<DiaryFormData>({
     resolver: zodResolver(diaryFormSchema),
@@ -39,15 +45,35 @@ export function DiaryForm() {
       date: new Date()
     }
   });
+  const router = useRouter();
+  const onSubmit = useCallback(
+    (data: DiaryFormData) => {
+      const formData = {
+        ...data,
+        date: data.date
+      };
 
-  const onSubmit = useCallback((data: DiaryFormData) => {
-    const formData = {
-      ...data,
-      date: data.date
-    };
-
-    console.log(formData);
-  }, []);
+      createDiaryEntry(
+        {
+          content: formData.content,
+          title: formData.title,
+          latitude: formData.location.latitude.toString(),
+          longitude: formData.location.longitude.toString(),
+          heroImageUrl: formData.imageUrl,
+          date: formData.date
+        },
+        {
+          onSuccess: () => {
+            toast.success("Diary entry created successfully");
+            reset();
+            setImageUrl("");
+            router.refresh();
+          }
+        }
+      );
+    },
+    [createDiaryEntry, router, reset]
+  );
 
   const renderLocationStatusDescription = useMemo(() => {
     switch (locationStatus) {
@@ -140,29 +166,36 @@ export function DiaryForm() {
                 console.error("Upload error:", error);
               }}
               disabled={isSubmitting}
-              className="ut-button:!bg-primary ut-button:text-primary-foreground ut-button:hover:!bg-primary/90 ut-button:shadow"
+              appearance={{
+                button:
+                  "!bg-primary !text-primary-foreground hover:!bg-primary/90 ut-uploading:!bg-primary/90 after:!bg-primary !py-2 !px-4 !text-sm !h-auto !w-auto !font-medium"
+              }}
             />
             {imageUrl && (
               <div className="mt-4">
                 <h4 className="text-accent text-sm font-medium">Preview:</h4>
                 <div className="mt-2 overflow-hidden rounded-lg">
-                  <img
+                  <Image
                     src={imageUrl}
                     alt="Uploaded preview"
                     className="h-48 w-full object-cover md:h-64"
+                    width={1024}
+                    height={1024}
                   />
                 </div>
               </div>
             )}
           </div>
         </div>
-        <p className="text-accent mb-2 text-sm">
-          Location status: <span className="font-bold">{renderLocationStatusDescription}</span>
-        </p>
-        <div className="mt-4">
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Creating entry..." : "Create Diary Entry"}
-          </Button>
+        <div className="w-full">
+          <div className="flex flex-col items-center justify-between gap-2 md:!flex-row md:!items-start">
+            <p className="text-accent mb-2 text-sm">
+              Location status: <span className="font-bold">{renderLocationStatusDescription}</span>
+            </p>
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Creating entry..." : "Create Diary Entry"}
+            </Button>
+          </div>
         </div>
       </form>
     </div>

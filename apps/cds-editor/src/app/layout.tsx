@@ -1,4 +1,4 @@
-import { TooltipProvider } from "@erichandsen/ui";
+import { Toaster, TooltipProvider } from "@erichandsen/ui";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
@@ -55,6 +55,7 @@ export default function RootLayout({
           <TooltipProvider delayDuration={200}>
             <div className="relative z-10">{children}</div>
           </TooltipProvider>
+          <Toaster />
         </TRPCReactProvider>
       </body>
     </html>

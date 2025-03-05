@@ -12,5 +12,6 @@ export * from "./input";
 export * from "./popover";
 export * from "./section";
 export * from "./section";
+export * from "./sonner";
 export * from "./textarea";
 export * from "./tooltip";

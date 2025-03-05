@@ -1,6 +1,7 @@
 import { sql } from "drizzle-orm";
 import {
   boolean,
+  date,
   decimal,
   integer,
   pgTable,
@@ -118,6 +119,8 @@ export const diaries = pgTable("diary", {
   longitude: decimal("longitude", { precision: 11, scale: 8 }).notNull(),
   // Hero image
   heroImageUrl: varchar("hero_image_url", { length: 2048 }),
+  // Date
+  date: date("date").notNull(),
   // Metadata
   createdAt: timestamp("created_at")
     .default(sql`CURRENT_TIMESTAMP`)

@@ -1,0 +1,1 @@
+ALTER TABLE "diary" ADD COLUMN "date" date NOT NULL;

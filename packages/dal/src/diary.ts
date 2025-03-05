@@ -12,7 +12,9 @@ export const getDiaryEntryById = async (id: number) => {
   return entry[0];
 };
 
-export const createDiaryEntry = async (entry: DiaryEntry) => {
+export const createDiaryEntry = async (
+  entry: Omit<DiaryEntry, "id" | "createdAt" | "updatedAt">
+) => {
   const newEntry = await db.insert(diaries).values(entry).returning();
   return newEntry[0];
 };
