@@ -21,7 +21,7 @@ import { format } from "date-fns";
 import { ListIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 type DiaryDrawerProps = {
   diaries: DiaryEntry[];
@@ -31,10 +31,20 @@ export function DiaryDrawer({ diaries }: DiaryDrawerProps) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleCardClick = useCallback(
+    (diaryId: number) => {
+      setIsOpen(false);
+      setTimeout(() => {
+        router.push(`/diary/${diaryId}`);
+      }, 100);
+    },
+    [router]
+  );
+
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
-        <Button className="fixed bottom-4 right-4 shadow-2xl" variant="outline">
+        <Button className="fixed bottom-4 right-4 shadow-xl" variant="outline">
           <ListIcon className="size-4" />
         </Button>
       </DrawerTrigger>
@@ -48,37 +58,39 @@ export function DiaryDrawer({ diaries }: DiaryDrawerProps) {
             <div className="overflow-x-auto pb-4">
               <div className="flex gap-4">
                 {diaries.map((diary) => (
-                  <Card
+                  <Button
                     key={diary.id}
-                    className="bg-card/50 border-border/50 hover:bg-card/80 w-64 min-w-64 transition-colors"
+                    variant="ghost"
+                    className="h-auto p-0 hover:bg-transparent"
                     onClick={() => {
-                      setIsOpen(false);
-                      router.push(`/diary/${diary.id}`);
+                      handleCardClick(diary.id);
                     }}
                   >
-                    <CardHeader>
-                      <CardTitle className="text-background">{diary.title}</CardTitle>
-                      <CardDescription className="text-background/80">
-                        {format(new Date(diary.date), "MMMM d, yyyy")}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-background/80 line-clamp-5 min-h-[100px] break-words text-sm">
-                        {diary.content}
-                      </p>
-                      {diary.heroImageUrl && (
-                        <div className="border-border/50 mt-4 overflow-hidden rounded-lg border">
-                          <Image
-                            src={diary.heroImageUrl}
-                            alt={diary.title}
-                            className="h-32 w-full object-cover"
-                            width={400}
-                            height={300}
-                          />
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
+                    <Card className="bg-card/50 border-border/50 hover:bg-card/80 w-64 min-w-64 transition-colors">
+                      <CardHeader>
+                        <CardTitle className="text-background">{diary.title}</CardTitle>
+                        <CardDescription className="text-background/80">
+                          {format(new Date(diary.date), "MMMM d, yyyy")}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-background/80 line-clamp-5 min-h-[100px] break-words text-sm">
+                          {diary.content}
+                        </p>
+                        {diary.heroImageUrl && (
+                          <div className="border-border/50 mt-4 overflow-hidden rounded-lg border">
+                            <Image
+                              src={diary.heroImageUrl}
+                              alt={diary.title}
+                              className="h-32 w-full object-cover"
+                              width={400}
+                              height={300}
+                            />
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </Button>
                 ))}
               </div>
             </div>

@@ -57,8 +57,8 @@ export default async function RootLayout({
         <TRPCReactProvider>
           <TooltipProvider delayDuration={200}>
             <div className="relative z-10">{children}</div>
-            <DiaryDrawer diaries={diaries} />
           </TooltipProvider>
+          <DiaryDrawer diaries={diaries} />
           <Toaster />
         </TRPCReactProvider>
       </body>
