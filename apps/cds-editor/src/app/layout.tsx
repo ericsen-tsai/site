@@ -1,6 +1,8 @@
+import { auth } from "@erichandsen/auth";
 import { Toaster, TooltipProvider } from "@erichandsen/ui";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { redirect } from "next/navigation";
 
 import "./globals.css";
 // Import uploadthing CSS
@@ -50,6 +52,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+  if (!session) {
+    redirect("/login");
+  }
   const diaries = await api.diaries.getAll();
   return (
     <html lang="en">

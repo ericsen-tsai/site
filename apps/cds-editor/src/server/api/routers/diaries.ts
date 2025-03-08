@@ -8,10 +8,10 @@ import {
 import { TRPCError } from "@trpc/server";
 import z from "zod";
 
-import { createTRPCRouter, privateProcedure } from "../trpc";
+import { createTRPCRouter, privateProcedure, publicProcedure } from "../trpc";
 
 export const diariesRouter = createTRPCRouter({
-  getAll: privateProcedure.query(async () => {
+  getAll: publicProcedure.query(async () => {
     return await getDiaryEntries();
   }),
   create: privateProcedure
