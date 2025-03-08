@@ -1,5 +1,6 @@
 "use client";
 
+import type { DiaryEntry } from "@erichandsen/dal";
 import { Button, DatePicker, Input, Textarea } from "@erichandsen/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
@@ -28,24 +29,86 @@ type DiaryFormData = z.infer<typeof diaryFormSchema>;
 
 type LocationStatus = "loading" | "success" | "error";
 
-export function DiaryForm() {
-  const [imageUrl, setImageUrl] = useState<string>("");
+export function DiaryForm({ diary }: { diary?: DiaryEntry }) {
   const [locationStatus, setLocationStatus] = useState<LocationStatus>("loading");
   const { mutate: createDiaryEntry } = api.diaries.create.useMutation();
+  const { mutate: updateDiaryEntry } = api.diaries.update.useMutation();
+
+  const isUpdate = !!diary;
+
+  const formDefaultValues = useMemo(() => {
+    return {
+      title: diary?.title ?? "",
+      content: diary?.content ?? "",
+      location:
+        diary?.latitude && diary.longitude
+          ? {
+              latitude: Number(diary.latitude),
+              longitude: Number(diary.longitude)
+            }
+          : undefined,
+      date: diary?.date ? new Date(diary.date) : new Date(),
+      imageUrl: diary?.heroImageUrl ?? ""
+    };
+  }, [diary]);
+
   const {
     register,
     handleSubmit,
     setValue,
     control,
+    watch,
     reset,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting, isDirty }
   } = useForm<DiaryFormData>({
     resolver: zodResolver(diaryFormSchema),
-    defaultValues: {
-      date: new Date()
-    }
+    defaultValues: formDefaultValues
   });
   const router = useRouter();
+
+  const onUpdate = useCallback(
+    (data: DiaryFormData, handleSuccess: (id: number) => void) => {
+      updateDiaryEntry(
+        {
+          ...data,
+          latitude: data.location.latitude.toString(),
+          longitude: data.location.longitude.toString(),
+          id: diary?.id ?? 0,
+          heroImageUrl: data.imageUrl,
+          date: data.date
+        },
+        {
+          onSuccess: () => {
+            handleSuccess(0);
+          }
+        }
+      );
+    },
+    [updateDiaryEntry, diary?.id]
+  );
+
+  const onCreate = useCallback(
+    (data: DiaryFormData, handleSuccess: (id: number) => void) => {
+      createDiaryEntry(
+        {
+          ...data,
+          latitude: data.location.latitude.toString(),
+          longitude: data.location.longitude.toString(),
+          heroImageUrl: data.imageUrl,
+          date: data.date
+        },
+        {
+          onSuccess: (result) => {
+            handleSuccess(result?.id ?? 0);
+          }
+        }
+      );
+    },
+    [createDiaryEntry]
+  );
+
+  const utils = api.useUtils();
+
   const onSubmit = useCallback(
     (data: DiaryFormData) => {
       const formData = {
@@ -53,26 +116,22 @@ export function DiaryForm() {
         date: data.date
       };
 
-      createDiaryEntry(
-        {
-          content: formData.content,
-          title: formData.title,
-          latitude: formData.location.latitude.toString(),
-          longitude: formData.location.longitude.toString(),
-          heroImageUrl: formData.imageUrl,
-          date: formData.date
-        },
-        {
-          onSuccess: () => {
-            toast.success("Diary entry created successfully");
-            reset();
-            setImageUrl("");
-            router.refresh();
+      const mutation = isUpdate ? onUpdate : onCreate;
+      const handleSuccess = isUpdate
+        ? () => {
+            toast.success("Diary entry updated successfully");
+            utils.diaries.getAll.invalidate();
+            utils.diaries.getById.invalidate({ id: diary.id });
+            reset(formDefaultValues);
           }
-        }
-      );
+        : (id: number) => {
+            toast.success("Diary entry created successfully");
+            router.push(`/diary/${id}`);
+          };
+
+      mutation(formData, handleSuccess);
     },
-    [createDiaryEntry, router, reset]
+    [isUpdate, onUpdate, onCreate, router, reset, formDefaultValues, diary?.id, utils]
   );
 
   const renderLocationStatusDescription = useMemo(() => {
@@ -108,6 +167,8 @@ export function DiaryForm() {
       );
     }
   }, [setValue]);
+
+  const imageUrl = watch("imageUrl");
 
   return (
     <div className="rounded-lg p-6 shadow-md">
@@ -158,8 +219,9 @@ export function DiaryForm() {
               onClientUploadComplete={(res) => {
                 const uploadedImageUrl = res[0]?.ufsUrl;
                 if (uploadedImageUrl) {
-                  setImageUrl(uploadedImageUrl);
-                  setValue("imageUrl", uploadedImageUrl);
+                  setValue("imageUrl", uploadedImageUrl, {
+                    shouldDirty: true
+                  });
                 }
               }}
               onUploadError={(error: Error) => {
@@ -192,8 +254,8 @@ export function DiaryForm() {
             <p className="text-accent mb-2 text-sm">
               Location status: <span className="font-bold">{renderLocationStatusDescription}</span>
             </p>
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Creating entry..." : "Create Diary Entry"}
+            <Button type="submit" disabled={isSubmitting || !isDirty}>
+              {isSubmitting ? "Saving entry..." : "Save Diary Entry"}
             </Button>
           </div>
         </div>

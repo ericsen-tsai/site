@@ -1,5 +1,6 @@
 "use client";
 
+import type { DiaryEntry } from "@erichandsen/dal";
 import {
   Button,
   Card,
@@ -19,24 +20,19 @@ import {
 import { format } from "date-fns";
 import { ListIcon } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type DiaryDrawerProps = {
-  diaries: Array<{
-    id: number;
-    title: string;
-    content: string;
-    heroImageUrl: string | null;
-    date: string;
-    latitude: string;
-    longitude: string;
-    createdAt: Date;
-    updatedAt: Date;
-  }>;
+  diaries: DiaryEntry[];
 };
 
 export function DiaryDrawer({ diaries }: DiaryDrawerProps) {
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Drawer>
+    <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
         <Button className="fixed bottom-4 right-4 shadow-2xl" variant="outline">
           <ListIcon className="size-4" />
@@ -55,6 +51,10 @@ export function DiaryDrawer({ diaries }: DiaryDrawerProps) {
                   <Card
                     key={diary.id}
                     className="bg-card/50 border-border/50 hover:bg-card/80 w-64 min-w-64 transition-colors"
+                    onClick={() => {
+                      setIsOpen(false);
+                      router.push(`/diary/${diary.id}`);
+                    }}
                   >
                     <CardHeader>
                       <CardTitle className="text-background">{diary.title}</CardTitle>

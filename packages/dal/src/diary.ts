@@ -23,6 +23,12 @@ export const deleteDiaryEntry = async (id: number) => {
   await db.delete(diaries).where(eq(diaries.id, id));
 };
 
-export const updateDiaryEntry = async (id: number, entry: DiaryEntry) => {
-  await db.update(diaries).set(entry).where(eq(diaries.id, id));
+export const updateDiaryEntry = async (
+  id: number,
+  entry: Omit<DiaryEntry, "id" | "createdAt" | "updatedAt">
+) => {
+  await db
+    .update(diaries)
+    .set({ ...entry, updatedAt: new Date() })
+    .where(eq(diaries.id, id));
 };

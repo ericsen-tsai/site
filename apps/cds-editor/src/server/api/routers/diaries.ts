@@ -1,4 +1,10 @@
-import { createDiaryEntry, getDiaryEntries } from "@erichandsen/dal";
+import {
+  createDiaryEntry,
+  deleteDiaryEntry,
+  getDiaryEntries,
+  getDiaryEntryById,
+  updateDiaryEntry
+} from "@erichandsen/dal";
 import { TRPCError } from "@trpc/server";
 import z from "zod";
 
@@ -32,5 +38,31 @@ export const diariesRouter = createTRPCRouter({
         heroImageUrl: input.heroImageUrl ?? null,
         date: input.date.toISOString()
       });
-    })
+    }),
+  getById: privateProcedure.input(z.object({ id: z.number() })).query(async ({ input }) => {
+    return await getDiaryEntryById(input.id);
+  }),
+  update: privateProcedure
+    .input(
+      z.object({
+        id: z.number(),
+        title: z.string(),
+        content: z.string(),
+        latitude: z.string(),
+        longitude: z.string(),
+        heroImageUrl: z.string().optional(),
+        date: z.date()
+      })
+    )
+    .mutation(async ({ input }) => {
+      const { id, ...rest } = input;
+      await updateDiaryEntry(id, {
+        ...rest,
+        heroImageUrl: rest.heroImageUrl ?? null,
+        date: rest.date.toISOString()
+      });
+    }),
+  delete: privateProcedure.input(z.object({ id: z.number() })).mutation(async ({ input }) => {
+    await deleteDiaryEntry(input.id);
+  })
 });
