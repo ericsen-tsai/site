@@ -1,8 +1,11 @@
+import { auth } from "@erichandsen/auth";
 import { Toaster, TooltipProvider } from "@erichandsen/ui";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
-import "./globals.css";
+import "../globals.css";
 // Import uploadthing CSS
 import "@uploadthing/react/styles.css";
 import { DiaryDrawer } from "@/components/diary-drawer";
@@ -50,15 +53,26 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+  if (!session) {
+    redirect("/login");
+  }
   const diaries = await api.diaries.getAll();
   return (
     <html lang="en">
       <body className={`${montserrat.variable} relative antialiased`}>
         <TRPCReactProvider>
           <TooltipProvider delayDuration={200}>
-            <div className="relative z-10">{children}</div>
+            <main className="relative z-10 py-8">
+              <div className="flex justify-between px-6">
+                <h1 className="mb-6 text-nowrap text-xl font-bold md:text-2xl">
+                  <Link href="/">Camino de Santiago</Link>
+                </h1>
+                <DiaryDrawer diaries={diaries} />
+              </div>
+              {children}
+            </main>
           </TooltipProvider>
-          <DiaryDrawer diaries={diaries} />
           <Toaster />
         </TRPCReactProvider>
       </body>

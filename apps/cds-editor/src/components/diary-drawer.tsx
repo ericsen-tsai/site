@@ -44,7 +44,7 @@ export function DiaryDrawer({ diaries }: DiaryDrawerProps) {
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
-        <Button className="fixed bottom-4 right-4 shadow-xl" variant="outline">
+        <Button className="shadow-xl" variant="outline">
           <ListIcon className="size-4" />
         </Button>
       </DrawerTrigger>
