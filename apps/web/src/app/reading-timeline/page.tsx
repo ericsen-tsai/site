@@ -5,11 +5,25 @@ export const dynamic = "force-dynamic";
 
 const books: BookEntry[] = [
   {
+    title: "Reveries of a Solitary Walker",
+    author: "Kobo Abe",
+    date: "Feb 2025",
+    link: "https://www.google.com/search?q=Reveries+of+a+Solitary+Walker+Kobo+Abe",
+    ongoing: true
+  },
+  {
+    title: "The Vegetarian",
+    author: "Han Kang",
+    date: "Feb 2025",
+    link: "https://www.google.com/search?q=The+Vegetarian+Han+Kang"
+  },
+  {
     title: "Heart of Darkness",
     author: "Joseph Conrad",
     date: "Jan 2025",
     link: "https://www.google.com/search?q=Heart+of+Darkness+Joseph+Conrad",
-    ongoing: true
+    bestQuoteInBook:
+      "We live as we dream - alone. While the dream disappears, the life continues painfully."
   },
   {
     title: "Sapiens: A Brief History of Humankind",
