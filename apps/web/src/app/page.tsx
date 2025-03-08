@@ -1,3 +1,6 @@
+import { auth } from "@erichandsen/auth";
+import { getGuestbookCommentsWithUserImages } from "@erichandsen/dal";
+
 import getAllTimeSinceToday from "@/actions/get-all-time-since-today";
 import getMostUsedLanguageDuringSevenDays from "@/actions/get-last-seven-day-most-used-language-and-editor";
 import AboutMeSection from "@/components/aboutme/section";
@@ -6,8 +9,6 @@ import Guestbook from "@/components/guestbook";
 import HeroSection from "@/components/home/section";
 import ProjectSection from "@/components/projects/section";
 import WhoAmISection from "@/components/whoami/section";
-import { auth } from "@/lib/auth";
-import { getGuestbookCommentsWithUserImages } from "@/lib/db-access/guestbook-comments";
 
 export const dynamic = "force-dynamic";
 

@@ -16,7 +16,8 @@
     "@erichandsen/web",
     "@erichandsen/cv",
     "@erichandsen/cds-editor",
-    "@erichandsen/dal"
+    "@erichandsen/dal",
+    "@erichandsen/auth"
   ],
   "linked": [],
   "updateInternalDependencies": "patch"

@@ -11,6 +11,14 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
     reactCompiler: true
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**"
+      }
+    ]
   }
 };
 

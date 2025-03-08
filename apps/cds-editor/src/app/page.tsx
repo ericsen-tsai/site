@@ -1,9 +1,10 @@
-export const dynamic = "force-dynamic";
+import { DiaryForm } from "../components/cds-form";
 
-export default function Home() {
+export default function CDSEditorPage() {
   return (
-    <div className="relative min-h-screen scroll-smooth font-[family-name:var(--font-montserrat)]">
-      Home
-    </div>
+    <main className="container mx-auto px-4 py-8">
+      <h1 className="mb-6 text-3xl font-bold">Camino de Santiago</h1>
+      <DiaryForm />
+    </main>
   );
 }

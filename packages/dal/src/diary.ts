@@ -12,7 +12,9 @@ export const getDiaryEntryById = async (id: number) => {
   return entry[0];
 };
 
-export const createDiaryEntry = async (entry: DiaryEntry) => {
+export const createDiaryEntry = async (
+  entry: Omit<DiaryEntry, "id" | "createdAt" | "updatedAt">
+) => {
   const newEntry = await db.insert(diaries).values(entry).returning();
   return newEntry[0];
 };
@@ -21,6 +23,12 @@ export const deleteDiaryEntry = async (id: number) => {
   await db.delete(diaries).where(eq(diaries.id, id));
 };
 
-export const updateDiaryEntry = async (id: number, entry: DiaryEntry) => {
-  await db.update(diaries).set(entry).where(eq(diaries.id, id));
+export const updateDiaryEntry = async (
+  id: number,
+  entry: Omit<DiaryEntry, "id" | "createdAt" | "updatedAt">
+) => {
+  await db
+    .update(diaries)
+    .set({ ...entry, updatedAt: new Date() })
+    .where(eq(diaries.id, id));
 };

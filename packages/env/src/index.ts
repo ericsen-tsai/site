@@ -17,7 +17,8 @@ export const env = createEnv({
     AUTH_GITHUB_SECRET: z.string().min(1),
     POSTGRES_URL: z.string().min(1),
     POSTGRES_USER: z.string().min(1),
-    POSTGRES_PASSWORD: z.string().min(1)
+    POSTGRES_PASSWORD: z.string().min(1),
+    UPLOADTHING_TOKEN: z.string().min(1)
   },
   client: {},
   runtimeEnv: {
@@ -30,7 +31,8 @@ export const env = createEnv({
     AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
     POSTGRES_URL: process.env.POSTGRES_URL,
     POSTGRES_USER: process.env.POSTGRES_USER,
-    POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD
+    POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
+    UPLOADTHING_TOKEN: process.env.UPLOADTHING_TOKEN
   },
   emptyStringAsUndefined: true
 });

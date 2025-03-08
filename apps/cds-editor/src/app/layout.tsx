@@ -1,9 +1,13 @@
-import { TooltipProvider } from "@erichandsen/ui";
+import { Toaster, TooltipProvider } from "@erichandsen/ui";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
 import "./globals.css";
+// Import uploadthing CSS
+import "@uploadthing/react/styles.css";
+import { DiaryDrawer } from "@/components/diary-drawer";
 import { TRPCReactProvider } from "@/trpc/react";
+import { api } from "@/trpc/server";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -11,10 +15,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Ericsen - A Frontend Developer",
-  description: "Ericsen • Frontend Developer • Gardener • Freediver",
-  keywords: ["Ericsen", "Frontend Developer", "Typescript", "Nextjs"],
-  creator: "ericsen-tsai",
+  title: "Camino de Santiago Editor",
+  description: "Camino de Santiago Editor",
   manifest: "/favicon/site.webmanifest",
   icons: {
     icon: "/favicon/favicon.ico",
@@ -40,39 +42,24 @@ export const metadata: Metadata = {
         url: "/favicon/favicon-32x32.png"
       }
     ]
-  },
-  metadataBase: new URL("https://site.erichandsen.dev"),
-  openGraph: {
-    url: "https://site.erichandsen.dev",
-    type: "website",
-    title: "Ericsen - A Frontend Developer",
-    siteName: "Ericsen - A Frontend Developer",
-    description: "Ericsen • Frontend Developer • Gardener • Freediver",
-    locale: "en-US",
-    images: [
-      {
-        url: "/images/og.png",
-        width: 1200,
-        height: 630,
-        alt: "Ericsen • Frontend Developer • Gardener • Freediver",
-        type: "image/png"
-      }
-    ]
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const diaries = await api.diaries.getAll();
   return (
     <html lang="en">
       <body className={`${montserrat.variable} relative antialiased`}>
         <TRPCReactProvider>
           <TooltipProvider delayDuration={200}>
             <div className="relative z-10">{children}</div>
+            <DiaryDrawer diaries={diaries} />
           </TooltipProvider>
+          <Toaster />
         </TRPCReactProvider>
       </body>
     </html>
