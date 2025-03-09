@@ -16,6 +16,20 @@ const PROJECTS = [
     link: ".",
     techStacks: ["React", "Next.js", "Tailwind CSS", "Shadcn"],
     githubLink: "https://github.com/ericsen-tsai/site"
+  },
+  {
+    title: "CV",
+    description: "Ericsen's CV",
+    link: "https://cv.erichandsen.dev",
+    techStacks: ["React", "Next.js", "Tailwind CSS", "Shadcn"],
+    githubLink: "https://github.com/ericsen-tsai/site"
+  },
+  {
+    title: "Buen-Camino",
+    description: "Camino de Santiago Diary Editor",
+    link: "https://buen-camino.erichandsen.dev",
+    techStacks: ["React", "Next.js", "Tailwind CSS", "Shadcn"],
+    githubLink: "https://github.com/ericsen-tsai/site"
   }
 ];
 

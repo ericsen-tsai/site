@@ -48,15 +48,36 @@ pnpm dev
 
 This project uses a monorepo structure with Turborepo:
 
+### Apps
+
 - `apps/web`: Main Next.js application
+- `apps/cv`: CV/Resume application
+- `apps/cds-editor`: Content Design System Editor
+
+### Packages
+
 - `packages/ui`: Shared UI components
 - `packages/utils`: Shared utility functions
 - `packages/db`: Database schema and ORM setup
 - `packages/env`: Environment variable validation
+- `packages/auth`: Authentication utilities and configurations
+- `packages/dal`: Data Access Layer
 - `packages/eslint-config`: Shared ESLint configuration
 - `packages/prettier-config`: Shared Prettier configuration
 - `packages/tailwind-config`: Shared Tailwind CSS configuration
 - `packages/tsconfig`: Shared TypeScript configuration
+
+## Development Tools
+
+The project uses several development tools to ensure code quality and consistency:
+
+- **Turborepo**: For monorepo management and build optimization
+- **pnpm**: For fast, disk-space efficient package management
+- **Changesets**: For version management and changelogs
+- **Husky**: For Git hooks
+- **Commitlint**: For conventional commit messages
+- **Prettier**: For code formatting
+- **ESLint**: For code linting
 
 ## Deployment
 

@@ -157,6 +157,24 @@ export const RESUME_DATA = {
         label: "site.erichandsen.dev",
         href: "https://site.erichandsen.dev"
       }
+    },
+    {
+      title: "CV",
+      techStack: ["Next.js", "TailwindCSS", "ShadcnUI", "Turborepo"],
+      description: "CV of Ericsen Tsai",
+      link: {
+        label: "cv.erichandsen.dev",
+        href: "https://cv.erichandsen.dev"
+      }
+    },
+    {
+      title: "Buen Camino",
+      techStack: ["Next.js", "TailwindCSS", "ShadcnUI", "Turborepo"],
+      description: "Camino de Santiago Diary Editor",
+      link: {
+        label: "buen-camino.erichandsen.dev",
+        href: "https://buen-camino.erichandsen.dev"
+      }
     }
   ]
 } as const;
