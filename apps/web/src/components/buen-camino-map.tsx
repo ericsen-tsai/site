@@ -3,13 +3,15 @@
 import { type DiaryEntry } from "@erichandsen/dal";
 import { env } from "@erichandsen/env";
 import { type LatLngExpression } from "leaflet";
+import { divIcon, Icon, point } from "leaflet";
 import { Calendar, MapPin } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import MarkerClusterGroup from "react-leaflet-cluster";
+import MarkerClusterGroup from "react-leaflet-markercluster";
 
 import "leaflet/dist/leaflet.css";
+import "react-leaflet-markercluster/styles";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 
@@ -19,10 +21,11 @@ interface BuenCaminoMapProps {
 
 const SJPP_COORDINATES: LatLngExpression = [43.163_01, -1.2399];
 
-// Custom marker icon with theme color
-const customIcon = new L.Icon({
-  iconUrl:
-    "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAyYy0yLjIgMC00IDEuOC00IDRzMS44IDQgNCA0IDQtMS44IDQtNC0xLjgtNC00LTR6Ii8+PHBhdGggZD0iTTEyIDIyYy0yLjIgMC00LTEuOC00LTRzMS44LTQgNC00IDQgMS44IDQgNC0xLjggNC00IDR6Ii8+PC9zdmc+",
+const SHELL_SVG =
+  '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Shell</title><path fill="#FFFFFF" d="M12 .863C5.34.863 0 6.251 0 12.98c0 .996.038 1.374.246 2.33l3.662 2.71.57 4.515h6.102l.326.227c.377.262.705.375 1.082.375.352 0 .732-.101 1.024-.313l.39-.289h6.094l.563-4.515 3.695-2.71c.208-.956.246-1.334.246-2.33C24 6.252 18.661.863 12 .863zm.996 2.258c.9 0 1.778.224 2.512.649l-2.465 12.548 3.42-12.062c1.059.36 1.863.941 2.508 1.814l.025.034-4.902 10.615 5.572-9.713.033.03c.758.708 1.247 1.567 1.492 2.648l-6.195 7.666 6.436-6.5.01.021c.253.563.417 1.36.417 1.996 0 .509-.024.712-.164 1.25l-3.554 2.602-.467 3.71h-4.475l-.517.395c-.199.158-.482.266-.682.266-.199 0-.483-.108-.682-.266l-.517-.394H6.322l-.445-3.61-3.627-2.666c-.11-.436-.16-.83-.16-1.261 0-.72.159-1.49.426-2.053l.013-.024 6.45 6.551L2.75 9.621c.25-1.063.874-2.09 1.64-2.713l5.542 9.776L4.979 6.1c.555-.814 1.45-1.455 2.546-1.827l3.424 12.069L8.355 3.816l.055-.03c.814-.45 1.598-.657 2.457-.657.195 0 .286.004.528.03l.587 13.05.46-13.059c.224-.025.309-.029.554-.029z"/></svg>';
+
+const ShellIcon = new Icon({
+  iconUrl: `data:image/svg+xml;base64,${btoa(SHELL_SVG)}`,
   iconSize: [24, 24],
   iconAnchor: [12, 12],
   popupAnchor: [0, -12],
@@ -31,9 +34,21 @@ const customIcon = new L.Icon({
   shadowAnchor: [0, 0]
 });
 
+type Cluster = {
+  getChildCount: () => number;
+};
+
+const createClusterCustomIcon = (cluster: Cluster) => {
+  return divIcon({
+    html: `<span class="text-sm font-bold text-white font-[family-name:var(--font-montserrat)] h-12 w-12 flex items-center justify-center rounded-full bg-primary/30">${cluster.getChildCount()}</span>`,
+    className: "marker-cluster-custom",
+    iconSize: point(40, 40, true)
+  });
+};
+
 function BuenCaminoMap({ diaries }: BuenCaminoMapProps) {
-  const [selectedEntry, setSelectedEntry] = useState<DiaryEntry>(() => {
-    if (diaries.length === 0) return SJPP_COORDINATES;
+  const [selectedEntry, setSelectedEntry] = useState<DiaryEntry | undefined>(() => {
+    if (diaries.length === 0) return;
     const latestDiary = diaries.toSorted(
       (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
     )[0];
@@ -41,10 +56,14 @@ function BuenCaminoMap({ diaries }: BuenCaminoMapProps) {
   });
 
   return (
-    <div className="grid h-[calc(100vh-5rem)] grid-cols-1 md:grid-cols-3">
+    <div className="grid h-full grid-cols-1 md:grid-cols-3">
       <div className="col-span-2 h-full">
         <MapContainer
-          center={[selectedEntry.latitude, selectedEntry.longitude]}
+          center={
+            selectedEntry
+              ? [Number(selectedEntry.latitude), Number(selectedEntry.longitude)]
+              : SJPP_COORDINATES
+          }
           zoom={13}
           className="size-full"
           zoomControl={false}
@@ -55,12 +74,12 @@ function BuenCaminoMap({ diaries }: BuenCaminoMapProps) {
             attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
           />
 
-          <MarkerClusterGroup chunkedLoading>
+          <MarkerClusterGroup chunkedLoading iconCreateFunction={createClusterCustomIcon}>
             {diaries.map((entry) => (
               <Marker
                 key={entry.id}
-                position={[entry.latitude, entry.longitude]}
-                icon={customIcon}
+                position={[Number(entry.latitude), Number(entry.longitude)]}
+                icon={ShellIcon}
                 eventHandlers={{
                   click: () => {
                     setSelectedEntry(entry);
@@ -85,29 +104,31 @@ function BuenCaminoMap({ diaries }: BuenCaminoMapProps) {
         </MapContainer>
       </div>
 
-      <div className="h-full overflow-y-auto border-t p-4 md:border-l md:border-t-0">
-        <article className="grid grid-cols-1 gap-4">
-          <div className="space-y-4">
-            <h4 className="text-2xl font-semibold">{selectedEntry.title}</h4>
-            <div className="text-muted-foreground flex items-center gap-2 text-sm">
-              <MapPin className="size-3" />
-              <span>
-                {selectedEntry.latitude}, {selectedEntry.longitude}
-              </span>
+      <div className="h-full overflow-y-auto p-4">
+        {selectedEntry && (
+          <article className="grid grid-cols-1 gap-4">
+            <div className="space-y-4">
+              <h4 className="text-2xl font-semibold">{selectedEntry.title}</h4>
+              <div className="text-muted-foreground flex items-center gap-2 text-sm">
+                <MapPin className="size-3" />
+                <span>
+                  {selectedEntry.latitude}, {selectedEntry.longitude}
+                </span>
+              </div>
+              <time className="text-muted-foreground flex items-center gap-2 text-sm">
+                <Calendar className="size-3" />
+                {new Date(selectedEntry.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric"
+                })}
+              </time>
+              <p className="text-card-foreground/80 line-clamp-[16] leading-relaxed">
+                {selectedEntry.content}
+              </p>
             </div>
-            <time className="text-muted-foreground flex items-center gap-2 text-sm">
-              <Calendar className="size-3" />
-              {new Date(selectedEntry.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric"
-              })}
-            </time>
-            <p className="text-card-foreground/80 line-clamp-[16] leading-relaxed">
-              {selectedEntry.content}
-            </p>
-          </div>
-        </article>
+          </article>
+        )}
       </div>
     </div>
   );
