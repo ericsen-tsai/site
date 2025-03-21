@@ -1,11 +1,11 @@
-import BuenCaminoMap from "@/components/buen-camino-map";
+import MapArticles from "@/components/buen-camino/map-articles";
 import { api } from "@/trpc/server";
 
 async function BuenCamino() {
   const caminoDiaries = await api.diaries.getAll();
 
   return (
-    <div className="mx-auto flex h-[calc(100vh-5rem)] min-h-[calc(100vh-5rem)] max-w-5xl flex-col scroll-smooth p-20 font-[family-name:var(--font-montserrat)]">
+    <div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-5xl flex-col scroll-smooth p-20 font-[family-name:var(--font-montserrat)] md:h-[calc(100vh-5rem)]">
       <div>
         <h1 className="mb-3 flex items-center justify-center text-center text-3xl font-bold">
           Buen Camino
@@ -16,7 +16,7 @@ async function BuenCamino() {
         </p>
       </div>
       <div className="w-full flex-1">
-        <BuenCaminoMap diaries={caminoDiaries} />
+        <MapArticles diaries={caminoDiaries} />
       </div>
     </div>
   );

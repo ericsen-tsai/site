@@ -17,7 +17,7 @@ async function BuenCamino() {
           <p className="text-card-foreground/50 mb-8 text-sm font-medium">
             Don&apos;t waste your time looking back, you are not going that way.
           </p>
-          <DiaryCard {...latestDiary} />
+          {latestDiary && <DiaryCard {...latestDiary} />}
         </div>
       </div>
     </section>
