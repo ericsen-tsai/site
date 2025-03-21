@@ -5,13 +5,16 @@ import { env } from "@erichandsen/env";
 import { type LatLngExpression } from "leaflet";
 import { divIcon, Icon, point } from "leaflet";
 import Image from "next/image";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { useCallback, useState } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-markercluster/styles";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
+
+import DiaryListDialog from "./diary-list-dialog";
 
 const SJPP_COORDINATES: LatLngExpression = [43.163_01, -1.2399];
 
@@ -39,6 +42,35 @@ const createClusterCustomIcon = (cluster: Cluster) => {
     iconSize: point(40, 40, true)
   });
 };
+
+function RecenterMapDiaryListDialog({
+  onSelectEntry,
+  diaries
+}: {
+  onSelectEntry: (entry: DiaryEntry) => void;
+  diaries: DiaryEntry[];
+}) {
+  const map = useMap();
+  const [open, setOpen] = useState(false);
+
+  const handleOpenChange = useCallback(
+    (isOpen: boolean, entry?: DiaryEntry) => {
+      setOpen(isOpen);
+      if (!isOpen && entry) {
+        map.setView([Number(entry.latitude), Number(entry.longitude)], 13);
+      }
+    },
+    [map]
+  );
+  return (
+    <DiaryListDialog
+      diaries={diaries}
+      onSelectEntry={onSelectEntry}
+      open={open}
+      onOpenChange={handleOpenChange}
+    />
+  );
+}
 
 type Props = {
   diaries: DiaryEntry[];
@@ -102,6 +134,7 @@ function BuenCaminoMap({ diaries, selectedEntry, onSelectEntry }: Props) {
           </Marker>
         ))}
       </MarkerClusterGroup>
+      <RecenterMapDiaryListDialog diaries={diaries} onSelectEntry={onSelectEntry} />
     </MapContainer>
   );
 }

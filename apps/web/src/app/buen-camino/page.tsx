@@ -1,4 +1,4 @@
-import MapArticles from "@/components/buen-camino/map-articles";
+import MapDiaries from "@/components/buen-camino/map-diaries";
 import { api } from "@/trpc/server";
 
 async function BuenCamino() {
@@ -16,7 +16,7 @@ async function BuenCamino() {
         </p>
       </div>
       <div className="w-full flex-1">
-        <MapArticles diaries={caminoDiaries} />
+        <MapDiaries diaries={caminoDiaries} />
       </div>
     </div>
   );

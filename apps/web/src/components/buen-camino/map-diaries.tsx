@@ -9,11 +9,11 @@ const DynamicMap = dynamic(() => import("./buen-camino-map"), {
   ssr: false
 });
 
-interface MapArticlesProps {
+interface MapDiariesProps {
   diaries: DiaryEntry[];
 }
 
-function MapArticles({ diaries }: MapArticlesProps) {
+function MapDiaries({ diaries }: MapDiariesProps) {
   const [selectedEntry, setSelectedEntry] = useState<DiaryEntry | undefined>(() => {
     if (diaries.length === 0) return;
     const latestDiary = diaries.toSorted(
@@ -24,7 +24,7 @@ function MapArticles({ diaries }: MapArticlesProps) {
 
   return (
     <div className="grid grid-cols-1 md:h-full md:grid-cols-2">
-      <div className="h-[360px] md:h-full">
+      <div className="relative h-[360px] md:h-full">
         <DynamicMap
           diaries={diaries}
           selectedEntry={selectedEntry}
@@ -52,7 +52,7 @@ function MapArticles({ diaries }: MapArticlesProps) {
                   day: "numeric"
                 })}
               </time>
-              <p className="text-card-foreground/80 flex-1 overflow-y-auto break-words leading-relaxed md:max-h-[36rem]">
+              <p className="text-card-foreground/80 flex-1 overflow-y-auto break-words leading-relaxed md:max-h-[33rem]">
                 {selectedEntry.content}
               </p>
             </div>
@@ -63,4 +63,4 @@ function MapArticles({ diaries }: MapArticlesProps) {
   );
 }
 
-export default MapArticles;
+export default MapDiaries;
