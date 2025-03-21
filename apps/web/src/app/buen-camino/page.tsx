@@ -11,8 +11,7 @@ async function BuenCamino() {
           Buen Camino
         </h1>
         <p className="text-card-foreground/50 mb-8 text-center text-sm font-medium">
-          Books are not just for reading the words within; they are also tools for adjusting one's
-          own feelings.
+          I walk down another street.
         </p>
       </div>
       <div className="w-full flex-1">

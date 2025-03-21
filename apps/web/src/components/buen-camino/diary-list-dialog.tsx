@@ -5,7 +5,6 @@ import {
   Button,
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger
@@ -31,12 +30,9 @@ function DiaryListDialog({ diaries, onSelectEntry, open, onOpenChange }: DiaryLi
           <Menu className="size-4" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-foreground text-background max-h-[80vh] w-11/12 overflow-y-auto !rounded-xl border-2 border-gray-700/50 p-3 shadow-lg md:w-full">
-        <DialogHeader>
-          <DialogTitle className="text-white">Diary Entries</DialogTitle>
-          <DialogDescription className="text-gray-400">
-            Select a diary entry to view its details and location on the map
-          </DialogDescription>
+      <DialogContent className="bg-foreground text-background max-h-[80vh] w-11/12 overflow-y-auto !rounded-xl border-2 border-gray-700/50 p-3 px-4 shadow-lg md:w-full">
+        <DialogHeader className="pt-2">
+          <DialogTitle className="text-white">Diaries</DialogTitle>
         </DialogHeader>
         <div className="space-y-3">
           {diaries.map((entry) => (
