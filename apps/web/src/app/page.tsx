@@ -4,6 +4,7 @@ import { getGuestbookCommentsWithUserImages } from "@erichandsen/dal";
 import getAllTimeSinceToday from "@/actions/get-all-time-since-today";
 import getMostUsedLanguageDuringSevenDays from "@/actions/get-last-seven-day-most-used-language-and-editor";
 import AboutMeSection from "@/components/aboutme/section";
+import BuenCamino from "@/components/buen-camino/section";
 import Container from "@/components/container";
 import Guestbook from "@/components/guestbook";
 import HeroSection from "@/components/home/section";
@@ -32,6 +33,9 @@ export default async function Home() {
       <Container>
         {/* <PhotoGallery /> */}
         <Guestbook user={session?.user} comments={comments} />
+      </Container>
+      <Container>
+        <BuenCamino />
       </Container>
     </div>
   );

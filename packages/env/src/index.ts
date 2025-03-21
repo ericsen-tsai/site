@@ -20,19 +20,16 @@ export const env = createEnv({
     POSTGRES_PASSWORD: z.string().min(1),
     UPLOADTHING_TOKEN: z.string().min(1)
   },
-  client: {},
-  runtimeEnv: {
+  client: {
+    NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN: z.string().min(1),
+    NEXT_PUBLIC_MAPBOX_STYLE_ID: z.string().min(1),
+    NEXT_PUBLIC_MAPBOX_USER_ID: z.string().min(1)
+  },
+  experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-    WAKATIME_API_KEY: process.env.WAKATIME_API_KEY,
-    AUTH_SECRET: process.env.AUTH_SECRET,
-    AUTH_GOOGLE_ID: process.env.AUTH_GOOGLE_ID,
-    AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
-    AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,
-    AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
-    POSTGRES_URL: process.env.POSTGRES_URL,
-    POSTGRES_USER: process.env.POSTGRES_USER,
-    POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
-    UPLOADTHING_TOKEN: process.env.UPLOADTHING_TOKEN
+    NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,
+    NEXT_PUBLIC_MAPBOX_STYLE_ID: process.env.NEXT_PUBLIC_MAPBOX_STYLE_ID,
+    NEXT_PUBLIC_MAPBOX_USER_ID: process.env.NEXT_PUBLIC_MAPBOX_USER_ID
   },
   emptyStringAsUndefined: true
 });

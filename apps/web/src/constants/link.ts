@@ -11,7 +11,8 @@ export enum SECTION_NAV_ITEMS {
   WHOAMI = "Who am I",
   ABOUTME = "About Me",
   PROJECTS = "Projects",
-  GUESTBOOK = "Guestbook"
+  GUESTBOOK = "Guestbook",
+  BUEN_CAMINO = "Buen Camino"
 }
 
 export enum LINK_NAV_ITEMS {
