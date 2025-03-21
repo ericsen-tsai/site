@@ -31,7 +31,7 @@ function DiaryListDialog({ diaries, onSelectEntry, open, onOpenChange }: DiaryLi
           <Menu className="size-4" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-foreground text-background max-h-[80vh] overflow-y-auto !rounded-xl border-2 border-gray-700/50 p-3 shadow-lg">
+      <DialogContent className="bg-foreground text-background max-h-[80vh] w-11/12 overflow-y-auto !rounded-xl border-2 border-gray-700/50 p-3 shadow-lg md:w-full">
         <DialogHeader>
           <DialogTitle className="text-white">Diary Entries</DialogTitle>
           <DialogDescription className="text-gray-400">

@@ -5,7 +5,7 @@ async function BuenCamino() {
   const caminoDiaries = await api.diaries.getAll();
 
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-5xl flex-col scroll-smooth p-20 font-[family-name:var(--font-montserrat)] md:h-[calc(100vh-5rem)]">
+    <div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-5xl flex-col scroll-smooth px-4 py-20 font-[family-name:var(--font-montserrat)] md:h-[calc(100vh-5rem)] md:p-20">
       <div>
         <h1 className="mb-3 flex items-center justify-center text-center text-3xl font-bold">
           Buen Camino
