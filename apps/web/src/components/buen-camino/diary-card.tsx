@@ -15,7 +15,7 @@ type Props = {
 function DiaryCard({ title, date, content, heroImageUrl, latitude, longitude }: Props) {
   return (
     <article className="grid grid-cols-1 gap-4 md:max-h-[500px] md:grid-cols-2">
-      <div className="relative mb-6 size-full h-[500px] overflow-hidden rounded-lg">
+      <div className="relative mb-3 size-full h-[500px] overflow-hidden rounded-lg">
         {heroImageUrl && (
           <Image src={heroImageUrl} alt={title} className="size-full object-cover" fill />
         )}

@@ -10,14 +10,16 @@ import Guestbook from "@/components/guestbook";
 import HeroSection from "@/components/home/section";
 import ProjectSection from "@/components/projects/section";
 import WhoAmISection from "@/components/whoami/section";
+import { api } from "@/trpc/server";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [{ totalHoursText }, { language, editor }, comments] = await Promise.all([
+  const [{ totalHoursText }, { language, editor }, comments, diaries] = await Promise.all([
     getAllTimeSinceToday(),
     getMostUsedLanguageDuringSevenDays(),
-    getGuestbookCommentsWithUserImages()
+    getGuestbookCommentsWithUserImages(),
+    api.diaries.getAll()
   ]);
   const session = await auth();
   return (
@@ -31,11 +33,11 @@ export default async function Home() {
       />
       <ProjectSection />
       <Container>
-        {/* <PhotoGallery /> */}
-        <Guestbook user={session?.user} comments={comments} />
+        <BuenCamino diaries={diaries} />
       </Container>
       <Container>
-        <BuenCamino />
+        {/* <PhotoGallery /> */}
+        <Guestbook user={session?.user} comments={comments} />
       </Container>
     </div>
   );
