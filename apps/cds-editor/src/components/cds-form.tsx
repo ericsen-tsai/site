@@ -31,8 +31,8 @@ type LocationStatus = "loading" | "success" | "error";
 
 export function DiaryForm({ diary }: { diary?: DiaryEntry }) {
   const [locationStatus, setLocationStatus] = useState<LocationStatus>("loading");
-  const { mutate: createDiaryEntry } = api.diaries.create.useMutation();
-  const { mutate: updateDiaryEntry } = api.diaries.update.useMutation();
+  const { mutate: createDiaryEntry, isPending: isCreating } = api.diaries.create.useMutation();
+  const { mutate: updateDiaryEntry, isPending: isUpdating } = api.diaries.update.useMutation();
 
   const isUpdate = !!diary;
 
@@ -59,7 +59,7 @@ export function DiaryForm({ diary }: { diary?: DiaryEntry }) {
     control,
     watch,
     reset,
-    formState: { errors, isSubmitting, isDirty }
+    formState: { errors, isDirty }
   } = useForm<DiaryFormData>({
     resolver: zodResolver(diaryFormSchema),
     defaultValues: formDefaultValues
@@ -122,17 +122,22 @@ export function DiaryForm({ diary }: { diary?: DiaryEntry }) {
             toast.success("Diary entry updated successfully");
             utils.diaries.getAll.invalidate();
             utils.diaries.getById.invalidate({ id: diary.id });
-            reset(formDefaultValues);
+            router.refresh();
           }
         : (id: number) => {
             toast.success("Diary entry created successfully");
             router.push(`/diary/${id}`);
+            router.refresh();
           };
 
       mutation(formData, handleSuccess);
     },
-    [isUpdate, onUpdate, onCreate, router, reset, formDefaultValues, diary?.id, utils]
+    [isUpdate, onUpdate, onCreate, router, diary?.id, utils]
   );
+
+  useEffect(() => {
+    reset(formDefaultValues);
+  }, [formDefaultValues, reset]);
 
   const renderLocationStatusDescription = useMemo(() => {
     switch (locationStatus) {
@@ -169,7 +174,7 @@ export function DiaryForm({ diary }: { diary?: DiaryEntry }) {
   }, [setValue]);
 
   const imageUrl = watch("imageUrl");
-
+  const isSubmitting = isCreating || isUpdating;
   return (
     <div className="rounded-lg p-6 shadow-md">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
