@@ -2,10 +2,10 @@
 
 import { type DiaryEntry } from "@erichandsen/dal";
 import { env } from "@erichandsen/env";
-import { type LatLngExpression } from "leaflet";
+import { type LatLngExpression, type LeafletEvent, type Marker as LeafletMarker } from "leaflet";
 import { divIcon, Icon, point } from "leaflet";
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { createRef, useCallback, useMemo, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 
@@ -47,11 +47,15 @@ const createClusterCustomIcon = (cluster: Cluster) => {
 };
 
 function RecenterMapDiaryListDialog({
+  selectedEntry,
   onSelectEntry,
-  diaries
+  diaries,
+  markerRefs
 }: {
+  selectedEntry: DiaryEntry | undefined;
   onSelectEntry: (entry: DiaryEntry) => void;
   diaries: DiaryEntry[];
+  markerRefs: Record<string, React.RefObject<LeafletMarker | null>>;
 }) {
   const map = useMap();
   const [open, setOpen] = useState(false);
@@ -60,17 +64,22 @@ function RecenterMapDiaryListDialog({
     (isOpen: boolean, entry?: DiaryEntry) => {
       setOpen(isOpen);
       if (!isOpen && entry) {
-        map.setView([Number(entry.latitude), Number(entry.longitude)], 13);
+        map.flyTo([Number(entry.latitude), Number(entry.longitude)], 13);
+        setTimeout(() => {
+          markerRefs[entry.id]?.current?.openPopup();
+        }, 2000);
       }
     },
-    [map]
+    [map, markerRefs]
   );
+
   return (
     <DiaryListDialog
       diaries={diaries}
       onSelectEntry={onSelectEntry}
       open={open}
       onOpenChange={handleOpenChange}
+      selectedEntry={selectedEntry}
     />
   );
 }
@@ -82,6 +91,26 @@ type Props = {
 };
 
 function BuenCaminoMap({ diaries, selectedEntry, onSelectEntry }: Props) {
+  const markerRefs = useMemo(
+    () =>
+      diaries.reduce<Record<string, React.RefObject<LeafletMarker | null>>>((acc, entry) => {
+        return {
+          ...acc,
+          // eslint-disable-next-line @eslint-react/no-create-ref -- this is a workaround for the fact that we can't use useRef here
+          [entry.id]: createRef<LeafletMarker>()
+        };
+      }, {}),
+    [diaries]
+  );
+
+  const handleMarkerClick = useCallback(
+    (e: LeafletEvent, entry: DiaryEntry) => {
+      e.target.openPopup();
+      onSelectEntry(entry);
+    },
+    [onSelectEntry]
+  );
+
   return (
     <MapContainer
       center={
@@ -103,18 +132,15 @@ function BuenCaminoMap({ diaries, selectedEntry, onSelectEntry }: Props) {
         {diaries.map((entry) => (
           <Marker
             key={entry.id}
+            ref={markerRefs[entry.id]}
             position={[Number(entry.latitude), Number(entry.longitude)]}
             icon={createShellIcon(entry.id === selectedEntry?.id)}
             eventHandlers={{
               click: (e) => {
-                e.target.openPopup();
-                onSelectEntry(entry);
+                handleMarkerClick(e, entry);
               },
               mouseover: (e) => {
                 e.target.openPopup();
-              },
-              mouseout: (e) => {
-                e.target.closePopup();
               }
             }}
           >
@@ -130,6 +156,7 @@ function BuenCaminoMap({ diaries, selectedEntry, onSelectEntry }: Props) {
                     fill
                     className="object-cover"
                     loading="eager"
+                    sizes="20vw"
                   />
                 </div>
               )}
@@ -137,7 +164,12 @@ function BuenCaminoMap({ diaries, selectedEntry, onSelectEntry }: Props) {
           </Marker>
         ))}
       </MarkerClusterGroup>
-      <RecenterMapDiaryListDialog diaries={diaries} onSelectEntry={onSelectEntry} />
+      <RecenterMapDiaryListDialog
+        diaries={diaries}
+        onSelectEntry={onSelectEntry}
+        markerRefs={markerRefs}
+        selectedEntry={selectedEntry}
+      />
     </MapContainer>
   );
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="mx-auto mb-6 flex max-w-4xl flex-col items-center font-[family-name:var(--font-montserrat)] text-sm">
+    <div className="mx-auto mb-6 flex max-w-6xl flex-col items-center px-4 font-[family-name:var(--font-montserrat)] text-sm">
       <footer className="w-full rounded-xl bg-white/10 px-8 py-3 font-medium shadow-sm">
         <div className="flex flex-wrap items-center justify-center sm:flex-nowrap">
           &copy; {new Date().getFullYear()} Ericsen,&nbsp;

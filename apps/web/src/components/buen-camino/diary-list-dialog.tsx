@@ -5,20 +5,29 @@ import {
   Button,
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger
 } from "@erichandsen/ui";
+import { cn } from "@erichandsen/utils";
 import { Calendar, MapPin, Menu } from "lucide-react";
 
 interface DiaryListDialogProps {
   diaries: DiaryEntry[];
+  selectedEntry: DiaryEntry | undefined;
   onSelectEntry: (entry: DiaryEntry) => void;
   open: boolean;
   onOpenChange: (open: boolean, entry?: DiaryEntry) => void;
 }
 
-function DiaryListDialog({ diaries, onSelectEntry, open, onOpenChange }: DiaryListDialogProps) {
+function DiaryListDialog({
+  diaries,
+  selectedEntry,
+  onSelectEntry,
+  open,
+  onOpenChange
+}: DiaryListDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
@@ -34,6 +43,7 @@ function DiaryListDialog({ diaries, onSelectEntry, open, onOpenChange }: DiaryLi
         <DialogHeader className="pt-2">
           <DialogTitle className="text-white">Shells</DialogTitle>
         </DialogHeader>
+        <DialogDescription className="text-white">Select a shell to view.</DialogDescription>
         <div className="space-y-3">
           {diaries.map((entry) => (
             <button
@@ -42,8 +52,12 @@ function DiaryListDialog({ diaries, onSelectEntry, open, onOpenChange }: DiaryLi
                 onSelectEntry(entry);
                 onOpenChange(false, entry);
               }}
-              className="group w-full rounded-lg border border-gray-700/50 bg-transparent p-4 text-left transition-colors hover:bg-gray-700/50"
+              className={cn(
+                "group w-full rounded-lg border border-gray-700/50 bg-transparent p-4 text-left transition-colors hover:bg-gray-700/50",
+                selectedEntry?.id === entry.id && "bg-gray-700/50"
+              )}
               type="button"
+              disabled={selectedEntry?.id === entry.id}
             >
               <h4 className="font-semibold text-white group-hover:text-white">{entry.title}</h4>
               <div className="mt-2 flex items-center gap-2 text-sm text-gray-400">
