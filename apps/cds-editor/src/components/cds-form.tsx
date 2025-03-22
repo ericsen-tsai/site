@@ -1,7 +1,7 @@
 "use client";
 
 import type { DiaryEntry } from "@erichandsen/dal";
-import { Button, DatePicker, Input, Textarea } from "@erichandsen/ui";
+import { Button, Checkbox, DatePicker, Input, Textarea } from "@erichandsen/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -33,7 +33,7 @@ export function DiaryForm({ diary }: { diary?: DiaryEntry }) {
   const [locationStatus, setLocationStatus] = useState<LocationStatus>("loading");
   const { mutate: createDiaryEntry, isPending: isCreating } = api.diaries.create.useMutation();
   const { mutate: updateDiaryEntry, isPending: isUpdating } = api.diaries.update.useMutation();
-
+  const [preserveLocation, setPreserveLocation] = useState(true);
   const isUpdate = !!diary;
 
   const formDefaultValues = useMemo(() => {
@@ -68,11 +68,13 @@ export function DiaryForm({ diary }: { diary?: DiaryEntry }) {
 
   const onUpdate = useCallback(
     (data: DiaryFormData, handleSuccess: (id: number) => void) => {
+      const latitude = preserveLocation ? diary?.latitude : data.location.latitude.toString();
+      const longitude = preserveLocation ? diary?.longitude : data.location.longitude.toString();
       updateDiaryEntry(
         {
           ...data,
-          latitude: data.location.latitude.toString(),
-          longitude: data.location.longitude.toString(),
+          latitude: latitude ?? "",
+          longitude: longitude ?? "",
           id: diary?.id ?? 0,
           heroImageUrl: data.imageUrl,
           date: data.date
@@ -84,7 +86,7 @@ export function DiaryForm({ diary }: { diary?: DiaryEntry }) {
         }
       );
     },
-    [updateDiaryEntry, diary?.id]
+    [updateDiaryEntry, diary?.id, preserveLocation, diary?.latitude, diary?.longitude]
   );
 
   const onCreate = useCallback(
@@ -142,13 +144,13 @@ export function DiaryForm({ diary }: { diary?: DiaryEntry }) {
   const renderLocationStatusDescription = useMemo(() => {
     switch (locationStatus) {
       case "loading": {
-        return "Getting your location...";
+        return "...";
       }
       case "success": {
-        return "Location captured ✓";
+        return "✓";
       }
       case "error": {
-        return "Error getting location";
+        return "x";
       }
     }
   }, [locationStatus]);
@@ -256,9 +258,23 @@ export function DiaryForm({ diary }: { diary?: DiaryEntry }) {
         </div>
         <div className="w-full">
           <div className="flex flex-col items-center justify-between gap-2 md:!flex-row md:!items-start">
-            <p className="text-accent mb-2 text-sm">
-              Location status: <span className="font-bold">{renderLocationStatusDescription}</span>
-            </p>
+            <div className="text-accent flex flex-col gap-2 text-sm">
+              <p>
+                Location status:{" "}
+                <span className="mr-3 font-bold">{renderLocationStatusDescription}</span>
+              </p>
+              {isUpdate && (
+                <p className="flex items-center gap-2">
+                  Preserve location?
+                  <Checkbox
+                    checked={preserveLocation}
+                    onCheckedChange={(checked) => {
+                      setPreserveLocation(!!checked);
+                    }}
+                  />
+                </p>
+              )}
+            </div>
             <Button type="submit" disabled={isSubmitting || !isDirty}>
               {isSubmitting ? "Saving entry..." : "Save Diary Entry"}
             </Button>
