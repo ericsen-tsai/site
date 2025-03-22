@@ -2,8 +2,14 @@
 
 import { type DiaryEntry } from "@erichandsen/dal";
 import { env } from "@erichandsen/env";
-import { type LatLngExpression, type LeafletEvent, type Marker as LeafletMarker } from "leaflet";
-import { divIcon, Icon, point } from "leaflet";
+import {
+  divIcon,
+  type LatLngExpression,
+  type LeafletEvent,
+  type Marker as LeafletMarker,
+  point
+} from "leaflet";
+import { Icon } from "leaflet";
 import Image from "next/image";
 import { createRef, useCallback, useMemo, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
@@ -36,11 +42,16 @@ const createShellIcon = (current: boolean) =>
 
 type Cluster = {
   getChildCount: () => number;
+  getAllChildMarkers: () => LeafletMarker[];
 };
 
 const createClusterCustomIcon = (cluster: Cluster) => {
+  const markers = cluster.getAllChildMarkers();
+  const isOneMarkerSelected = markers.some((marker) => marker.options.opacity === 1);
   return divIcon({
-    html: `<span class="text-sm font-bold text-white font-[family-name:var(--font-montserrat)] h-12 w-12 flex items-center justify-center rounded-full bg-primary/30">${cluster.getChildCount()}</span>`,
+    html: `<span class="text-sm font-bold text-white font-[family-name:var(--font-montserrat)] h-12 w-12 flex items-center justify-center rounded-full ${
+      isOneMarkerSelected ? "bg-primary/50" : "bg-white/50"
+    }">${cluster.getChildCount()}</span>`,
     className: "marker-cluster-custom",
     iconSize: point(40, 40, true)
   });
@@ -50,12 +61,12 @@ function RecenterMapDiaryListDialog({
   selectedEntry,
   onSelectEntry,
   diaries,
-  markerRefs
+  onMarkerPopupOpen
 }: {
   selectedEntry: DiaryEntry | undefined;
   onSelectEntry: (entry: DiaryEntry) => void;
   diaries: DiaryEntry[];
-  markerRefs: Record<string, React.RefObject<LeafletMarker | null>>;
+  onMarkerPopupOpen: (entryId: number) => void;
 }) {
   const map = useMap();
   const [open, setOpen] = useState(false);
@@ -64,13 +75,11 @@ function RecenterMapDiaryListDialog({
     (isOpen: boolean, entry?: DiaryEntry) => {
       setOpen(isOpen);
       if (!isOpen && entry) {
-        map.flyTo([Number(entry.latitude), Number(entry.longitude)], 13);
-        setTimeout(() => {
-          markerRefs[entry.id]?.current?.openPopup();
-        }, 2000);
+        map.flyTo([Number(entry.latitude), Number(entry.longitude)], 15);
+        onMarkerPopupOpen(entry.id);
       }
     },
-    [map, markerRefs]
+    [map, onMarkerPopupOpen]
   );
 
   return (
@@ -111,6 +120,16 @@ function BuenCaminoMap({ diaries, selectedEntry, onSelectEntry }: Props) {
     [onSelectEntry]
   );
 
+  const handleMarkerPopupOpen = useCallback(
+    (entryId: number) => {
+      // This is a workaround to open the popup after the marker is rendered
+      setTimeout(() => {
+        markerRefs[entryId]?.current?.openPopup();
+      }, 3000);
+    },
+    [markerRefs]
+  );
+
   return (
     <MapContainer
       center={
@@ -135,6 +154,7 @@ function BuenCaminoMap({ diaries, selectedEntry, onSelectEntry }: Props) {
       >
         {diaries.map((entry) => (
           <Marker
+            opacity={entry.id === selectedEntry?.id ? 1 : 0.5}
             key={entry.id}
             ref={markerRefs[entry.id]}
             position={[Number(entry.latitude), Number(entry.longitude)]}
@@ -171,7 +191,7 @@ function BuenCaminoMap({ diaries, selectedEntry, onSelectEntry }: Props) {
       <RecenterMapDiaryListDialog
         diaries={diaries}
         onSelectEntry={onSelectEntry}
-        markerRefs={markerRefs}
+        onMarkerPopupOpen={handleMarkerPopupOpen}
         selectedEntry={selectedEntry}
       />
     </MapContainer>

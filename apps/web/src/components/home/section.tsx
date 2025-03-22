@@ -19,7 +19,7 @@ const GlowingShell = () => {
   const { scrollToSection } = useScrollContext();
   return (
     <button
-      className="group absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center justify-center"
+      className="group absolute bottom-32 left-1/2 flex -translate-x-1/2 items-center justify-center"
       onClick={() => {
         scrollToSection(SECTION_NAV_ITEMS.BUEN_CAMINO);
       }}
