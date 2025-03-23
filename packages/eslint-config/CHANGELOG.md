@@ -1,5 +1,11 @@
 # @erichandsen/eslint-config
 
+## 0.1.2
+
+### Patch Changes
+
+- [#8](https://github.com/ericsen-tsai/site/pull/8) [`717934a`](https://github.com/ericsen-tsai/site/commit/717934aa262729afbb129703d1f86bac35081206) Thanks [@ericsen-tsai](https://github.com/ericsen-tsai)! - updates
+
 ## 0.1.1
 
 ### Patch Changes
