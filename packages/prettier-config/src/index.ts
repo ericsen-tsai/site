@@ -20,7 +20,6 @@ const erichandsen = (options: Options = {}): Options => {
     trailingComma: "none",
     endOfLine: "lf",
     plugins: [
-      "prettier-plugin-prisma",
       "prettier-plugin-sort-json",
       "prettier-plugin-package-perfection",
       ...plugins,

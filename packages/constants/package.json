@@ -34,7 +34,7 @@
   "devDependencies": {
     "@erichandsen/eslint-config": "workspace:*",
     "@erichandsen/tsconfig": "workspace:*",
-    "@types/node": "^20"
+    "@types/node": "^22.13.1"
   },
   "publishConfig": {
     "access": "public"
@@ -46,7 +46,6 @@
     }
   },
   "lint-staged": {
-    "*.{cjs,mjs,js,jsx,cts,mts,ts,tsx,json}": "eslint --fix",
-    "**/*": "prettier --write --ignore-unknown"
+    "*.{cjs,mjs,js,jsx,cts,mts,ts,tsx,json}": "eslint --fix"
   }
 }

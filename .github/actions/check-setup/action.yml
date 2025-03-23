@@ -7,7 +7,7 @@ runs:
     - name: Install Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 20
+        node-version-file: ".nvmrc"
 
     - name: Install pnpm
       uses: pnpm/action-setup@v4
@@ -32,19 +32,27 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      run: pnpm install
+      run: |
+        pnpm store prune
+        pnpm install --frozen-lockfile
 
     - name: Create environment variables file
       shell: bash
       run: |
-        echo "DATABASE_URL=postgres://postgres:postgres@localhost:5432/honghongme" >> .env.local
-        echo "RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" >> .env.local
-        echo "UPSTASH_REDIS_REST_URL=http://127.0.0.1:8079" >> .env.local
-        echo "UPSTASH_REDIS_REST_TOKEN=honghongme" >> .env.local
-        echo "AUTH_SECRET=honghongme" >> .env.local
-        echo "AUTH_TRUST_HOST=true" >> .env.local
-        echo "NEXT_PUBLIC_FLAG_COMMENT=true" >> .env.local
-        echo "NEXT_PUBLIC_FLAG_AUTH=true" >> .env.local
-        echo "NEXT_PUBLIC_FLAG_STATS=true" >> .env.local
-        echo "NEXT_PUBLIC_FLAG_SPOTIFY=true" >> .env.local
-        echo "NEXT_PUBLIC_FLAG_LIKE_BUTTON=true" >> .env.local
+        echo "WAKATIME_API_KEY=waka_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" >> .env.local
+        echo "AUTH_GOOGLE_ID=google_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" >> .env.local
+        echo "AUTH_GOOGLE_SECRET=google_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" >> .env.local
+        echo "AUTH_GITHUB_ID=github_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" >> .env.local
+        echo "AUTH_GITHUB_SECRET=github_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" >> .env.local
+        echo "POSTGRES_URL=postgres://postgres:postgres@localhost:5432/erichandsen" >> .env.local
+        echo "POSTGRES_PRISMA_URL=postgres://postgres:postgres@localhost:5432/erichandsen" >> .env.local
+        echo "POSTGRES_URL_NO_SSL=postgres://postgres:postgres@localhost:5432/erichandsen" >> .env.local
+        echo "POSTGRES_URL_NON_POOLING=postgres://postgres:postgres@localhost:5432/erichandsen" >> .env.local
+        echo "POSTGRES_USER=postgres" >> .env.local
+        echo "POSTGRES_HOST=localhost" >> .env.local
+        echo "POSTGRES_PASSWORD=postgres" >> .env.local
+        echo "POSTGRES_DATABASE=erichandsen" >> .env.local
+        echo "UPLOADTHING_TOKEN=ut_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" >> .env.local
+        echo "NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=pk.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" >> .env.local
+        echo "NEXT_PUBLIC_MAPBOX_STYLE_ID=mapbox://styles/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" >> .env.local
+        echo "NEXT_PUBLIC_MAPBOX_USER_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" >> .env.local
