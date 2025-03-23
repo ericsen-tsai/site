@@ -1,4 +1,11 @@
 import {
+  FACEBOOK_URL,
+  GITHUB_URL,
+  INSTAGRAM_URL,
+  LINKEDIN_URL,
+  THREADS_URL
+} from "@erichandsen/constants";
+import {
   SiFacebook,
   SiGithub,
   SiInstagram,
@@ -21,27 +28,27 @@ export enum LINK_NAV_ITEMS {
 
 export const SOCIAL_LINKS = [
   {
-    href: "https://github.com/ericsen-tsai",
+    href: GITHUB_URL,
     icon: SiGithub,
     text: "GitHub"
   },
   {
-    href: "https://www.facebook.com/cookiestrangetsai/",
+    href: FACEBOOK_URL,
     icon: SiFacebook,
     text: "Facebook"
   },
   {
-    href: "https://www.instagram.com/cookiestrange_tsai/",
+    href: INSTAGRAM_URL,
     icon: SiInstagram,
     text: "Instagram"
   },
   {
-    href: "https://www.threads.net/@cookiestrange_tsai",
+    href: THREADS_URL,
     icon: SiThreads,
     text: "Threads"
   },
   {
-    href: "https://www.linkedin.com/in/ericsen-tsai-a00948236/",
+    href: LINKEDIN_URL,
     icon: SiLinkedin,
     text: "LinkedIn"
   }

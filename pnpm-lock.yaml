@@ -219,6 +219,9 @@ importers:
 
   apps/cv:
     dependencies:
+      '@erichandsen/constants':
+        specifier: workspace:*
+        version: link:../../packages/constants
       '@erichandsen/dal':
         specifier: workspace:*
         version: link:../../packages/dal
@@ -319,6 +322,9 @@ importers:
       '@erichandsen/auth':
         specifier: workspace:*
         version: link:../../packages/auth
+      '@erichandsen/constants':
+        specifier: workspace:*
+        version: link:../../packages/constants
       '@erichandsen/dal':
         specifier: workspace:*
         version: link:../../packages/dal
@@ -501,6 +507,25 @@ importers:
       '@erichandsen/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
+
+  packages/constants:
+    dependencies:
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      tailwind-merge:
+        specifier: ^2.6.0
+        version: 2.6.0
+    devDependencies:
+      '@erichandsen/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@erichandsen/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@types/node':
+        specifier: ^20
+        version: 20.16.10
 
   packages/dal:
     dependencies:

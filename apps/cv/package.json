@@ -13,6 +13,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@erichandsen/constants": "workspace:*",
     "@erichandsen/dal": "workspace:*",
     "@erichandsen/db": "workspace:*",
     "@erichandsen/env": "workspace:*",
