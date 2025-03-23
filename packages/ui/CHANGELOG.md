@@ -1,5 +1,14 @@
 # @erichandsen/ui
 
+## 0.0.4
+
+### Patch Changes
+
+- [#8](https://github.com/ericsen-tsai/site/pull/8) [`717934a`](https://github.com/ericsen-tsai/site/commit/717934aa262729afbb129703d1f86bac35081206) Thanks [@ericsen-tsai](https://github.com/ericsen-tsai)! - updates
+
+- Updated dependencies []:
+  - @erichandsen/utils@0.0.2
+
 ## 0.0.3
 
 ### Patch Changes
