@@ -125,7 +125,7 @@ function BuenCaminoMap({ diaries, selectedEntry, onSelectEntry }: Props) {
       // This is a workaround to open the popup after the marker is rendered
       setTimeout(() => {
         markerRefs[entryId]?.current?.openPopup();
-      }, 3000);
+      }, 4000);
     },
     [markerRefs]
   );
@@ -137,7 +137,7 @@ function BuenCaminoMap({ diaries, selectedEntry, onSelectEntry }: Props) {
     if (selectedEntryId) {
       timeout = setTimeout(() => {
         markerRefs[selectedEntryId]?.current?.openPopup();
-      }, 1000);
+      }, 4000);
     }
     return () => {
       clearTimeout(timeout);
