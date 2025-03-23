@@ -46,7 +46,7 @@ function DiaryListDialog({
         <DialogDescription className="text-white">Select a shell to view.</DialogDescription>
         <div className="space-y-3">
           {diaries
-            .toSorted((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+            .toSorted((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
             .map((entry) => (
               <button
                 key={entry.id}

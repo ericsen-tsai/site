@@ -17,7 +17,7 @@ function MapDiaries({ diaries }: MapDiariesProps) {
   const [selectedEntry, setSelectedEntry] = useState<DiaryEntry | undefined>(() => {
     if (diaries.length === 0) return;
     const latestDiary = diaries.toSorted(
-      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+      (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
     )[0];
     return latestDiary;
   });
@@ -52,7 +52,7 @@ function MapDiaries({ diaries }: MapDiariesProps) {
                   day: "numeric"
                 })}
               </time>
-              <p className="text-card-foreground/80 flex-1 overflow-y-auto break-words leading-relaxed md:max-h-[33rem]">
+              <p className="text-card-foreground/80 flex-1 overflow-y-auto whitespace-pre break-words leading-relaxed md:max-h-[33rem]">
                 {selectedEntry.content}
               </p>
             </div>

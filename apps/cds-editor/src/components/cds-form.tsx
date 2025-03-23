@@ -209,7 +209,7 @@ export function DiaryForm({ diary }: { diary?: DiaryEntry }) {
           </label>
           <Textarea
             id="content"
-            rows={6}
+            rows={15}
             {...register("content")}
             placeholder="Write your diary entry here..."
           />

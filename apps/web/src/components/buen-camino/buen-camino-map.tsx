@@ -11,7 +11,7 @@ import {
 } from "leaflet";
 import { Icon } from "leaflet";
 import Image from "next/image";
-import { createRef, useCallback, useMemo, useState } from "react";
+import { createRef, useCallback, useEffect, useMemo, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 
@@ -129,6 +129,20 @@ function BuenCaminoMap({ diaries, selectedEntry, onSelectEntry }: Props) {
     },
     [markerRefs]
   );
+
+  const selectedEntryId = selectedEntry?.id;
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (selectedEntryId) {
+      timeout = setTimeout(() => {
+        markerRefs[selectedEntryId]?.current?.openPopup();
+      }, 1000);
+    }
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [selectedEntryId, markerRefs]);
 
   return (
     <MapContainer
