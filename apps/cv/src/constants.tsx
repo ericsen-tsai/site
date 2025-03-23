@@ -1,4 +1,11 @@
 import {
+  FACEBOOK_URL,
+  GITHUB_URL,
+  INSTAGRAM_URL,
+  LINKEDIN_URL,
+  THREADS_URL
+} from "@erichandsen/constants";
+import {
   SiFacebook,
   SiGithub,
   SiInstagram,
@@ -28,27 +35,27 @@ export const RESUME_DATA = {
     social: [
       {
         name: "GitHub",
-        url: "https://github.com/ericsen-tsai",
+        url: GITHUB_URL,
         icon: SiGithub
       },
       {
         name: "LinkedIn",
-        url: "https://www.linkedin.com/in/ericsen-tsai-a00948236/",
+        url: LINKEDIN_URL,
         icon: SiLinkedin
       },
       {
         name: "Facebook",
-        url: "https://www.facebook.com/cookiestrangetsai/",
+        url: FACEBOOK_URL,
         icon: SiFacebook
       },
       {
         name: "Instagram",
-        url: "https://www.instagram.com/cookiestrange_tsai/",
+        url: INSTAGRAM_URL,
         icon: SiInstagram
       },
       {
         name: "Threads",
-        url: "https://www.threads.net/@cookiestrange_tsai",
+        url: THREADS_URL,
         icon: SiThreads
       }
     ] as const

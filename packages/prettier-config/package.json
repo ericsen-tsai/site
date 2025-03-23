@@ -29,7 +29,6 @@
   "types": "./dist/index.d.ts",
   "dependencies": {
     "prettier-plugin-package-perfection": "^1.1.0",
-    "prettier-plugin-prisma": "^5.0.0",
     "prettier-plugin-sort-json": "^4.1.1",
     "prettier-plugin-tailwindcss": "^0.6.11"
   },
@@ -43,7 +42,6 @@
     "access": "public"
   },
   "lint-staged": {
-    "*.{cjs,mjs,js,jsx,cts,mts,ts,tsx,json}": "eslint --fix",
-    "**/*": "prettier --write --ignore-unknown"
+    "*.{cjs,mjs,js,jsx,cts,mts,ts,tsx,json}": "eslint --fix"
   }
 }

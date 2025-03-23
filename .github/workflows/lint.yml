@@ -4,18 +4,47 @@ on:
   pull_request:
 
 jobs:
-  lint:
-    name: Lint
+  eslint:
+    name: ESLint
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout branch
         uses: actions/checkout@v4
 
-      - name: Check setup
+      - name: Setup
         uses: ./.github/actions/check-setup
 
-      - name: Build the app
+      - name: Build apps
         run: pnpm build:apps
 
-      - name: Check
-        run: pnpm check
+      - name: Run ESLint
+        run: pnpm lint
+
+  types:
+    name: TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/check-setup
+
+      - name: Build apps
+        run: pnpm build:apps
+
+      - name: Run type check
+        run: pnpm type-check
+
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/check-setup
+
+      - name: Run Prettier
+        run: pnpm format:check

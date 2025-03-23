@@ -36,14 +36,15 @@ export const SectionRefsProvider = ({ children }: { children: React.ReactNode })
   const aboutmeRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const guestbookRef = useRef<HTMLDivElement>(null);
-
+  const buenCaminoRef = useRef<HTMLDivElement>(null);
   const sectionRefs: TSectionRefsContext["sectionRefs"] = useMemo(
     () => ({
       [SECTION_NAV_ITEMS.HOME]: homeRef,
       [SECTION_NAV_ITEMS.WHOAMI]: whoamiRef,
       [SECTION_NAV_ITEMS.ABOUTME]: aboutmeRef,
       [SECTION_NAV_ITEMS.PROJECTS]: projectsRef,
-      [SECTION_NAV_ITEMS.GUESTBOOK]: guestbookRef
+      [SECTION_NAV_ITEMS.GUESTBOOK]: guestbookRef,
+      [SECTION_NAV_ITEMS.BUEN_CAMINO]: buenCaminoRef
     }),
     []
   );
@@ -53,7 +54,8 @@ export const SectionRefsProvider = ({ children }: { children: React.ReactNode })
     [SECTION_NAV_ITEMS.WHOAMI]: false,
     [SECTION_NAV_ITEMS.ABOUTME]: false,
     [SECTION_NAV_ITEMS.PROJECTS]: false,
-    [SECTION_NAV_ITEMS.GUESTBOOK]: false
+    [SECTION_NAV_ITEMS.GUESTBOOK]: false,
+    [SECTION_NAV_ITEMS.BUEN_CAMINO]: false
   });
 
   const handleAnimationComplete = useCallback((section: SECTION_NAV_ITEMS) => {
