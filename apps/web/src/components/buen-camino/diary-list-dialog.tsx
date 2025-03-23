@@ -45,37 +45,39 @@ function DiaryListDialog({
         </DialogHeader>
         <DialogDescription className="text-white">Select a shell to view.</DialogDescription>
         <div className="space-y-3">
-          {diaries.map((entry) => (
-            <button
-              key={entry.id}
-              onClick={() => {
-                onSelectEntry(entry);
-                onOpenChange(false, entry);
-              }}
-              className={cn(
-                "group w-full rounded-lg border border-gray-700/50 bg-transparent p-4 text-left transition-colors hover:bg-gray-700/50",
-                selectedEntry?.id === entry.id && "bg-gray-700/50"
-              )}
-              type="button"
-              disabled={selectedEntry?.id === entry.id}
-            >
-              <h4 className="font-semibold text-white group-hover:text-white">{entry.title}</h4>
-              <div className="mt-2 flex items-center gap-2 text-sm text-gray-400">
-                <MapPin className="size-3" />
-                <span>
-                  {Number(entry.latitude).toFixed(2)}, {Number(entry.longitude).toFixed(2)}
-                </span>
-              </div>
-              <time className="mt-1 flex items-center gap-2 text-sm text-gray-400">
-                <Calendar className="size-3" />
-                {new Date(entry.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric"
-                })}
-              </time>
-            </button>
-          ))}
+          {diaries
+            .toSorted((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+            .map((entry) => (
+              <button
+                key={entry.id}
+                onClick={() => {
+                  onSelectEntry(entry);
+                  onOpenChange(false, entry);
+                }}
+                className={cn(
+                  "group w-full rounded-lg border border-gray-700/50 bg-transparent p-4 text-left transition-colors hover:bg-gray-700/50",
+                  selectedEntry?.id === entry.id && "bg-gray-700/50"
+                )}
+                type="button"
+                disabled={selectedEntry?.id === entry.id}
+              >
+                <h4 className="font-semibold text-white group-hover:text-white">{entry.title}</h4>
+                <div className="mt-2 flex items-center gap-2 text-sm text-gray-400">
+                  <MapPin className="size-3" />
+                  <span>
+                    {Number(entry.latitude).toFixed(2)}, {Number(entry.longitude).toFixed(2)}
+                  </span>
+                </div>
+                <time className="mt-1 flex items-center gap-2 text-sm text-gray-400">
+                  <Calendar className="size-3" />
+                  {new Date(entry.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                  })}
+                </time>
+              </button>
+            ))}
         </div>
       </DialogContent>
     </Dialog>
