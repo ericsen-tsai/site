@@ -54,7 +54,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
-  if (!session) {
+  if (!session || session.user?.role !== "admin") {
     redirect("/login");
   }
   const diaries = await api.diaries.getAll();
