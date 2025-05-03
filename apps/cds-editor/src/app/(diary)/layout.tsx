@@ -3,7 +3,7 @@ import { Toaster, TooltipProvider } from "@erichandsen/ui";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { forbidden, redirect } from "next/navigation";
 
 import "../globals.css";
 // Import uploadthing CSS
@@ -54,9 +54,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
-  if (!session || session.user?.role !== "admin") {
+  if (!session) {
     redirect("/login");
   }
+
+  if (session.user?.role !== "admin") {
+    forbidden();
+  }
+
   const diaries = await api.diaries.getAll();
   return (
     <html lang="en">
