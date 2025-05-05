@@ -224,6 +224,31 @@ export function DiaryForm({ diary }: { diary?: DiaryEntry }) {
           <div id="image-upload" className="mt-1">
             <UploadButton
               endpoint="imageUploader"
+              onBeforeUploadBegin={async (files) => {
+                const heic2any = (await import("heic2any")).default;
+                const convertedFiles = await Promise.all(
+                  files.map(async (file) => {
+                    if (file.type === "image/heic" || file.name.endsWith(".heic")) {
+                      try {
+                        const blobOrBlobs = await heic2any({ blob: file, toType: "image/jpeg" });
+                        const blob = Array.isArray(blobOrBlobs) ? blobOrBlobs[0] : blobOrBlobs;
+                        if (!blob) {
+                          throw new Error("Failed to convert HEIC to PNG");
+                        }
+                        const newFile = new File([blob], file.name.replace(/\.heic$/i, ".jpeg"), {
+                          type: "image/jpeg"
+                        });
+                        return newFile;
+                      } catch (error) {
+                        console.error("HEIC to PNG conversion failed", error);
+                        return file;
+                      }
+                    }
+                    return file;
+                  })
+                );
+                return convertedFiles;
+              }}
               onClientUploadComplete={(res) => {
                 const uploadedImageUrl = res[0]?.ufsUrl;
                 if (uploadedImageUrl) {

@@ -59,7 +59,6 @@ export default async function RootLayout({
   }
 
   if (session.user?.role !== "admin") {
-    console.log(session.user?.role);
     redirect("/not-authorized");
   }
 
