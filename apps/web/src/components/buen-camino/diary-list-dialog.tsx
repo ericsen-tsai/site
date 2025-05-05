@@ -44,7 +44,7 @@ function DiaryListDialog({
           <DialogTitle className="text-white">Shells</DialogTitle>
         </DialogHeader>
         <DialogDescription className="text-white">Select a shell to view.</DialogDescription>
-        <div className="space-y-3">
+        <div className="max-h-80 space-y-3 overflow-y-auto">
           {diaries
             .toSorted((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
             .map((entry) => (
