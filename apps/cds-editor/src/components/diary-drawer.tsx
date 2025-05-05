@@ -51,8 +51,8 @@ export function DiaryDrawer({ diaries }: DiaryDrawerProps) {
       <DrawerContent className="bg-foreground border-border border-t">
         <div className="mx-auto w-full max-w-4xl">
           <DrawerHeader>
-            <DrawerTitle>Your Diaries</DrawerTitle>
-            <DrawerDescription>View all your diary entries.</DrawerDescription>
+            <DrawerTitle>Diaries</DrawerTitle>
+            <DrawerDescription>View all diary entries.</DrawerDescription>
           </DrawerHeader>
           <div className="p-4">
             <div className="overflow-x-auto pb-4">
@@ -74,7 +74,7 @@ export function DiaryDrawer({ diaries }: DiaryDrawerProps) {
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-background/80 line-clamp-5 min-h-[100px] break-words text-sm">
+                        <p className="text-background/80 max-h-[100px] min-h-[100px] w-full overflow-hidden text-ellipsis whitespace-pre text-sm">
                           {diary.content}
                         </p>
                         {diary.heroImageUrl && (
