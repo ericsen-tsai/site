@@ -36,7 +36,7 @@ function DiaryCard({ title, date, content, heroImageUrl, latitude, longitude }: 
             day: "numeric"
           })}
         </time>
-        <p className="text-card-foreground/80 line-clamp-[16] whitespace-pre leading-relaxed">
+        <p className="text-card-foreground/80 line-clamp-[16] whitespace-pre-line leading-relaxed">
           {content}
         </p>
       </div>

@@ -52,7 +52,7 @@ function MapDiaries({ diaries }: MapDiariesProps) {
                   day: "numeric"
                 })}
               </time>
-              <p className="text-card-foreground/80 flex-1 overflow-y-auto whitespace-pre break-words leading-relaxed md:max-h-[33rem]">
+              <p className="text-card-foreground/80 flex-1 overflow-y-auto whitespace-pre-line break-words leading-relaxed md:max-h-[33rem]">
                 {selectedEntry.content}
               </p>
             </div>
