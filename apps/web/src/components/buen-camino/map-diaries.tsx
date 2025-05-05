@@ -17,7 +17,7 @@ function MapDiaries({ diaries }: MapDiariesProps) {
   const [selectedEntry, setSelectedEntry] = useState<DiaryEntry | undefined>(() => {
     if (diaries.length === 0) return;
     const latestDiary = diaries.toSorted(
-      (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
     )[0];
     return latestDiary;
   });

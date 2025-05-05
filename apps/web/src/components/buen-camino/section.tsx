@@ -16,8 +16,7 @@ type Props = {
 
 function BuenCamino({ diaries }: Props) {
   const { sectionRefs, onAnimationComplete, animationCompleted } = useScrollContext();
-  const latestDiary = diaries.toSorted((a, b) => a.createdAt.getTime() - b.createdAt.getTime())[0];
-
+  const latestDiary = diaries.toSorted((a, b) => b.createdAt.getTime() - a.createdAt.getTime())[0];
   return (
     <motion.section
       className="mb-48 mt-24 grid grid-cols-1 gap-12 pt-24"

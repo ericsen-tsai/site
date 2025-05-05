@@ -177,6 +177,7 @@ export function DiaryForm({ diary }: { diary?: DiaryEntry }) {
 
   const imageUrl = watch("imageUrl");
   const isSubmitting = isCreating || isUpdating;
+
   return (
     <div className="rounded-lg p-6 shadow-md">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
