@@ -74,7 +74,7 @@ export function DiaryDrawer({ diaries }: DiaryDrawerProps) {
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-background/80 max-h-[100px] min-h-[100px] w-full overflow-hidden text-ellipsis whitespace-pre text-sm">
+                        <p className="text-background/80 line-clamp-6 max-h-[120px] min-h-[120px] w-full overflow-hidden text-ellipsis whitespace-pre-line text-start text-sm">
                           {diary.content}
                         </p>
                         {diary.heroImageUrl && (
