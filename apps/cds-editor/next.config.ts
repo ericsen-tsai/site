@@ -9,8 +9,7 @@ jiti.esmResolve("@erichandsen/env");
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
-    reactCompiler: true,
-    authInterrupts: true
+    reactCompiler: true
   },
   images: {
     remotePatterns: [
