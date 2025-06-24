@@ -19,13 +19,11 @@ export const RESUME_DATA = {
   location: "Taipei, Taiwan",
   locationLink: "https://www.google.com/maps/place/Taipei",
   about:
-    "Frontend-focused full-stack engineer with a biomedical engineering background and 3+ years of experience building web apps across healthcare, SaaS, and AI.",
+    "Frontend-focused full-stack engineer with 3+ years experience in web apps, SaaS, and healthcare.",
   summary: (
     <>
-      Frontend-focused full-stack engineer with a biomedical engineering background and 3+ years of
-      experience building web apps across healthcare, SaaS, and AI. Skilled in React, Next.js, and
-      TypeScript, with a strong sense of ownership and hands-on experience delivering end-to-end
-      features.
+      Frontend-focused full-stack engineer with 3+ years of experience. Skilled in React, Next.js,
+      TypeScript. Strong ownership, delivers end-to-end features.
     </>
   ),
   avatarUrl: "https://avatars.githubusercontent.com/u/90230992?v=4",
@@ -63,45 +61,32 @@ export const RESUME_DATA = {
   },
   education: [
     {
-      school: "National Cheng-Kung University, Tainan, Taiwan",
-      degree: "M.S. in Biomedical Engineering",
-      start: "Aug. 2019",
-      end: "Feb. 2021"
+      school: "NCKU, Taiwan",
+      degree: "M.S. Biomedical Engineering",
+      start: "2019",
+      end: "2021"
     },
     {
-      school: "National Cheng-Kung University, Tainan, Taiwan",
-      degree: "B.S. in Biomedical Engineering",
-      start: "Aug. 2015",
-      end: "Aug. 2019"
+      school: "NCKU, Taiwan",
+      degree: "B.S. Biomedical Engineering",
+      start: "2015",
+      end: "2019"
     }
   ],
   work: [
     {
       company: "AIFT",
       link: undefined,
-      badges: [
-        "React.js",
-        "Next.js",
-        "React Query",
-        "styled-components",
-        "TailwindCSS",
-        "FastAPI",
-        "PostgreSQL"
-      ],
-      title: "Software Engineer, Application",
+      badges: ["Next.js", "React Query", "TailwindCSS", "FastAPI", "PostgreSQL"],
+      title: "Software Engineer",
       start: "Sep. 2023",
       end: null,
       description: (
         <>
-          Built modular, reusable templates using an in-house CMS platform (Launchpad) for
-          onboarding new insurance products, reducing setup time by 40%.
+          • Built reusable CMS templates, cut setup time 40%
           <br />
-          Co-led the development of Vulcan, an internal AI compliance tool for monitoring LLM
-          responses. Implemented key frontend components, ensuring robust UI/UX and seamless API
-          integration.
-          <br />
-          Collaborated cross-functionally with PMs and backend engineers to ship weekly iterations
-          in an agile workflow.
+          • Co-led AI compliance tool (Vulcan) UI
+          <br />• Shipped weekly in agile team
         </>
       )
     },
@@ -109,17 +94,13 @@ export const RESUME_DATA = {
       company: "Big Data",
       link: undefined,
       badges: ["React.js", "Next.js", "React Query", "MUI"],
-      title: "Frontend Engineer, Saas",
+      title: "Frontend Engineer",
       start: "Jul. 2022",
       end: "Sep. 2023",
       description: (
         <>
-          Led the development of Fanti Insights, a Facebook fan page analytics dashboard for
-          marketers. Architected and implemented the entire frontend from scratch, launching v1.0
-          within 3 months.
-          <br />
-          Refactored two legacy flagship platforms (DailyView and KEYPO) into scalable
-          component-based systems, cutting average page load by 30%.
+          • Built Fanti Insights dashboard v1.0 in 3 months
+          <br />• Refactored legacy platforms, cut load 30%
         </>
       )
     },
@@ -127,20 +108,13 @@ export const RESUME_DATA = {
       company: "LNT Intelligence",
       link: undefined,
       badges: ["jQuery", "SASS", "Flask"],
-      title: "Software Engineer, Dashboard",
+      title: "Software Engineer",
       start: "Jul. 2021",
       end: "Jul. 2022",
       description: (
         <>
-          Built and maintained custom dashboards using FineReport, integrating real-time sensor data
-          (air quality, humidity, brightness, etc.) to monitor and visualize environmental
-          conditions.
-          <br />
-          Developed a hospital queuing system from scratch, working across the full stack to handle
-          patient flow logic and UI display.
-          <br />
-          Collaborated with hardware teams to ensure accurate data pipeline from sensors to
-          dashboards.
+          • Built dashboards for sensor data
+          <br />• Developed hospital queuing system
         </>
       )
     },
@@ -148,15 +122,13 @@ export const RESUME_DATA = {
       company: "Acusense",
       link: undefined,
       badges: ["TensorFlow", "Machine Learning", "Python"],
-      title: "ML Intern, Embedded System",
+      title: "ML Intern",
       start: "Jun. 2020",
       end: "Aug. 2020",
       description: (
         <>
-          Developed machine learning models for wearable dialysis monitoring, predicting critical
-          conditions like hypotension with 95% accuracy in lab simulations.
-          <br />
-          Built end-to-end pipeline from data preprocessing to TensorFlow inference.
+          • Built ML models for dialysis monitoring
+          <br />• 95% accuracy in lab simulations
         </>
       )
     }
@@ -182,20 +154,18 @@ export const RESUME_DATA = {
   ],
   projects: [
     {
-      title: "Portfolio (Page), Application",
-      techStack: ["Next.js", "ShadcnUI", "Turborepo", "PostgreSQL", "GitHub Actions", "Vercel"],
-      description:
-        "Designed and built a monorepo-structured portfolio with server components, responsive layouts, and animated UI interactions. Integrated type-safe API routes and server-side auth logic.",
+      title: "Portfolio",
+      techStack: ["Next.js", "ShadcnUI", "Turborepo", "PostgreSQL", "Vercel"],
+      description: "Monorepo portfolio with server components, responsive UI, type-safe APIs.",
       link: {
         label: "site.erichandsen.dev",
         href: "https://site.erichandsen.dev"
       }
     },
     {
-      title: "Buen Camino, CMS Editor",
-      techStack: ["Next.js", "ShadcnUI", "PostgreSQL", "GitHub Actions", "Vercel"],
-      description:
-        "A full-stack journaling app for Camino de Santiago hikers, featuring map interactions, shell markers, media uploads, and secure authentication. Supports real-time diary editing, responsive layouts, and custom backend for user content and permissions.",
+      title: "Buen Camino",
+      techStack: ["Next.js", "ShadcnUI", "PostgreSQL", "Vercel"],
+      description: "Journaling app for Camino hikers. Map, media, auth, real-time editing.",
       link: {
         label: "buen-camino.erichandsen.dev",
         href: "https://buen-camino.erichandsen.dev"
