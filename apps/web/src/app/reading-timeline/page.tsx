@@ -5,11 +5,30 @@ export const dynamic = "force-dynamic";
 
 const books: BookEntry[] = [
   {
-    title: "Reveries of a Solitary Walker",
-    author: "Kobo Abe",
-    date: "Feb 2025",
-    link: "https://www.google.com/search?q=Reveries+of+a+Solitary+Walker+Kobo+Abe",
+    title: "The Fall",
+    author: "Albert Camus",
+    date: "Jun 2025",
+    link: "https://www.google.com/search?q=The+Fall+Albert+Camus",
     ongoing: true
+  },
+  {
+    title: "這個動盪的世界",
+    author: "Lung Ying-tai",
+    date: "Apr 2025",
+    link: "https://www.google.com/search?q=這個動盪的世界+Lung+Ying-tai",
+    ongoing: true
+  },
+  {
+    title: "Heart of Darkness",
+    author: "Joseph Conrad",
+    date: "Mar 2025",
+    link: "https://www.google.com/search?q=Heart+of+Darkness+Joseph+Conrad"
+  },
+  {
+    title: "Reveries of a Solitary Walker",
+    author: "Jean-Jacques Rousseau",
+    date: "Feb 2025",
+    link: "https://www.google.com/search?q=Reveries+of+a+Solitary+Walker+Jean-Jacques+Rousseau"
   },
   {
     title: "The Vegetarian",

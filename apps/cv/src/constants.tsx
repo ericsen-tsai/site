@@ -196,7 +196,10 @@ export const RESUME_DATA = {
       techStack: ["Next.js", "ShadcnUI", "PostgreSQL", "GitHub Actions", "Vercel"],
       description:
         "A full-stack journaling app for Camino de Santiago hikers, featuring map interactions, shell markers, media uploads, and secure authentication. Supports real-time diary editing, responsive layouts, and custom backend for user content and permissions.",
-      link: undefined
+      link: {
+        label: "buen-camino.erichandsen.dev",
+        href: "https://buen-camino.erichandsen.dev"
+      }
     }
   ]
 } as const;
