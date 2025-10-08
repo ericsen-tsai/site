@@ -5,18 +5,49 @@ export const dynamic = "force-dynamic";
 
 const books: BookEntry[] = [
   {
+    title: "莫非定律",
+    author: "張文成",
+    date: "Oct 2025",
+    link: "https://www.google.com/search?q=莫非定律+張文成"
+  },
+  {
+    title: "注視",
+    author: "Lung Ying-tai",
+    date: "Sep 2025",
+    link: "https://www.google.com/search?q=注視+Lung+Ying-tai"
+  },
+  {
+    title: "Do Androids Dream of Electric Sheep?",
+    author: "Philip K. Dick",
+    date: "Aug 2025",
+    link: "https://www.google.com/search?q=Do+Androids+Dream+of+Electric+Sheep%3F+Philip+K.+Dick",
+    ongoing: true,
+    bestQuoteInBook: "My schedule for today lists a six-hour self-accusatory depression."
+  },
+  {
+    title: "Opór. Ukraińcy wobec rosyjskiej inwazji",
+    author: "Paweł Pieniążek",
+    date: "Jul 2025",
+    link: "https://www.google.com/search?q=Opór.+Ukrai%C5%84cy+wobec+rosyjskiej+inwazji+Paweł+Pieniążek",
+    ongoing: true
+  },
+  {
+    title: "Routes of the Dream",
+    author: "Wu Ming-Yi",
+    date: "Jul 2025",
+    link: "https://www.google.com/search?q=Routes+of+the+Dream+Wu+Ming-Yi"
+  },
+  {
     title: "The Fall",
     author: "Albert Camus",
     date: "Jun 2025",
-    link: "https://www.google.com/search?q=The+Fall+Albert+Camus",
-    ongoing: true
+    link: "https://www.google.com/search?q=The+Fall+Albert+Camus"
   },
   {
     title: "這個動盪的世界",
     author: "Lung Ying-tai",
     date: "Apr 2025",
-    link: "https://www.google.com/search?q=這個動盪的世界+Lung+Ying-tai",
-    ongoing: true
+    link: "https://www.google.com/search?q=這個動盪的世界+Lung+Ying-tai"
   },
   {
     title: "Heart of Darkness",
