@@ -32,11 +32,11 @@
     "@auth/core": "0.37.2",
     "@auth/drizzle-adapter": "1.7.2",
     "@erichandsen/db": "workspace:*",
-    "next": "^15.1.7",
+    "next": "^15.1.9",
     "next-auth": "5.0.0-beta.25"
   },
   "peerDependencies": {
-    "next": "^15.1.7"
+    "next": "^15.1.9"
   },
   "devDependencies": {
     "@erichandsen/eslint-config": "workspace:*",
