@@ -2,19 +2,15 @@ name: Release
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 permissions:
   id-token: write
   contents: write
   pull-requests: write
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
-
 jobs:
   release:
-    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,26 +18,23 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js (Trusted Publishing)
+      - name: Setup Node.js + pnpm (Trusted Publishing)
         uses: actions/setup-node@v4
         with:
-          node-version-file: ".nvmrc"
+          node-version-file: .nvmrc
           registry-url: https://registry.npmjs.org
           cache: pnpm
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Create Release Pull Request or Publish
-        id: changesets
+      - name: Release
         uses: changesets/action@v1
         with:
-          commit: "chore(release): version packages"
-          title: "chore(release): version packages"
           version: pnpm run version
           publish: pnpm run release
+          commit: "chore: release"
+          title: "chore: release"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
