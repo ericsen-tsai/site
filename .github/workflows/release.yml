@@ -20,8 +20,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check setup
-        uses: ./.github/actions/check-setup
+      - name: Setup Node.js for NPM Trusted Publishing
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          registry-url: 'https://registry.npmjs.org'
+          token: ${{ secrets.NPM_TOKEN }} 
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup pnpm cache & Install dependencies
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+          pnpm install --frozen-lockfile
 
       - name: Create Release Pull Request or Publish to NPM
         id: changesets
