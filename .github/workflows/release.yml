@@ -20,6 +20,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
       - name: Setup Node.js for NPM Trusted Publishing
         uses: actions/setup-node@v4
         with:
@@ -27,10 +32,15 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           scope: "@erichandsen"
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          run_install: false
+      - name: Install latest npm (for OIDC support)
+        run: npm install -g npm@latest
+
+      - name: Verify npm authentication
+        shell: bash
+        run: |
+          echo "Checking npm authentication..."
+          cat ~/.npmrc || echo "No .npmrc found in home directory"
+          npm whoami || echo "Not authenticated"
 
       - name: Setup pnpm cache & Install dependencies
         shell: bash
