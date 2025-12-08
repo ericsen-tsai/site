@@ -25,7 +25,7 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo lint:fix && pnpm format:write",
     "prepare": "husky && pnpm build:packages",
-    "release": "changeset publish",
+    "release": "changeset publish --access public",
     "type-check": "turbo type-check",
     "version": "changeset version"
   },
