@@ -1,5 +1,11 @@
 # @erichandsen/ui
 
+## 0.0.6
+
+### Patch Changes
+
+- [`1f6ac68`](https://github.com/ericsen-tsai/site/commit/1f6ac688b5ef4116e5be422e8f6c6a3d763bd213) Thanks [@ericsen-tsai](https://github.com/ericsen-tsai)! - release pipeline
+
 ## 0.0.5
 
 ### Patch Changes
