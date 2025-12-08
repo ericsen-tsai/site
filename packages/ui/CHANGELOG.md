@@ -1,5 +1,11 @@
 # @erichandsen/ui
 
+## 0.0.5
+
+### Patch Changes
+
+- [`c731059`](https://github.com/ericsen-tsai/site/commit/c731059eaec173df9fcb2b2c53471e0ea4f6e5c7) Thanks [@ericsen-tsai](https://github.com/ericsen-tsai)! - upgrade next and react
+
 ## 0.0.4
 
 ### Patch Changes
