@@ -25,6 +25,7 @@ jobs:
         with:
           node-version-file: ".nvmrc"
           registry-url: "https://registry.npmjs.org"
+          scope: "@erichandsen"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
