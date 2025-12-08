@@ -24,9 +24,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-          registry-url: 'https://registry.npmjs.org'
-          token: ${{ secrets.NPM_TOKEN }} 
-          
+          registry-url: "https://registry.npmjs.org"
+          scope: "@erichandsen"
+          token: ${{ secrets.NPM_TOKEN }}
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
