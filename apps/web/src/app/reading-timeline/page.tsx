@@ -5,6 +5,37 @@ export const dynamic = "force-dynamic";
 
 const books: BookEntry[] = [
   {
+    title: "The Gospel of the Eels",
+    author: "Patrik Svensson",
+    date: "Feb 2026",
+    link: "https://www.google.com/search?q=The+Gospel+of+the+Eels+Patrik+Svensson"
+  },
+  {
+    title: "Return to the Himalayas of Life",
+    author: "Lobsang Sangay",
+    date: "Feb 2026",
+    link: "https://www.google.com/search?q=Return+to+the+Himalayas+of+Life+Lobsang+Sangay"
+  },
+  {
+    title: "The Stranger",
+    author: "Albert Camus",
+    date: "Jan 2026",
+    link: "https://www.google.com/search?q=The+Stranger+Albert+Camus"
+  },
+  {
+    title: "The Swarm",
+    author: "Frank Schätzing",
+    date: "Jan 2026",
+    link: "https://www.google.com/search?q=The+Swarm+Frank+Schätzing",
+    ongoing: true
+  },
+  {
+    title: "Discourse on the Origin and Basis of Inequality Among Men",
+    author: "Jean-Jacques Rousseau",
+    date: "Dec 2025",
+    link: "https://www.google.com/search?q=Discourse+on+the+Origin+and+Basis+of+Inequality+Among+Men+Jean-Jacques+Rousseau"
+  },
+  {
     title: "莫非定律",
     author: "張文成",
     date: "Oct 2025",
@@ -28,8 +59,7 @@ const books: BookEntry[] = [
     title: "Opór. Ukraińcy wobec rosyjskiej inwazji",
     author: "Paweł Pieniążek",
     date: "Jul 2025",
-    link: "https://www.google.com/search?q=Opór.+Ukrai%C5%84cy+wobec+rosyjskiej+inwazji+Paweł+Pieniążek",
-    ongoing: true
+    link: "https://www.google.com/search?q=Opór.+Ukrai%C5%84cy+wobec+rosyjskiej+inwazji+Paweł+Pieniążek"
   },
   {
     title: "Routes of the Dream",
@@ -48,12 +78,6 @@ const books: BookEntry[] = [
     author: "Lung Ying-tai",
     date: "Apr 2025",
     link: "https://www.google.com/search?q=這個動盪的世界+Lung+Ying-tai"
-  },
-  {
-    title: "Heart of Darkness",
-    author: "Joseph Conrad",
-    date: "Mar 2025",
-    link: "https://www.google.com/search?q=Heart+of+Darkness+Joseph+Conrad"
   },
   {
     title: "Reveries of a Solitary Walker",
