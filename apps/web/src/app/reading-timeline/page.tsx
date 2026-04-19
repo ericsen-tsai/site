@@ -5,6 +5,44 @@ export const dynamic = "force-dynamic";
 
 const books: BookEntry[] = [
   {
+    title: "Into Thin Air",
+    author: "Jon Krakauer",
+    date: "Apr 2026",
+    link: "https://www.google.com/search?q=Into+Thin+Air+Jon+Krakauer",
+    ongoing: true
+  },
+  {
+    title: "Rules for the Direction of the Mind",
+    author: "René Descartes",
+    date: "Apr 2026",
+    link: "https://www.google.com/search?q=Rules+for+the+Direction+of+the+Mind+René+Descartes"
+  },
+  {
+    title: "The Red and Black",
+    author: "Stendhal",
+    date: "Mar 2026",
+    link: "https://www.google.com/search?q=The+Red+and+Black+Stendhal",
+    ongoing: true
+  },
+  {
+    title: "The Silent Spring",
+    author: "Rachel Carson",
+    date: "Mar 2026",
+    link: "https://www.google.com/search?q=The+Silent+Spring+Rachel+Carson"
+  },
+  {
+    title: "The Myth of Sisyphus",
+    author: "Albert Camus",
+    date: "Mar 2026",
+    link: "https://www.google.com/search?q=The+Myth+of+Sisyphus+Albert+Camus"
+  },
+  {
+    title: "1984",
+    author: "George Orwell",
+    date: "Feb 2026",
+    link: "https://www.google.com/search?q=1984+George+Orwell"
+  },
+  {
     title: "The Gospel of the Eels",
     author: "Patrik Svensson",
     date: "Feb 2026",
@@ -26,8 +64,7 @@ const books: BookEntry[] = [
     title: "The Swarm",
     author: "Frank Schätzing",
     date: "Jan 2026",
-    link: "https://www.google.com/search?q=The+Swarm+Frank+Schätzing",
-    ongoing: true
+    link: "https://www.google.com/search?q=The+Swarm+Frank+Schätzing"
   },
   {
     title: "Discourse on the Origin and Basis of Inequality Among Men",
@@ -52,7 +89,6 @@ const books: BookEntry[] = [
     author: "Philip K. Dick",
     date: "Aug 2025",
     link: "https://www.google.com/search?q=Do+Androids+Dream+of+Electric+Sheep%3F+Philip+K.+Dick",
-    ongoing: true,
     bestQuoteInBook: "My schedule for today lists a six-hour self-accusatory depression."
   },
   {
@@ -72,6 +108,12 @@ const books: BookEntry[] = [
     author: "Albert Camus",
     date: "Jun 2025",
     link: "https://www.google.com/search?q=The+Fall+Albert+Camus"
+  },
+  {
+    title: "Siddhartha",
+    author: "Hermann Hesse",
+    date: "Apr 2025",
+    link: "https://www.google.com/search?q=Siddhartha+Hermann+Hesse"
   },
   {
     title: "這個動盪的世界",
@@ -238,6 +280,12 @@ const books: BookEntry[] = [
     date: "May 2023",
     link: "https://www.google.com/search?q=The+Old+Man+and+the+Sea+Ernest+Hemingway",
     bestQuoteInBook: "A man can be destroyed but not defeated."
+  },
+  {
+    title: "Jonathan Livingston Seagull",
+    author: "Richard Bach",
+    date: "Jan 2023",
+    link: "https://www.google.com/search?q=Jonathan+Livingston+Seagull+Richard+Bach"
   }
 ];
 
