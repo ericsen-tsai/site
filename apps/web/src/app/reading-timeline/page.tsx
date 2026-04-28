@@ -8,7 +8,8 @@ const books: BookEntry[] = [
     title: "A Scanner Darkly",
     author: "Philip K. Dick",
     date: "Apr 2026",
-    link: "https://www.google.com/search?q=A+Scanner+Darkly+Philip+K.+Dick"
+    link: "https://www.google.com/search?q=A+Scanner+Darkly+Philip+K.+Dick",
+    ongoing: true
   },
 
   {
