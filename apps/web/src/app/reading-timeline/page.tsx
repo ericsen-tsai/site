@@ -5,11 +5,23 @@ export const dynamic = "force-dynamic";
 
 const books: BookEntry[] = [
   {
+    title: "A Scanner Darkly",
+    author: "Philip K. Dick",
+    date: "Apr 2026",
+    link: "https://www.google.com/search?q=A+Scanner+Darkly+Philip+K.+Dick"
+  },
+
+  {
+    title: "Il nuotatore",
+    author: "Paolo Cognetti",
+    date: "Apr 2026",
+    link: "https://www.google.com/search?q=Il+nuotatore+Paolo+Cognetti"
+  },
+  {
     title: "Into Thin Air",
     author: "Jon Krakauer",
     date: "Apr 2026",
-    link: "https://www.google.com/search?q=Into+Thin+Air+Jon+Krakauer",
-    ongoing: true
+    link: "https://www.google.com/search?q=Into+Thin+Air+Jon+Krakauer"
   },
   {
     title: "Rules for the Direction of the Mind",
