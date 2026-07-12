@@ -5,6 +5,31 @@ export const dynamic = "force-dynamic";
 
 const books: BookEntry[] = [
   {
+    title: "The Unbearable Lightness of Being",
+    author: "Milan Kundera",
+    date: "Jun 2026",
+    link: "https://www.google.com/search?q=The+Unbearable+Lightness+of+Being+Milan+Kundera"
+  },
+  {
+    title: "Of Human Bondage",
+    author: "W. Somerset Maugham",
+    date: "Jun 2026",
+    link: "https://www.google.com/search?q=Of+Human+Bondage+W.+Somerset+Maugham",
+    ongoing: true
+  },
+  {
+    title: "Lord of the Flies",
+    author: "William Golding",
+    date: "May 2026",
+    link: "https://www.google.com/search?q=Lord+of+the+Flies+William+Golding"
+  },
+  {
+    title: "The Communist Manifesto",
+    author: "Karl Marx and Friedrich Engels",
+    date: "May 2026",
+    link: "https://www.google.com/search?q=The+Communist+Manifesto+Karl+Marx+and+Friedrich+Engels"
+  },
+  {
     title: "A Scanner Darkly",
     author: "Philip K. Dick",
     date: "Apr 2026",
