@@ -5,6 +5,25 @@ export const dynamic = "force-dynamic";
 
 const books: BookEntry[] = [
   {
+    title: "Darkness Visible",
+    author: "William Golding",
+    date: "Aug 2026",
+    link: "https://www.google.com/search?q=Darkness+Visible+William+Golding",
+    ongoing: true
+  },
+  {
+    title: "A Happy Death",
+    author: "Albert Camus",
+    date: "Aug 2026",
+    link: "https://www.google.com/search?q=A+Happy+Death+Albert+Camus"
+  },
+  {
+    title: "Notes from Underground",
+    author: "Fyodor Dostoevsky",
+    date: "Jul 2026",
+    link: "https://www.google.com/search?q=Notes+from+Underground+Fyodor+Dostoevsky"
+  },
+  {
     title: "The Unbearable Lightness of Being",
     author: "Milan Kundera",
     date: "Jun 2026",
