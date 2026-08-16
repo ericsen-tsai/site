@@ -32,8 +32,10 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           scope: "@erichandsen"
 
-      - name: Install latest npm (for OIDC support)
-        run: npm install -g npm@latest
+      # Pin npm 11.x: OIDC needs >=11.5.1, but npm 12 hard-errors on
+      # --git-checks that changeset→pnpm@10.6 still forwards during publish.
+      - name: Install npm 11 (for OIDC support)
+        run: npm install -g npm@11
 
       - name: Verify npm authentication
         shell: bash
