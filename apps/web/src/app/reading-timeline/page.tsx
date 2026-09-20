@@ -5,11 +5,17 @@ export const dynamic = "force-dynamic";
 
 const books: BookEntry[] = [
   {
+    title: "White Nights",
+    author: "Fyodor Dostoevsky",
+    date: "Sep 2026",
+    link: "https://www.google.com/search?q=White+Nights+Fyodor+Dostoevsky",
+    ongoing: true
+  },
+  {
     title: "Darkness Visible",
     author: "William Golding",
     date: "Aug 2026",
-    link: "https://www.google.com/search?q=Darkness+Visible+William+Golding",
-    ongoing: true
+    link: "https://www.google.com/search?q=Darkness+Visible+William+Golding"
   },
   {
     title: "A Happy Death",
