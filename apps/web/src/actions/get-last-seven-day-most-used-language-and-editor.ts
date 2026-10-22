@@ -1,8 +1,10 @@
+"use server";
+
 import { env } from "@erichandsen/env";
 
 type LastSevenDaysMostUsedLanguageResponse = {
-  data: {
-    languages: Array<{
+  data?: {
+    languages?: Array<{
       name: string;
       total_seconds: number;
       percent: number;
@@ -12,7 +14,7 @@ type LastSevenDaysMostUsedLanguageResponse = {
       hours: number;
       minutes: number;
     }>;
-    editors: Array<{
+    editors?: Array<{
       name: string;
       total_seconds: number;
       percent: number;
@@ -26,27 +28,45 @@ type LastSevenDaysMostUsedLanguageResponse = {
 };
 
 const getMostUsedLanguageDuringSevenDays = async () => {
-  const response = await fetch("https://wakatime.com/api/v1/users/current/stats/last_7_days", {
-    headers: {
-      Authorization: `Basic ${env.WAKATIME_API_KEY}`
-    }
-  });
-  const data = (await response.json()) as LastSevenDaysMostUsedLanguageResponse;
-  const mostUsedLanguage = data.data.languages[0];
-  const mostUsedEditor = data.data.editors[0];
+  try {
+    const url = new URL("https://wakatime.com/api/v1/users/current/stats/last_7_days");
+    url.searchParams.set("api_key", env.WAKATIME_API_KEY);
 
-  return {
-    language: {
-      name: mostUsedLanguage?.name,
-      percent: mostUsedLanguage?.percent,
-      hours: mostUsedLanguage?.hours
-    },
-    editor: {
-      name: mostUsedEditor?.name,
-      percent: mostUsedEditor?.percent,
-      hours: mostUsedEditor?.hours
+    const response = await fetch(url, {
+      next: {
+        revalidate: 3600
+      }
+    });
+
+    if (!response.ok) {
+      return {
+        language: {},
+        editor: {}
+      };
     }
-  };
+
+    const data = (await response.json()) as LastSevenDaysMostUsedLanguageResponse;
+    const mostUsedLanguage = data.data?.languages?.[0];
+    const mostUsedEditor = data.data?.editors?.[0];
+
+    return {
+      language: {
+        name: mostUsedLanguage?.name,
+        percent: mostUsedLanguage?.percent,
+        hours: mostUsedLanguage?.hours
+      },
+      editor: {
+        name: mostUsedEditor?.name,
+        percent: mostUsedEditor?.percent,
+        hours: mostUsedEditor?.hours
+      }
+    };
+  } catch {
+    return {
+      language: {},
+      editor: {}
+    };
+  }
 };
 
 export default getMostUsedLanguageDuringSevenDays;
